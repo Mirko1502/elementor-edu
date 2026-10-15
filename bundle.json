@@ -1,0 +1,29 @@
+{
+  "name": "Elementor Edu",
+  "slug": "elementor-edu",
+  "version": "4.3.2",
+  "elementor": "4.3.5",
+  "elementor_pro": "4.3.2",
+  "hello_elementor": "3.5.1",
+  "hello_elementor_requires_php": "7.4",
+  "hello_elementor_requires_wordpress": "6.0",
+  "hello_elementor_package_sha256": "0b27403bb12a5a9c5f79e7c8e2f14db6fecc9d690365a1390010183cda671cbd",
+  "requires_php": "7.4",
+  "requires_wordpress": "6.8",
+  "modified_engine_files": [
+    "elementor/core/admin/canary-deployment.php",
+    "elementor/elementor.php",
+    "elementor/includes/beta-testers.php",
+    "elementor/includes/settings/tools.php",
+    "elementor/includes/utils.php",
+    "elementor/modules/compatibility-tag/module.php",
+    "elementor-pro/core/admin/admin.php",
+    "elementor-pro/elementor-pro.php",
+    "elementor-pro/license/updater.php"
+  ],
+  "source_entry_sha256": {
+    "elementor": "22633b697637241e53c5b67552ef5937c92b378e50afbd6c3624eb3c77b7bc45",
+    "elementor-pro": "57e4159a14b8b67c6df2f505fbc7ac86d78e1f56e62d2b23234cb3d2a793694c",
+    "hello-elementor": "a123262e484adae7021fc7d2024886ddce09febe69c81955622d9f440c49489a"
+  }
+}
