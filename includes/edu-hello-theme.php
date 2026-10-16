@@ -28,19 +28,19 @@ final class Elementor_Edu_Hello_Theme {
 			return;
 		}
 		$theme = wp_get_theme( self::SLUG );
-		echo '<div class="notice notice-info elementor-edu-hello-notice"><h2>Completa la configurazione con Hello Elementor</h2>';
-		echo '<p>Per lavorare con Elementor ti consigliamo Hello Elementor, il tema base incluso in Elementor Edu. Il tema attuale resterà attivo finché non premi il pulsante.</p>';
+		echo '<div class="notice notice-info elementor-edu-hello-notice"><h2>' . esc_html__( 'Complete your setup with Hello Elementor', 'elementor-edu' ) . '</h2>';
+		echo '<p>' . esc_html__( 'We recommend Hello Elementor, the base theme included in Elementor Edu. Your current theme will remain active until you click the button.', 'elementor-edu' ) . '</p>';
 		if ( is_network_admin() ) {
-			echo '<p>Il tema viene scelto per ogni sito della rete. Apri l’amministrazione del sito per configurarlo.</p><p><a class="button button-primary" href="' . esc_url( admin_url( 'plugins.php' ) ) . '">Configura il tema di questo sito</a></p>';
+			echo '<p>' . esc_html__( 'Each site in the network has its own theme. Open the site dashboard to configure it.', 'elementor-edu' ) . '</p><p><a class="button button-primary" href="' . esc_url( admin_url( 'plugins.php' ) ) . '">' . esc_html__( 'Set up this site\'s theme', 'elementor-edu' ) . '</a></p>';
 		} elseif ( ! $theme->exists() && ! current_user_can( 'install_themes' ) ) {
-			echo '<p>Chiedi a un amministratore autorizzato di installare Hello Elementor; poi potrai attivarlo qui.</p>';
+			echo '<p>' . esc_html__( 'Ask an authorized administrator to install Hello Elementor. You can then activate it here.', 'elementor-edu' ) . '</p>';
 		} elseif ( is_multisite() && $theme->exists() && ! $theme->is_allowed() && ! current_user_can( 'manage_network_themes' ) ) {
-			echo '<p>Chiedi all’amministratore della rete di abilitare Hello Elementor per questo sito.</p>';
+			echo '<p>' . esc_html__( 'Ask the network administrator to enable Hello Elementor for this site.', 'elementor-edu' ) . '</p>';
 		} else {
-			echo '<p>L’attivazione cambierà l’aspetto del sito. Il tema precedente e i contenuti saranno conservati.</p>';
+			echo '<p>' . esc_html__( 'Activating the theme will change the appearance of your site. Your previous theme and content will be preserved.', 'elementor-edu' ) . '</p>';
 			echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php?action=' . self::ACTION ) ) . '">';
 			wp_nonce_field( self::ACTION );
-			submit_button( $theme->exists() ? 'Attiva Hello Elementor' : 'Installa e attiva Hello Elementor', 'primary', 'submit', true );
+			submit_button( $theme->exists() ? __( 'Activate Hello Elementor', 'elementor-edu' ) : __( 'Install and activate Hello Elementor', 'elementor-edu' ), 'primary', 'submit', true );
 			echo '</form>';
 		}
 		echo '</div>';
@@ -49,10 +49,10 @@ final class Elementor_Edu_Hello_Theme {
 	/** The request guard is separate from the installation for native WP integration tests. */
 	public static function authorize_request() {
 		if ( 'POST' !== ( $_SERVER['REQUEST_METHOD'] ?? '' ) ) {
-			wp_die( 'Usa il pulsante di installazione di Hello Elementor.', 'Elementor Edu', [ 'response' => 405 ] );
+			wp_die( __( 'Use the Hello Elementor installation button.', 'elementor-edu' ), 'Elementor Edu', [ 'response' => 405 ] );
 		}
 		if ( ! current_user_can( 'switch_themes' ) ) {
-			wp_die( 'Non hai i permessi per cambiare il tema di questo sito.', 'Elementor Edu', [ 'response' => 403 ] );
+			wp_die( __( 'You do not have permission to change this site\'s theme.', 'elementor-edu' ), 'Elementor Edu', [ 'response' => 403 ] );
 		}
 		check_admin_referer( self::ACTION );
 	}
@@ -65,7 +65,7 @@ final class Elementor_Edu_Hello_Theme {
 		$hook_suffix = 'themes.php';
 		set_current_screen( 'themes' );
 		iframe_header( 'Hello Elementor' );
-		echo '<div class="wrap"><h1>Configurazione di Hello Elementor</h1>';
+		echo '<div class="wrap"><h1>' . esc_html__( 'Hello Elementor setup', 'elementor-edu' ) . '</h1>';
 		$skin = new WP_Upgrader_Skin( [
 			'url' => admin_url( 'admin-post.php?action=' . self::ACTION ),
 			'nonce' => self::ACTION,
@@ -75,8 +75,8 @@ final class Elementor_Edu_Hello_Theme {
 		if ( is_wp_error( $result ) ) {
 			echo '<div class="notice notice-error"><p>' . esc_html( $result->get_error_message() ) . '</p></div>';
 		} elseif ( true === $result ) {
-			echo '<div class="notice notice-success"><p>Hello Elementor è attivo come tema del sito.</p></div>';
-			echo '<p><a class="button button-primary" href="' . esc_url( admin_url( 'themes.php' ) ) . '">Vai ai temi</a> <a class="button" href="' . esc_url( home_url( '/' ) ) . '">Visita il sito</a></p>';
+			echo '<div class="notice notice-success"><p>' . esc_html__( 'Hello Elementor is now the active theme for this site.', 'elementor-edu' ) . '</p></div>';
+			echo '<p><a class="button button-primary" href="' . esc_url( admin_url( 'themes.php' ) ) . '">' . esc_html__( 'Go to Themes', 'elementor-edu' ) . '</a> <a class="button" href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Visit site', 'elementor-edu' ) . '</a></p>';
 		}
 		// false means WordPress displayed its filesystem credentials form.
 		echo '</div>';
@@ -87,7 +87,7 @@ final class Elementor_Edu_Hello_Theme {
 	/** @return true|false|WP_Error False allows the native credentials form to continue. */
 	public static function install_and_activate( $skin ) {
 		if ( ! current_user_can( 'switch_themes' ) ) {
-			return new WP_Error( 'edu_theme_forbidden', 'Non hai i permessi per cambiare il tema.' );
+			return new WP_Error( 'edu_theme_forbidden', __( 'You do not have permission to change the theme.', 'elementor-edu' ) );
 		}
 		if ( self::SLUG === get_template() ) {
 			return true;
@@ -95,11 +95,11 @@ final class Elementor_Edu_Hello_Theme {
 		$theme = wp_get_theme( self::SLUG );
 		if ( ! $theme->exists() ) {
 			if ( ! current_user_can( 'install_themes' ) ) {
-				return new WP_Error( 'edu_install_forbidden', 'Non hai i permessi per installare temi.' );
+				return new WP_Error( 'edu_install_forbidden', __( 'You do not have permission to install themes.', 'elementor-edu' ) );
 			}
 			$package = __DIR__ . '/../packages/hello-elementor.zip';
 			if ( ! is_readable( $package ) ) {
-				return new WP_Error( 'edu_theme_missing', 'Il pacchetto Hello Elementor non è disponibile. Reinstalla lo ZIP completo di Elementor Edu.' );
+				return new WP_Error( 'edu_theme_missing', __( 'The Hello Elementor package is unavailable. Reinstall the complete Elementor Edu ZIP file.', 'elementor-edu' ) );
 			}
 			require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
 			$upgrader = new Theme_Upgrader( $skin );
@@ -112,7 +112,7 @@ final class Elementor_Edu_Hello_Theme {
 		}
 		// Never overwrite an existing theme, even if the bundled version differs.
 		if ( ! $theme->exists() || $theme->errors() ) {
-			return new WP_Error( 'edu_theme_invalid', 'Hello Elementor risulta incompleto o non valido. Ripristina il tema dalla pagina Aspetto > Temi e riprova.' );
+			return new WP_Error( 'edu_theme_invalid', __( 'Hello Elementor is incomplete or invalid. Restore it from Appearance > Themes and try again.', 'elementor-edu' ) );
 		}
 		$requirements = validate_theme_requirements( self::SLUG );
 		if ( is_wp_error( $requirements ) ) {
@@ -120,7 +120,7 @@ final class Elementor_Edu_Hello_Theme {
 		}
 		if ( is_multisite() && ! $theme->is_allowed() ) {
 			if ( ! current_user_can( 'manage_network_themes' ) ) {
-				return new WP_Error( 'edu_theme_not_allowed', 'L’amministratore della rete deve abilitare Hello Elementor per questo sito.' );
+				return new WP_Error( 'edu_theme_not_allowed', __( 'The network administrator must enable Hello Elementor for this site.', 'elementor-edu' ) );
 			}
 			// Enable only for the current site, without changing other sites' themes.
 			$allowed = (array) get_option( 'allowedthemes', [] );
@@ -129,7 +129,7 @@ final class Elementor_Edu_Hello_Theme {
 		}
 		switch_theme( self::SLUG );
 		if ( self::SLUG !== get_stylesheet() ) {
-			return new WP_Error( 'edu_theme_activation_failed', 'Hello Elementor è installato, ma non è stato possibile attivarlo. Riprova da Aspetto > Temi.' );
+			return new WP_Error( 'edu_theme_activation_failed', __( 'Hello Elementor is installed but could not be activated. Try again from Appearance > Themes.', 'elementor-edu' ) );
 		}
 		return true;
 	}

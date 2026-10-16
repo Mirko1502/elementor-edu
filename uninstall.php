@@ -17,3 +17,7 @@ if ( is_array( $prepared_update ) && ! empty( $prepared_update['path'] ) ) {
 }
 delete_site_transient( 'elementor_edu_prepared_update' );
 delete_site_option( 'elementor_edu_available_update' );
+
+wp_clear_scheduled_hook( 'elementor_edu_translation_refresh' );
+delete_site_option( 'elementor_edu_translation_lock' );
+delete_site_option( 'elementor_edu_translation_state' );

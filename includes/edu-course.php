@@ -1,7 +1,8 @@
 <?php
 /**
- * Plugin Name: Elementor Edu – Avviso educativo
- * Description: Mantiene gli avvisi e le condizioni di utilizzo didattico di Elementor Edu.
+ * Plugin Name: Elementor Edu – Educational notice
+ * Description: Maintains educational notices and usage conditions for Elementor Edu.
+ * Text Domain: elementor-edu
  *
  * Elementor Edu course monitor. Retained outside the regular plugin on removal.
  */
@@ -10,12 +11,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Elementor_Edu_Course_V2', false ) ) {
-	final class Elementor_Edu_Course_V2 {
+if ( ! class_exists( 'Elementor_Edu_Course_V3', false ) ) {
+	final class Elementor_Edu_Course_V3 {
 		private const RECORD = 'elementor_edu_course_record';
 		private const INTERVAL = 2592000;
 		private const EVENT = 'elementor_edu_course_check';
-		private const PRO_URL = 'https://elementor.com/it/pro/';
+		private const PRO_URL = 'https://elementor.com/pro/';
 		private static $booted = false;
 
 		public static function boot() {
@@ -23,12 +24,14 @@ if ( ! class_exists( 'Elementor_Edu_Course_V2', false ) ) {
 				return;
 			}
 			self::$booted = true;
+			add_action( 'init', [ __CLASS__, 'load_translations' ], -110 );
 			add_action( 'admin_notices', [ __CLASS__, 'notice' ] );
 			add_action( 'network_admin_notices', [ __CLASS__, 'notice' ] );
 			add_action( self::EVENT, [ __CLASS__, 'enforce' ] );
 			// The former MU monitor may already be loaded in this request.
 			foreach ( [ 'admin_notices' => 'notice', 'network_admin_notices' => 'notice', self::EVENT => 'enforce' ] as $hook => $method ) {
 				remove_action( $hook, [ 'Elementor_Edu_Course', $method ] );
+				remove_action( $hook, [ 'Elementor_Edu_Course_V2', $method ] );
 			}
 			remove_action( 'activate_plugin', [ 'Elementor_Edu_Course', 'check_activation' ], -100 );
 			remove_filter( 'pre_update_option_active_plugins', [ 'Elementor_Edu_Course', 'filter_activation' ], PHP_INT_MAX );
@@ -68,7 +71,7 @@ if ( ! class_exists( 'Elementor_Edu_Course_V2', false ) ) {
 				], true );
 				$record = self::record();
 				if ( ! $record ) {
-					return 'Impossibile salvare la configurazione didattica di Elementor Edu. Verifica il database di WordPress.';
+					return 'Could not save the Elementor Edu educational settings. Check the WordPress database.';
 				}
 			}
 			if ( ! in_array( $base, $record['plugins'], true ) ) {
@@ -85,7 +88,7 @@ if ( ! class_exists( 'Elementor_Edu_Course_V2', false ) ) {
 			$target = WPMU_PLUGIN_DIR . '/elementor-edu-course.php';
 			$contents = file_get_contents( $source );
 			if ( false === $contents ) {
-				return 'Il pacchetto Elementor Edu è incompleto. Reinstalla lo ZIP completo.';
+				return 'The Elementor Edu package is incomplete. Reinstall the complete ZIP file.';
 			}
 			if ( is_file( $target ) ) {
 				$current = file_get_contents( $target );
@@ -93,20 +96,20 @@ if ( ! class_exists( 'Elementor_Edu_Course_V2', false ) ) {
 					return '';
 				}
 				if ( false === $current || false === strpos( $current, 'Elementor Edu course monitor.' ) ) {
-					return 'Impossibile predisporre gli avvisi didattici: esiste un file incompatibile in mu-plugins/elementor-edu-course.php.';
+					return 'Could not set up educational notices: an incompatible file exists at mu-plugins/elementor-edu-course.php.';
 				}
 			}
 			if ( ! wp_mkdir_p( WPMU_PLUGIN_DIR ) || ! is_writable( WPMU_PLUGIN_DIR ) ) {
-				return 'Elementor Edu richiede che la cartella mu-plugins di WordPress sia scrivibile per mantenere gli avvisi didattici.';
+				return 'Elementor Edu needs write access to the WordPress mu-plugins directory to maintain educational notices.';
 			}
 			$temp = tempnam( WPMU_PLUGIN_DIR, 'edu-' );
 			if ( false === $temp ) {
-				return 'Impossibile predisporre gli avvisi didattici di Elementor Edu. Verifica i permessi della cartella mu-plugins.';
+				return 'Could not set up Elementor Edu educational notices. Check the mu-plugins directory permissions.';
 			}
 			$written = file_put_contents( $temp, $contents, LOCK_EX );
 			if ( strlen( $contents ) !== $written || ! rename( $temp, $target ) ) {
 				@unlink( $temp );
-				return 'Impossibile salvare gli avvisi didattici di Elementor Edu. Verifica i permessi della cartella mu-plugins.';
+				return 'Could not save Elementor Edu educational notices. Check the mu-plugins directory permissions.';
 			}
 			@chmod( $target, defined( 'FS_CHMOD_FILE' ) ? FS_CHMOD_FILE : 0644 );
 			return '';
@@ -143,6 +146,7 @@ if ( ! class_exists( 'Elementor_Edu_Course_V2', false ) ) {
 			}
 			wp_clear_scheduled_hook( self::EVENT );
 			wp_clear_scheduled_hook( 'elementor_edu_daily_update_check' );
+			wp_clear_scheduled_hook( 'elementor_edu_translation_refresh' );
 			delete_site_option( 'elementor_edu_available_update' );
 			$prepared = get_site_transient( 'elementor_edu_prepared_update' );
 			if ( is_array( $prepared ) && ! empty( $prepared['path'] ) ) {
@@ -164,8 +168,22 @@ if ( ! class_exists( 'Elementor_Edu_Course_V2', false ) ) {
 		}
 
 		private static function expiration_message() {
-			return '<p><strong>Elementor: copia a uso puramente didattico.</strong> Questa copia continua a funzionare, ma il periodo previsto per ricevere gli aggiornamenti è terminato. Da questo momento non vengono più cercati né installati aggiornamenti di Elementor tramite questa copia.</p>'
-				. '<p>Ti invitiamo a disattivarla e a sostituirla con un’installazione regolare di <a href="' . esc_url( self::PRO_URL ) . '" target="_blank" rel="noopener noreferrer">Elementor Pro dal sito ufficiale</a>. Per continuare a ricevere gli aggiornamenti di Elementor, passa alla versione ufficiale di Elementor Pro.</p>';
+			$link = '<a href="' . esc_url( self::PRO_URL ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Elementor Pro from the official website', 'elementor-edu' ) . '</a>';
+			return '<p><strong>' . esc_html__( 'Elementor: educational use only.', 'elementor-edu' ) . '</strong> '
+				. esc_html__( 'This copy will keep working, but its update period has ended. Elementor updates will no longer be checked for or installed through this copy.', 'elementor-edu' ) . '</p><p>'
+				/* translators: %s: Link to the official Elementor Pro website. */
+				. sprintf( esc_html__( 'Please deactivate this copy and replace it with an official installation of %s. Switch to the official version of Elementor Pro to keep receiving Elementor updates.', 'elementor-edu' ), $link ) . '</p>';
+		}
+
+		public static function load_translations() {
+			foreach ( self::record()['plugins'] ?? [] as $plugin ) {
+				$root = dirname( WP_PLUGIN_DIR . '/' . $plugin );
+				if ( is_readable( $root . '/includes/edu-i18n.php' ) ) {
+					require_once $root . '/includes/edu-i18n.php';
+					Elementor_Edu_I18n::boot( $root );
+					return;
+				}
+			}
 		}
 
 		public static function notice() {
@@ -187,10 +205,10 @@ if ( ! class_exists( 'Elementor_Edu_Course_V2', false ) ) {
 				echo '<div class="notice notice-warning elementor-edu-educational-notice">' . wp_kses_post( self::expiration_message() ) . '</div>';
 				return;
 			}
-			echo '<div class="notice notice-warning elementor-edu-educational-notice"><p><strong>Elementor Edu – Utilizzo esclusivamente educativo.</strong> '
-				. 'Questo plugin è destinato esclusivamente alle dimostrazioni e alle esercitazioni del corso. Non deve in nessun caso essere utilizzato al di fuori delle attività strettamente legate al corso.</p></div>';
+			echo '<div class="notice notice-warning elementor-edu-educational-notice"><p><strong>' . esc_html__( 'Elementor Edu – Educational use only.', 'elementor-edu' ) . '</strong> '
+				. esc_html__( 'This plugin is intended only for course demonstrations and exercises. It must not be used outside activities directly related to the course.', 'elementor-edu' ) . '</p></div>';
 		}
 	}
 }
 
-Elementor_Edu_Course_V2::boot();
+Elementor_Edu_Course_V3::boot();

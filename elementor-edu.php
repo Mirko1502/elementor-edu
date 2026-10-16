@@ -1,12 +1,13 @@
 <?php
 /**
  * Plugin Name: Elementor Edu
- * Description: Elementor in un unico pacchetto per uso educativo e dimostrativo.
+ * Description: Elementor in one package for educational and demonstration use.
  * Version: 4.3.2
- * Author: Elementor.com; confezionamento Elementor Edu
+ * Author: Elementor.com; Elementor Edu packaging
  * Requires PHP: 7.4
  * Requires at least: 6.8
  * Text Domain: elementor-edu
+ * Domain Path: /languages/elementor-edu
  * License: GPL-3.0-or-later
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  * Update URI: false
@@ -27,25 +28,30 @@ define( 'ELEMENTOR_EDU_PLUGIN_BASE', plugin_basename( __FILE__ ) );
 final class Elementor_Edu {
 
 	private static $error = '';
+	private static $error_args = [];
 	private const ORIGINAL_PLUGINS = [ 'elementor/elementor.php', 'elementor-pro/elementor-pro.php' ];
 
 	public static function boot() {
 		// Validate before the activation callbacks registered by the engines.
 		register_activation_hook( ELEMENTOR_EDU__FILE__, [ __CLASS__, 'activate' ] );
 
+		require_once __DIR__ . '/includes/edu-i18n.php';
+		Elementor_Edu_I18n::boot( __DIR__ );
 		require_once __DIR__ . '/includes/edu-course.php';
-		$course_error = Elementor_Edu_Course_V2::prepare( ELEMENTOR_EDU__FILE__ );
+		$course_error = Elementor_Edu_Course_V3::prepare( ELEMENTOR_EDU__FILE__ );
 
 		if ( $course_error ) {
 			self::$error = $course_error;
 		} elseif ( version_compare( PHP_VERSION, '7.4', '<' ) ) {
-			self::$error = 'Elementor Edu richiede PHP 7.4 o successivo.';
+			self::$error = 'Elementor Edu requires PHP %s or later.';
+			self::$error_args = [ '7.4' ];
 		} elseif ( version_compare( get_bloginfo( 'version' ), '6.8', '<' ) ) {
-			self::$error = 'Elementor Edu richiede WordPress 6.8 o successivo.';
+			self::$error = 'Elementor Edu requires WordPress %s or later.';
+			self::$error_args = [ '6.8' ];
 		} elseif ( self::has_conflict() ) {
-			self::$error = 'Disattiva Elementor ed Elementor Pro separati prima di attivare Elementor Edu. I contenuti esistenti vengono conservati.';
+			self::$error = 'Deactivate the separate Elementor and Elementor Pro plugins before activating Elementor Edu. Existing content will be preserved.';
 		} elseif ( ! is_readable( __DIR__ . '/includes/elementor/elementor.php' ) || ! is_readable( __DIR__ . '/includes/elementor-pro/elementor-pro.php' ) ) {
-			self::$error = 'Il pacchetto Elementor Edu è incompleto. Reinstalla lo ZIP completo.';
+			self::$error = 'The Elementor Edu package is incomplete. Reinstall the complete ZIP file.';
 		}
 
 		if ( self::$error ) {
@@ -59,8 +65,10 @@ final class Elementor_Edu {
 		require_once __DIR__ . '/includes/elementor-pro/elementor-pro.php';
 		require_once __DIR__ . '/includes/edu-hello-theme.php';
 		require_once __DIR__ . '/includes/edu-updater.php';
+		require_once __DIR__ . '/includes/edu-translation-updater.php';
 		Elementor_Edu_Hello_Theme::boot();
 		Elementor_Edu_Updater::boot();
+		Elementor_Edu_Translation_Updater::boot();
 
 		add_filter( 'pre_set_site_transient_update_plugins', [ __CLASS__, 'filter_updates' ], PHP_INT_MAX );
 		add_filter( 'site_transient_update_plugins', [ __CLASS__, 'filter_updates' ], PHP_INT_MAX );
@@ -79,19 +87,25 @@ final class Elementor_Edu {
 
 	public static function activate( $network_wide ) {
 		if ( self::$error ) {
-			wp_die( esc_html( self::$error ), 'Elementor Edu', [ 'back_link' => true ] );
+			wp_die( esc_html( self::error_message() ), 'Elementor Edu', [ 'back_link' => true ] );
 		}
 		if ( is_multisite() && $network_wide ) {
 			foreach ( get_sites( [ 'fields' => 'ids', 'number' => 0 ] ) as $site_id ) {
 				if ( array_intersect( self::ORIGINAL_PLUGINS, (array) get_blog_option( $site_id, 'active_plugins', [] ) ) ) {
-					wp_die( esc_html( 'Disattiva Elementor ed Elementor Pro separati in tutti i siti della rete prima di attivare Elementor Edu nella rete.' ), 'Elementor Edu', [ 'back_link' => true ] );
+					wp_die( esc_html( __( 'Deactivate the separate Elementor and Elementor Pro plugins on every site before activating Elementor Edu across the network.', 'elementor-edu' ) ), 'Elementor Edu', [ 'back_link' => true ] );
 				}
 			}
 		}
 	}
 
+	private static function error_message() {
+		// Delayed until the user locale and translations are available.
+		$message = translate( self::$error, 'elementor-edu' );
+		return self::$error_args ? vsprintf( $message, self::$error_args ) : $message;
+	}
+
 	public static function notice() {
-		echo '<div class="notice notice-error"><p><strong>Elementor Edu:</strong> ' . esc_html( self::$error ) . '</p></div>';
+		echo '<div class="notice notice-error"><p><strong>Elementor Edu:</strong> ' . esc_html( self::error_message() ) . '</p></div>';
 	}
 
 	/** Never install a single upstream engine over the combined plugin. */
@@ -123,11 +137,11 @@ final class Elementor_Edu {
 		if ( ELEMENTOR_EDU_PLUGIN_BASE !== $plugin_file ) {
 			return $html;
 		}
-		return esc_html( Elementor_Edu_Course_V2::updates_allowed() ? 'Aggiornamento del pacchetto Elementor' : 'Aggiornamenti di questa copia non disponibili' );
+		return esc_html( Elementor_Edu_Course_V3::updates_allowed() ? __( 'Elementor package update', 'elementor-edu' ) : __( 'Updates are unavailable for this copy', 'elementor-edu' ) );
 	}
 
 	public static function block_rollback() {
-		wp_die( esc_html( 'Per cambiare versione carica un pacchetto completo Elementor Edu. Il ripristino dei singoli motori non è disponibile.' ), 'Elementor Edu', [ 'back_link' => true ] );
+		wp_die( esc_html( __( 'To change versions, upload a complete Elementor Edu package. Rolling back individual components is unavailable.', 'elementor-edu' ) ), 'Elementor Edu', [ 'back_link' => true ] );
 	}
 }
 

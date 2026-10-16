@@ -1,0 +1,283 @@
+# Elementor Edu translations. License: GPL-3.0-or-later.
+msgid ""
+msgstr "Project-Id-Version: Elementor Edu\nMIME-Version: 1.0\nContent-Type: text/plain; charset=UTF-8\nContent-Transfer-Encoding: 8bit\nLanguage: pt_BR\nPlural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Elementor in one package for educational and demonstration use."
+msgstr "Elementor em um único pacote para uso educacional e demonstrativo."
+
+msgid "Deactivate the separate Elementor and Elementor Pro plugins before activating Elementor Edu. Existing content will be preserved."
+msgstr "Desative os plugins separados Elementor e Elementor Pro antes de ativar o Elementor Edu. O conteúdo existente será preservado."
+
+msgid "The Elementor Edu package is incomplete. Reinstall the complete ZIP file."
+msgstr "O pacote do Elementor Edu está incompleto. Reinstale o arquivo ZIP completo."
+
+msgid "Deactivate the separate Elementor and Elementor Pro plugins on every site before activating Elementor Edu across the network."
+msgstr "Desative os plugins separados Elementor e Elementor Pro em todos os sites antes de ativar o Elementor Edu na rede."
+
+msgid "Elementor package update"
+msgstr "Atualização do pacote Elementor"
+
+msgid "Updates are unavailable for this copy"
+msgstr "Atualizações indisponíveis para esta cópia"
+
+msgid "To change versions, upload a complete Elementor Edu package. Rolling back individual components is unavailable."
+msgstr "Para mudar de versão, envie um pacote completo do Elementor Edu. Não é possível reverter componentes individuais."
+
+msgid "Complete your setup with Hello Elementor"
+msgstr "Conclua a configuração com o Hello Elementor"
+
+msgid "We recommend Hello Elementor, the base theme included in Elementor Edu. Your current theme will remain active until you click the button."
+msgstr "Recomendamos o Hello Elementor, o tema base incluído no Elementor Edu. Seu tema atual continuará ativo até você clicar no botão."
+
+msgid "Each site in the network has its own theme. Open the site dashboard to configure it."
+msgstr "Cada site da rede tem seu próprio tema. Abra o painel do site para configurá-lo."
+
+msgid "Set up this site's theme"
+msgstr "Configure o tema deste site"
+
+msgid "Ask an authorized administrator to install Hello Elementor. You can then activate it here."
+msgstr "Peça a um administrador autorizado para instalar o Hello Elementor. Depois, você poderá ativá-lo aqui."
+
+msgid "Ask the network administrator to enable Hello Elementor for this site."
+msgstr "Peça ao administrador da rede para habilitar o Hello Elementor neste site."
+
+msgid "Activating the theme will change the appearance of your site. Your previous theme and content will be preserved."
+msgstr "A ativação do tema mudará a aparência do site. O tema anterior e o conteúdo serão preservados."
+
+msgid "Activate Hello Elementor"
+msgstr "Ativar o Hello Elementor"
+
+msgid "Install and activate Hello Elementor"
+msgstr "Instalar e ativar o Hello Elementor"
+
+msgid "Use the Hello Elementor installation button."
+msgstr "Use o botão de instalação do Hello Elementor."
+
+msgid "You do not have permission to change this site's theme."
+msgstr "Você não tem permissão para alterar o tema deste site."
+
+msgid "Hello Elementor setup"
+msgstr "Configuração do Hello Elementor"
+
+msgid "Hello Elementor is now the active theme for this site."
+msgstr "O Hello Elementor agora é o tema ativo deste site."
+
+msgid "Go to Themes"
+msgstr "Ir para Temas"
+
+msgid "Visit site"
+msgstr "Visitar site"
+
+msgid "You do not have permission to change the theme."
+msgstr "Você não tem permissão para alterar o tema."
+
+msgid "You do not have permission to install themes."
+msgstr "Você não tem permissão para instalar temas."
+
+msgid "The Hello Elementor package is unavailable. Reinstall the complete Elementor Edu ZIP file."
+msgstr "O pacote do Hello Elementor está indisponível. Reinstale o arquivo ZIP completo do Elementor Edu."
+
+msgid "Hello Elementor is incomplete or invalid. Restore it from Appearance > Themes and try again."
+msgstr "O Hello Elementor está incompleto ou inválido. Restaure-o em Aparência > Temas e tente novamente."
+
+msgid "The network administrator must enable Hello Elementor for this site."
+msgstr "O administrador da rede precisa habilitar o Hello Elementor neste site."
+
+msgid "Hello Elementor is installed but could not be activated. Try again from Appearance > Themes."
+msgstr "O Hello Elementor está instalado, mas não foi possível ativá-lo. Tente novamente em Aparência > Temas."
+
+msgid "Could not save the Elementor Edu educational settings. Check the WordPress database."
+msgstr "Não foi possível salvar as configurações educacionais do Elementor Edu. Verifique o banco de dados do WordPress."
+
+msgid "Could not set up educational notices: an incompatible file exists at mu-plugins/elementor-edu-course.php."
+msgstr "Não foi possível configurar os avisos educacionais: existe um arquivo incompatível em mu-plugins/elementor-edu-course.php."
+
+msgid "Elementor Edu needs write access to the WordPress mu-plugins directory to maintain educational notices."
+msgstr "O Elementor Edu precisa de permissão de escrita no diretório mu-plugins do WordPress para manter os avisos educacionais."
+
+msgid "Could not set up Elementor Edu educational notices. Check the mu-plugins directory permissions."
+msgstr "Não foi possível configurar os avisos educacionais do Elementor Edu. Verifique as permissões do diretório mu-plugins."
+
+msgid "Could not save Elementor Edu educational notices. Check the mu-plugins directory permissions."
+msgstr "Não foi possível salvar os avisos educacionais do Elementor Edu. Verifique as permissões do diretório mu-plugins."
+
+msgid "An Elementor update is available"
+msgstr "Uma atualização do Elementor está disponível"
+
+msgid "A new version of Elementor is available. You can install it now."
+msgstr "Uma nova versão do Elementor está disponível. Você pode instalá-la agora."
+
+msgid "Update Elementor now"
+msgstr "Atualizar o Elementor agora"
+
+msgid "Later"
+msgstr "Mais tarde"
+
+msgid "You do not have permission to update plugins."
+msgstr "Você não tem permissão para atualizar plugins."
+
+msgid "Use the Elementor update button."
+msgstr "Use o botão de atualização do Elementor."
+
+msgid "No Elementor update is available."
+msgstr "Nenhuma atualização do Elementor está disponível."
+
+msgid "Could not prepare the Elementor update. Please try again later."
+msgstr "Não foi possível preparar a atualização do Elementor. Tente novamente mais tarde."
+
+msgid "Elementor update"
+msgstr "Atualização do Elementor"
+
+msgid "The prepared Elementor package is no longer available."
+msgstr "O pacote preparado do Elementor não está mais disponível."
+
+msgid "Could not prepare the Elementor package for installation."
+msgstr "Não foi possível preparar o pacote do Elementor para instalação."
+
+msgid "Updates for this educational copy of Elementor are no longer available. Switch to the official version of Elementor Pro to keep receiving updates."
+msgstr "As atualizações desta cópia educacional do Elementor não estão mais disponíveis. Migre para a versão oficial do Elementor Pro para continuar recebendo atualizações."
+
+msgid "The server does not have the ZIP support required to prepare the Elementor update."
+msgstr "O servidor não tem o suporte a ZIP necessário para preparar a atualização do Elementor."
+
+msgid "The available version changed during preparation. Reload the dashboard and try again."
+msgstr "A versão disponível mudou durante a preparação. Recarregue o painel e tente novamente."
+
+msgid "Could not verify the Elementor package."
+msgstr "Não foi possível verificar o pacote do Elementor."
+
+msgid "The source returned an Elementor version older than the installed version."
+msgstr "A fonte retornou uma versão do Elementor anterior à versão instalada."
+
+msgid "Could not create the temporary update directory."
+msgstr "Não foi possível criar o diretório temporário de atualização."
+
+msgid "Could not access the temporary directory to prepare the Elementor update."
+msgstr "Não foi possível acessar o diretório temporário para preparar a atualização do Elementor."
+
+msgid "This site does not meet the requirements of the new Elementor version."
+msgstr "Este site não atende aos requisitos da nova versão do Elementor."
+
+msgid "Could not prepare a complete copy of the plugin."
+msgstr "Não foi possível preparar uma cópia completa do plugin."
+
+msgid "The downloaded package structure is invalid."
+msgstr "A estrutura do pacote baixado é inválida."
+
+msgid "Could not integrate the new version's files."
+msgstr "Não foi possível integrar os arquivos da nova versão."
+
+msgid "The installed package manifest is invalid."
+msgstr "O manifesto do pacote instalado é inválido."
+
+msgid "Could not create the update package."
+msgstr "Não foi possível criar o pacote de atualização."
+
+msgid "Could not complete the update package."
+msgstr "Não foi possível concluir o pacote de atualização."
+
+msgid "Could not read the available version."
+msgstr "Não foi possível ler a versão disponível."
+
+msgid "Could not find the plugin to download."
+msgstr "Não foi possível encontrar o plugin para baixar."
+
+msgid "The downloaded package is not a valid ZIP archive."
+msgstr "O pacote baixado não é um arquivo ZIP válido."
+
+msgid "The package contains a disallowed symbolic link."
+msgstr "O pacote contém um link simbólico não permitido."
+
+msgid "The package contains duplicate paths."
+msgstr "O pacote contém caminhos duplicados."
+
+msgid "The package contains a disallowed path."
+msgstr "O pacote contém um caminho não permitido."
+
+msgid "The package exceeds the maximum allowed size."
+msgstr "O pacote excede o tamanho máximo permitido."
+
+msgid "The package does not contain the expected files."
+msgstr "O pacote não contém os arquivos esperados."
+
+msgid "The package version does not match the detected version."
+msgstr "A versão do pacote não corresponde à versão detectada."
+
+msgid "The package header version does not match its runtime version."
+msgstr "A versão declarada no cabeçalho do pacote não corresponde à versão em execução."
+
+msgid "Could not read the Elementor package requirements."
+msgstr "Não foi possível ler os requisitos do pacote do Elementor."
+
+msgid "The Elementor package does not declare its minimum requirements."
+msgstr "O pacote do Elementor não declara os requisitos mínimos."
+
+msgid "The downloaded package is incompatible with Elementor Edu."
+msgstr "O pacote baixado é incompatível com o Elementor Edu."
+
+msgid "The downloaded package needs to be adapted before installation."
+msgstr "O pacote baixado precisa ser adaptado antes da instalação."
+
+msgid "The update source must use HTTPS."
+msgstr "A fonte de atualização deve usar HTTPS."
+
+msgid "The source redirected to a disallowed host or protocol."
+msgstr "A fonte redirecionou para um servidor ou protocolo não permitido."
+
+msgid "The update source is unreachable."
+msgstr "A fonte de atualização está inacessível."
+
+msgid "The source exceeded the allowed number of redirects."
+msgstr "A fonte excedeu o número permitido de redirecionamentos."
+
+msgid "The downloaded package has an invalid size."
+msgstr "O pacote baixado tem um tamanho inválido."
+
+msgid "Could not save the package temporarily."
+msgstr "Não foi possível salvar o pacote temporariamente."
+
+msgid "Elementor: educational use only."
+msgstr "Elementor: somente para uso educacional."
+
+msgid "This copy will keep working, but its update period has ended. Elementor updates will no longer be checked for or installed through this copy."
+msgstr "Esta cópia continuará funcionando, mas o período de atualizações terminou. As atualizações do Elementor não serão mais verificadas nem instaladas por meio desta cópia."
+
+msgid "Please deactivate this copy and replace it with an official installation of %s. Switch to the official version of Elementor Pro to keep receiving Elementor updates."
+msgstr "Recomendamos desativar esta cópia e substituí-la por uma instalação oficial do %s. Migre para a versão oficial do Elementor Pro para continuar recebendo atualizações do Elementor."
+
+msgid "Elementor Pro from the official website"
+msgstr "Elementor Pro pelo site oficial"
+
+msgid "Elementor Edu – Educational use only."
+msgstr "Elementor Edu – Somente para uso educacional."
+
+msgid "This plugin is intended only for course demonstrations and exercises. It must not be used outside activities directly related to the course."
+msgstr "Este plugin destina-se exclusivamente a demonstrações e exercícios do curso. Não deve ser usado fora das atividades diretamente relacionadas ao curso."
+
+msgid "Elementor Edu requires PHP %s or later."
+msgstr "O Elementor Edu requer o PHP %s ou superior."
+
+msgid "Elementor Edu requires WordPress %s or later."
+msgstr "O Elementor Edu requer o WordPress %s ou superior."
+
+msgid "The translation catalogue is invalid. Existing translations have been kept."
+msgstr "O catálogo de tradução é inválido. As traduções existentes foram mantidas."
+
+msgid "Could not save translations. Existing translations have been kept."
+msgstr "Não foi possível salvar as traduções. As traduções existentes foram mantidas."
+
+msgid "A translation source is unavailable. Existing translations have been kept; another attempt is scheduled."
+msgstr "Uma fonte de traduções está indisponível. As traduções existentes foram mantidas; uma nova tentativa está agendada."
+
+msgid "Some Elementor translations could not be updated. Existing translations remain available. Another attempt will run automatically."
+msgstr "Não foi possível atualizar algumas traduções do Elementor. As traduções existentes continuam disponíveis. Uma nova tentativa será feita automaticamente."
+
+msgid "Elementor.com; Elementor Edu packaging"
+msgstr "Elementor.com; empacotamento Elementor Edu"
+
+msgid "Elementor Edu – Educational notice"
+msgstr "Elementor Edu – Aviso educacional"
+
+msgid "Maintains educational notices and usage conditions for Elementor Edu."
+msgstr "Mantém os avisos e as condições de uso educacional do Elementor Edu."
+

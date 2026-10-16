@@ -1,0 +1,411 @@
+{
+  "Consider switching to the desired breakpoint in the panel instead of using @media width queries here.": [
+    "Seleziona il breakpoint desiderato nel pannello invece di usare qui query @media sulla larghezza."
+  ],
+  "Consider switching to the desired pseudo state in the panel instead of using pseudo-classes here.": [
+    "Seleziona lo pseudostato desiderato nel pannello invece di usare qui pseudoclassi."
+  ],
+  "Static position": [
+    "Posizione fissa"
+  ],
+  "Repeat every": [
+    "Ripeti ogni"
+  ],
+  "Apply once": [
+    "Applica una volta"
+  ],
+  "Edit Alternating Item": [
+    "Modifica elemento alternato"
+  ],
+  "You've reached the limit of 5 alternating items for this loop. Please remove an alternating item before creating a new one.": [
+    "Hai raggiunto il limite di 5 elementi alternati per questo loop. Rimuovine uno prima di crearne un altro."
+  ],
+  "Alternating items": [
+    "Elementi alternati"
+  ],
+  "Remove Alternating Item": [
+    "Rimuovi elemento alternato"
+  ],
+  "Alternating Item": [
+    "Elemento alternato"
+  ],
+  "Add to cart": [
+    "Aggiungi al carrello"
+  ],
+  "Selectable": [
+    "Selezionabile"
+  ],
+  "Product taxonomy": [
+    "Tassonomia del prodotto"
+  ],
+  "Mode": [
+    "Modalità"
+  ],
+  "Failed to save conditions.": [
+    "Impossibile salvare le condizioni."
+  ],
+  "You do not have permission to create theme templates.": [
+    "Non hai i permessi per creare template del tema."
+  ],
+  "Failed to delete the site part.": [
+    "Impossibile eliminare la parte del sito."
+  ],
+  "You do not have permission to delete this template.": [
+    "Non hai i permessi per eliminare questo template."
+  ],
+  "update requires at least one mutable field (currently: conditions).": [
+    "update richiede almeno un campo modificabile (attualmente: conditions)."
+  ],
+  "The given post_id is not a Theme Builder document.": [
+    "Il post_id indicato non è un documento del Theme Builder."
+  ],
+  "You do not have permission to edit this template.": [
+    "Non hai i permessi per modificare questo template."
+  ],
+  "post_id is required.": [
+    "post_id è obbligatorio."
+  ],
+  "Created document is not a Theme_Document.": [
+    "Il documento creato non è un Theme_Document."
+  ],
+  "Elementor %s": [
+    "Elementor %s"
+  ],
+  "\"%s\" is not a Theme Builder document type.": [
+    "\"%s\" non è un tipo di documento del Theme Builder."
+  ],
+  "Unknown action: %s.": [
+    "Azione sconosciuta: %s."
+  ],
+  "Invalid operation.": [
+    "Operazione non valida."
+  ],
+  "Maximum %d operations per request.": [
+    "Massimo %d operazioni per richiesta."
+  ],
+  "operations must not be empty.": [
+    "operations non deve essere vuoto."
+  ],
+  "operations array is required.": [
+    "L’array operations è obbligatorio."
+  ],
+  "Manage Elementor site parts (Theme Builder documents: %s). Bulk operations (1-50) with three actions: \"create\" makes a new site part as a draft (optionally assigning display conditions in the same call), \"update\" mutates an existing site part (currently the only mutable field is \"conditions\"; body/settings edits go via manage-elements / build-composition / update-page-settings), and \"delete\" removes a site part. Conditions are slash-separated strings like \"include/general\" (site-wide), \"include/singular/post\", \"exclude/singular/post/42\". Site parts are NOT published by this tool — they stay drafts and must be published separately (matches the editor UX). For repeating-layout patterns (one single template driven by dynamic data instead of N duplicated pages, include-all + exclude-exceptions condition scoping, Post Content placement), read the elementor://wordpress/best-practices resource before creating singles.": [
+    "Gestisci le parti del sito Elementor (documenti del Theme Builder: %s). Esegui da 1 a 50 operazioni con tre azioni: \"create\" crea una parte del sito in bozza e può assegnare le condizioni di visualizzazione; \"update\" modifica una parte esistente (attualmente solo \"conditions\"; contenuto e impostazioni si modificano tramite manage-elements, build-composition o update-page-settings); \"delete\" rimuove una parte. Le condizioni sono stringhe separate da barre, come \"include/general\" (intero sito), \"include/singular/post\" o \"exclude/singular/post/42\". Questo strumento non pubblica le parti: restano bozze da pubblicare separatamente, come nell’editor. Prima di creare template singoli per layout ripetuti, leggi elementor://wordpress/best-practices: un unico template con dati dinamici invece di N pagine duplicate, condizioni con inclusione generale ed esclusione delle eccezioni e posizionamento del contenuto dell’articolo."
+  ],
+  "Manage Elementor Site Parts": [
+    "Gestisci le parti del sito Elementor"
+  ],
+  "Lists Theme Builder site parts like header, footer, 404 page and more. Each row includes type, title, assignment, publish state, and whether it is rendered. is_active means the site part is published and matches a Theme Builder location on the front end. has_conditions means display conditions are saved on the document regardless of publish state. post_status is the raw WordPress status (draft, publish, private). A draft row with has_conditions true and is_active false means assignment succeeded but the site part will not render until published. Pass active: true to return only site parts that are currently rendered.": [
+    "Elenca le parti del sito del Theme Builder, come intestazione, piè di pagina, pagina 404 e altro. Ogni riga include tipo, titolo, assegnazione, stato di pubblicazione e presenza sul sito. is_active indica che la parte è pubblicata e corrisponde a una posizione del Theme Builder nel frontend. has_conditions indica che il documento ha condizioni di visualizzazione salvate, indipendentemente dalla pubblicazione. post_status è lo stato originale WordPress (draft, publish, private). Una bozza con has_conditions true e is_active false è assegnata correttamente ma non sarà visibile finché non viene pubblicata. Passa active: true per restituire solo le parti attualmente visualizzate."
+  ],
+  "List Site Parts": [
+    "Elenca le parti del sito"
+  ],
+  "Login Form": [
+    "Modulo di accesso"
+  ],
+  "Expire message": [
+    "Messaggio di scadenza"
+  ],
+  "Current time": [
+    "Ora attuale"
+  ],
+  "Target": [
+    "Destinazione"
+  ],
+  "%1$d hours, %2$d minutes": [
+    "%1$d ore, %2$d minuti"
+  ],
+  "Interval": [
+    "Intervallo"
+  ],
+  "Evaluates all matching terms in PHP before paging. May impact performance on very large taxonomies.": [
+    "Valuta tutti i termini corrispondenti in PHP prima della paginazione. Può influire sulle prestazioni con tassonomie molto grandi."
+  ],
+  "Number of items to skip before the grid starts.": [
+    "Numero di elementi da saltare prima dell’inizio della griglia."
+  ],
+  "Skip items": [
+    "Salta elementi"
+  ],
+  "Prevents duplicate terms from appearing across multiple loops on the same page. Applies to the frontend only.": [
+    "Evita che termini duplicati compaiano in più loop della stessa pagina. Si applica solo al frontend."
+  ],
+  "Avoid duplicates": [
+    "Evita duplicati"
+  ],
+  "Hide empty": [
+    "Nascondi vuoti"
+  ],
+  "Show all": [
+    "Mostra tutto"
+  ],
+  "Filter by": [
+    "Filtra per"
+  ],
+  "Post taxonomy": [
+    "Tassonomia dell’articolo"
+  ],
+  "Add Alternating Item": [
+    "Aggiungi elemento alternato"
+  ],
+  "No items found": [
+    "Nessun elemento trovato"
+  ],
+  "Empty state": [
+    "Stato vuoto"
+  ],
+  "Form label": [
+    "Etichetta del modulo"
+  ],
+  "Enter default value": [
+    "Inserisci il valore predefinito"
+  ],
+  "Default value": [
+    "Valore predefinito"
+  ],
+  "No valid recipient email address.": [
+    "Nessun indirizzo email del destinatario valido."
+  ],
+  "Cross-Sells": [
+    "Vendite incrociate"
+  ],
+  "Related Products": [
+    "Prodotti correlati"
+  ],
+  "Latest Products": [
+    "Prodotti recenti"
+  ],
+  "Ignore Sticky Posts": [
+    "Ignora gli articoli in evidenza"
+  ],
+  "Comment Count": [
+    "Numero di commenti"
+  ],
+  "Last Modified": [
+    "Ultima modifica"
+  ],
+  "Menu Order": [
+    "Ordine del menu"
+  ],
+  "Past Year": [
+    "Ultimo anno"
+  ],
+  "Past Quarter": [
+    "Ultimo trimestre"
+  ],
+  "Past Month": [
+    "Ultimo mese"
+  ],
+  "Past Week": [
+    "Ultima settimana"
+  ],
+  "Past Day": [
+    "Ultimo giorno"
+  ],
+  "Current Post": [
+    "Articolo corrente"
+  ],
+  "Current Query": [
+    "Query corrente"
+  ],
+  "Items Per Page": [
+    "Elementi per pagina"
+  ],
+  "Page Reload": [
+    "Ricaricamento della pagina"
+  ],
+  "Load Type": [
+    "Tipo di caricamento"
+  ],
+  "Give your Query a custom unique id to allow server side filtering": [
+    "Assegna alla query un ID univoco personalizzato per consentire il filtraggio lato server"
+  ],
+  "Manual Selection": [
+    "Selezione manuale"
+  ],
+  "Minimum value cannot be greater than maximum value.": [
+    "Il valore minimo non può superare quello massimo."
+  ],
+  "Max": [
+    "Max"
+  ],
+  "Min": [
+    "Min"
+  ],
+  "Drag widget here": [
+    "Trascina il widget qui"
+  ],
+  "Add template": [
+    "Aggiungi template"
+  ],
+  "Add widget": [
+    "Aggiungi widget"
+  ],
+  "Layout Style Panel": [
+    "Pannello Stile del layout"
+  ],
+  "To control the layout of the items use the Style Panel of the \"Loop Layout\".": [
+    "Per controllare il layout degli elementi, usa il pannello Stile di \"Layout del loop\"."
+  ],
+  "Edit loop item": [
+    "Modifica elemento del loop"
+  ],
+  "Double-click the loop item on your canvas or click the button below to enter Edit mode.": [
+    "Fai doppio clic sull’elemento del loop nell’area di lavoro o premi il pulsante qui sotto per modificarlo."
+  ],
+  "Edit your loop item": [
+    "Modifica il tuo elemento del loop"
+  ],
+  "Exit loop editing mode": [
+    "Esci dalla modifica del loop"
+  ],
+  "time format\u0004Use the letters: %s": [
+    "Usa le lettere: %s"
+  ],
+  "date format\u0004Use the letters: %s": [
+    "Usa le lettere: %s"
+  ],
+  "Get Your Emails Delivered With Email Deliverability": [
+    "Recapita le tue email con Email Deliverability"
+  ],
+  "Get your emails delivered with Email Deliverability": [
+    "Recapita le tue email con Email Deliverability"
+  ],
+  "Make sure your emails reach the inbox every time with Email Deliverability.": [
+    "Assicurati che le tue email arrivino sempre nella posta in arrivo con Email Deliverability."
+  ],
+  "Exclude filter": [
+    "Filtro di esclusione"
+  ],
+  "Include filter": [
+    "Filtro di inclusione"
+  ],
+  "Selection": [
+    "Selezione"
+  ],
+  "Template type": [
+    "Tipo di template"
+  ],
+  "Pagination type": [
+    "Tipo di paginazione"
+  ],
+  "Prev / Next": [
+    "Precedente / Successivo"
+  ],
+  "Structure": [
+    "Struttura"
+  ],
+  "Page %1$s of %2$s": [
+    "Pagina %1$s di %2$s"
+  ],
+  "Loop Layout": [
+    "Layout del loop"
+  ],
+  "Next page": [
+    "Pagina successiva"
+  ],
+  "Previous page": [
+    "Pagina precedente"
+  ],
+  "Minimum length cannot be greater than maximum length.": [
+    "La lunghezza minima non può superare quella massima."
+  ],
+  "Length": [
+    "Lunghezza"
+  ],
+  "Renew": [
+    "Rinnova"
+  ],
+  "Portfolio Bio": [
+    "Biografia del portfolio"
+  ],
+  "Loop element for repeating dynamic content. Note: This feature requires the \"Atomic Widgets\" experiment to be enabled.": [
+    "Elemento loop per ripetere contenuti dinamici. Nota: richiede l’attivazione dell’esperimento \"Widget atomici\"."
+  ],
+  "Ensure form submission emails reach the inbox and track delivery with built-in logs. Email Deliverability is included in your ONE subscription. Activate it to continue.": [
+    "Assicurati che le email dei moduli arrivino a destinazione e monitora la consegna con i registri integrati. Email Deliverability è incluso nel tuo abbonamento ONE. Attivalo per continuare."
+  ],
+  "Ensure form submission emails reach the inbox and track delivery with built-in logs. Email Deliverability is included in your ONE subscription.": [
+    "Assicurati che le email dei moduli arrivino a destinazione e monitora la consegna con i registri integrati. Email Deliverability è incluso nel tuo abbonamento ONE."
+  ],
+  "Ensure your site’s emails reach the inbox every time. Email Deliverability is included in your ONE subscription. Activate it to continue.": [
+    "Assicurati che le email del sito arrivino sempre nella posta in arrivo. Email Deliverability è incluso nel tuo abbonamento ONE. Attivalo per continuare."
+  ],
+  "Make sure your site’s emails reach the inbox every time. Email Deliverability is included in your ONE subscription.": [
+    "Assicurati che le email del sito arrivino sempre nella posta in arrivo. Email Deliverability è incluso nel tuo abbonamento ONE."
+  ],
+  "Experiencing email deliverability issues? Get your emails delivered with Email Deliverability.": [
+    "Hai problemi di consegna delle email? Recapitale con Email Deliverability."
+  ],
+  "Keep in mind: Certain cache plugins can conflict with your display conditions.": [
+    "Ricorda: alcuni plugin di cache possono interferire con le condizioni di visualizzazione."
+  ],
+  "Last modified": [
+    "Ultima modifica"
+  ],
+  "Page reload": [
+    "Ricaricamento della pagina"
+  ],
+  "Load type": [
+    "Tipo di caricamento"
+  ],
+  "Cross-sells": [
+    "Vendite incrociate"
+  ],
+  "Items per page": [
+    "Elementi per pagina"
+  ],
+  "%d submission has been successfully updated.": [
+    "%d invio è stato aggiornato correttamente.",
+    "%d invii sono stati aggiornati correttamente."
+  ],
+  "Jello": [
+    "Gelatina"
+  ],
+  "Ignore sticky posts": [
+    "Ignora gli articoli in evidenza"
+  ],
+  "Past year": [
+    "Ultimo anno"
+  ],
+  "Past quarter": [
+    "Ultimo trimestre"
+  ],
+  "Past month": [
+    "Ultimo mese"
+  ],
+  "Past week": [
+    "Ultima settimana"
+  ],
+  "Past day": [
+    "Ultimo giorno"
+  ],
+  "Related products": [
+    "Prodotti correlati"
+  ],
+  "Latest products": [
+    "Prodotti recenti"
+  ],
+  "Give your query a custom unique ID to allow server side filtering.": [
+    "Assegna alla query un ID univoco personalizzato per consentire il filtraggio lato server."
+  ],
+  "Current query": [
+    "Query corrente"
+  ],
+  "Comment count": [
+    "Numero di commenti"
+  ],
+  "Current post": [
+    "Articolo corrente"
+  ],
+  "Warning: Please back up your database before making the rollback.": [
+    "Attenzione: esegui un backup del database prima di ripristinare la versione precedente."
+  ],
+  "Menu order": [
+    "Ordine del menu"
+  ],
+  "Manual selection": [
+    "Selezione manuale"
+  ]
+}

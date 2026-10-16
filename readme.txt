@@ -6,40 +6,36 @@ License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
-Distribuzione educativa modificata di Elementor 4.3.5, con un solo plugin installabile e attivabile.
-I motori originali sono di Elementor Ltd.; copyright e licenze sono conservati.
-L'utilizzo è consentito esclusivamente per dimostrazioni ed esercitazioni
-strettamente legate al corso. Non utilizzare il plugin al di fuori del corso.
+Elementor Edu combines Elementor 4.3.5 and Elementor Pro in one installable WordPress plugin for educational demonstrations and course exercises. The original engines are by Elementor Ltd.; their copyright notices and licenses are preserved.
+
+This educational distribution is intended only for activities directly related to the course. It does not include an official Elementor Pro license or guarantee access to cloud services.
 
 == Installation ==
-1. Se già presenti, disattiva Elementor ed Elementor Pro separati.
-2. In Plugin > Aggiungi plugin > Carica plugin, carica lo ZIP Elementor Edu.
-3. Attiva Elementor Edu. Non occorrono altre attivazioni.
-4. Nel riquadro Hello Elementor, premi "Installa e attiva Hello Elementor"
-   per installare il tema incluso (3.5.1) e attivarlo sul sito.
-   Il tema attuale cambia soltanto al clic. Se Hello Elementor è già installato,
-   viene attivata la copia esistente senza sovrascriverla. Un tema child di Hello
-   già attivo viene conservato. Servono i permessi WordPress per installare e
-   cambiare temi; se necessario WordPress richiederà le credenziali filesystem.
-   Su multisito la scelta riguarda solo il sito corrente, non tutta la rete.
+1. Deactivate any separate Elementor and Elementor Pro installations.
+2. In Plugins > Add New Plugin > Upload Plugin, upload the Elementor Edu ZIP file.
+3. Activate Elementor Edu. Both included engines load together and reuse existing Elementor pages, settings and data.
+4. Optionally select "Install and activate Hello Elementor" to use the included Hello Elementor 3.5.1 theme. Your current theme changes only after you click. An existing Hello installation is reused without being overwritten; an active Hello child theme is preserved. WordPress theme installation and activation permissions are required. On multisite, the change applies only to the current site.
 
-Pagine, impostazioni e dati Elementor esistenti vengono riutilizzati.
-Quando disponibile e durante il periodo previsto per gli aggiornamenti,
-l’aggiornamento completo di Elementor può essere avviato dalla bacheca.
-Al termine di tale periodo il plugin continua a funzionare, ma gli aggiornamenti
-di questa copia non sono più disponibili. Passa a una versione ufficiale
-di Elementor Pro per continuare a riceverli: https://elementor.com/it/pro/.
+== Languages ==
+English is the source language. Italian (it_IT) and Brazilian Portuguese (pt_BR) translations are included for Elementor Edu and both Elementor engines, including PHP interfaces and JavaScript editor panels.
 
-== Provenienza e servizi remoti ==
-Il pacchetto include personalizzazioni di una distribuzione Pro modificata.
-Questa copia usa il proxy https://elementor.gpltimes.com per alcune richieste
-ai servizi Elementor. Il proxy è conservato: il pacchetto non aggiunge una
-licenza ufficiale né garantisce disponibilità di template o servizi cloud.
-Le funzionalità che richiedono altri plugin, per esempio WooCommerce,
-mantengono le stesse dipendenze dei motori forniti.
+In the dashboard and editor, the language follows the current user's WordPress profile under Users > Profile > Language. With "Site Default", the site's language is used. Public pages use the site's language. Unsupported interface languages fall back to English. Your page content is not translated automatically, and this plugin does not change the WordPress dashboard language or other plugins' translations.
 
-== Modifiche ==
-Un solo identificatore plugin per il pacchetto combinato; percorsi interni e API
-conservati; blocco dei conflitti con i plugin separati; aggiornamenti e rollback
-dei componenti singoli disattivati. Gli aggiornamenti del database restano attivi.
-L'interfaccia del builder conserva il marchio Elementor.
+Translation catalogues are included and work offline. While the update period is active, WordPress Cron refreshes the Italian and Brazilian Portuguese catalogues daily from the public WordPress.org and Elementor translation projects. It also refreshes them when preparing a combined Elementor update, and schedules a refresh after a manually installed new version. No manual language-pack installation is needed.
+
+Only translation data is downloaded; remote PHP files are never installed or executed. Supplementary translations for missing strings are preserved. If a source is unavailable, existing catalogues are retained, an administrator notice is shown after a failed scheduled refresh, and a later automatic attempt is scheduled. Newly introduced strings without an available translation appear in English until a translated catalogue becomes available. WordPress Cron depends on site visits or a server cron job.
+
+== Updates ==
+While the educational update period is active, the plugin checks daily for a newer Pro release at https://www.gpl-astra.com/elementor-pro/. Only a newer Pro release triggers an Elementor update offer. Clicking "Update Elementor now" downloads both current engines, validates the packages and installs the combined update through WordPress. A newer Elementor release alone does not trigger an update.
+
+When the update period ends, the plugin keeps working and can still be reactivated. Automatic engine and translation checks stop, and this copy no longer installs updates. Existing translations remain available. A permanent dashboard notice explains the educational status and recommends replacing this copy with an official Elementor Pro installation to continue receiving updates: https://elementor.com/pro/.
+
+Reinstallation does not reset the persistent educational record. If an earlier version already deactivated the plugin, reactivate it normally after replacing the package.
+
+== Sources and remote services ==
+This package includes customizations from an altered Pro distribution. It retains the proxy https://elementor.gpltimes.com for some Elementor service requests. It does not grant an official license or guarantee template or cloud-service availability. Features requiring other plugins, such as WooCommerce, retain those dependencies.
+
+Translations are obtained from https://translate.wordpress.org/projects/wp-plugins/elementor/ and https://translate.elementor.com/projects/elementor-pro/. Translation requests contain no site content, personal data or license credentials. Public servers necessarily receive connection metadata such as the requesting IP address.
+
+== Distribution changes ==
+The combined package uses one plugin identity while preserving internal engine paths and APIs. Separate engine updates and rollbacks are disabled to protect the combined installation; database upgrades remain enabled. The builder retains Elementor branding. Local translation catalogues and supplementary entries are distributed under the corresponding component licenses.

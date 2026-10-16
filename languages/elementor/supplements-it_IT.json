@@ -1,0 +1,1209 @@
+{
+  "Size variables require an active Elementor Pro license, so this operation was not applied. Do not retry it — tell the user that size variables are a Pro feature.": [
+    "Le variabili di dimensione richiedono una licenza Elementor Pro attiva, quindi l’operazione non è stata applicata. Non ripeterla: informa l’utente che le variabili di dimensione sono una funzione Pro."
+  ],
+  "With Pro, your agent can build with Theme Builder, forms, popups, and more advanced Elementor capabilities.": [
+    "Con Pro, il tuo agente può utilizzare Theme Builder, moduli, popup e altre funzionalità avanzate di Elementor."
+  ],
+  "Build more with your AI agent": [
+    "Crea di più con il tuo agente IA"
+  ],
+  "Element <%s> is not closed.": [
+    "L’elemento <%s> non è chiuso."
+  ],
+  "Closing tag </%s> has no matching opening tag.": [
+    "Il tag di chiusura </%s> non ha un tag di apertura corrispondente."
+  ],
+  "These CSS properties or values are not supported and were not saved: %s": [
+    "Queste proprietà o valori CSS non sono supportati e non sono stati salvati: %s"
+  ],
+  "There was a problem saving your selected features.": [
+    "Si è verificato un problema nel salvataggio delle funzionalità selezionate."
+  ],
+  "New Onboarding": [
+    "Nuova configurazione iniziale"
+  ],
+  "Install and activate": [
+    "Installa e attiva"
+  ],
+  "By installing, you agree to our %1$s & %2$s.": [
+    "Installando accetti i nostri %1$s e %2$s."
+  ],
+  "Ask Angie to build you full pages, custom widgets, snippets, and code directly in Elementor. Install and activate Angie once on this site to start building.": [
+    "Chiedi ad Angie di creare pagine complete, widget personalizzati, snippet e codice direttamente in Elementor. Installa e attiva Angie su questo sito per iniziare."
+  ],
+  "widgets and more": [
+    "widget e altro"
+  ],
+  "Pages, layouts,": [
+    "Pagine, layout,"
+  ],
+  "Drag to reposition": [
+    "Trascina per riposizionare"
+  ],
+  "Item name": [
+    "Nome dell’elemento"
+  ],
+  "Reorder List Items": [
+    "Riordina gli elementi dell’elenco"
+  ],
+  "Duplicate List Item": [
+    "Duplica elemento dell’elenco"
+  ],
+  "Reorder Accordion Items": [
+    "Riordina gli elementi della fisarmonica"
+  ],
+  "Duplicate Accordion Item": [
+    "Duplica elemento della fisarmonica"
+  ],
+  "Defaults": [
+    "Valori predefiniti"
+  ],
+  "You have unsaved changes in Default Styles.": [
+    "Hai modifiche non salvate negli Stili predefiniti."
+  ],
+  "Type tag name": [
+    "Digita il nome del tag"
+  ],
+  "Open tag state menu": [
+    "Apri il menu dello stato del tag"
+  ],
+  "tags": [
+    "tag"
+  ],
+  "tag": [
+    "tag"
+  ],
+  "Video preview": [
+    "Anteprima video"
+  ],
+  "Preview icon": [
+    "Icona di anteprima"
+  ],
+  "Icon library": [
+    "Libreria delle icone"
+  ],
+  "Page has too many widgets.": [
+    "La pagina contiene troppi widget."
+  ],
+  "Reduce the number of widgets on the page by removing or combining elements.": [
+    "Riduci il numero di widget nella pagina rimuovendo o combinando elementi."
+  ],
+  "Excessive DOM size caused by too many widgets degrades rendering performance.": [
+    "Un DOM troppo grande a causa di troppi widget peggiora le prestazioni di rendering."
+  ],
+  "Too many widgets": [
+    "Troppi widget"
+  ],
+  "Site favicon is not set.": [
+    "La favicon del sito non è impostata."
+  ],
+  "Site logo is not set.": [
+    "Il logo del sito non è impostato."
+  ],
+  "Site description is missing or still uses the default.": [
+    "La descrizione del sito manca o è ancora quella predefinita."
+  ],
+  "Site name is missing or still uses the default.": [
+    "Il nome del sito manca o è ancora quello predefinito."
+  ],
+  "Open Site Settings → Site Identity and complete all the missing fields.": [
+    "Apri Impostazioni sito → Identità del sito e completa tutti i campi mancanti."
+  ],
+  "Site name, description, logo, and favicon establish your brand and appear in search results and browser tabs.": [
+    "Nome, descrizione, logo e favicon definiscono l’identità del sito e compaiono nei risultati di ricerca e nelle schede del browser."
+  ],
+  "Site identity": [
+    "Identità del sito"
+  ],
+  "Column element": [
+    "Elemento colonna"
+  ],
+  "Section element": [
+    "Elemento sezione"
+  ],
+  "Use the Container Converter to replace each section/column with a container.": [
+    "Usa il convertitore di contenitori per sostituire ogni sezione o colonna con un contenitore."
+  ],
+  "Sections and columns are legacy elements. Containers render fewer DOM nodes and are more flexible.": [
+    "Sezioni e colonne sono elementi della versione precedente. I contenitori generano meno nodi DOM e sono più flessibili."
+  ],
+  "Sections and columns": [
+    "Sezioni e colonne"
+  ],
+  "Search engines are discouraged from indexing this website.": [
+    "Ai motori di ricerca viene richiesto di non indicizzare questo sito."
+  ],
+  "Go to Settings → Reading in the WordPress admin and uncheck \"Discourage search engines from indexing this site\" when the website should be indexed.": [
+    "Vai in Impostazioni → Lettura nel pannello WordPress e deseleziona \"Scoraggia i motori di ricerca dall’effettuare l’indicizzazione di questo sito\" quando vuoi indicizzare il sito."
+  ],
+  "When search engine visibility is checked in WordPress Settings -> Reading -> Search Engine Visibility, search engines are discouraged from indexing the website.": [
+    "Quando l’opzione in Impostazioni → Lettura → Visibilità ai motori di ricerca di WordPress è selezionata, ai motori viene richiesto di non indicizzare il sito."
+  ],
+  "Search engine visibility": [
+    "Visibilità ai motori di ricerca"
+  ],
+  "No privacy policy page is set.": [
+    "Non è stata impostata una pagina per l’informativa sulla privacy."
+  ],
+  "Go to Settings > Privacy in the WordPress admin and assign a published privacy policy page.": [
+    "Vai in Impostazioni > Privacy nel pannello WordPress e assegna una pagina pubblicata per l’informativa sulla privacy."
+  ],
+  "A privacy policy page is required by privacy regulations such as GDPR (EU) and CCPA (US).": [
+    "Le normative sulla privacy, come GDPR (UE) e CCPA (USA), richiedono una pagina con l’informativa sulla privacy."
+  ],
+  "replace hardcoded typography with \"%s\" global font": [
+    "sostituisci la tipografia impostata manualmente con il font globale \"%s\""
+  ],
+  "No global fonts": [
+    "Nessun font globale"
+  ],
+  "Replace the hard-coded value with the matching global font.": [
+    "Sostituisci il valore impostato manualmente con il font globale corrispondente."
+  ],
+  "Global fonts make the design consistent and easy to update site-wide.": [
+    "I font globali rendono il design coerente e facile da aggiornare in tutto il sito."
+  ],
+  "Prefer global fonts": [
+    "Preferisci i font globali"
+  ],
+  "replace \"%1$s\" with \"%2$s\" global color": [
+    "sostituisci \"%1$s\" con il colore globale \"%2$s\""
+  ],
+  "No global colors": [
+    "Nessun colore globale"
+  ],
+  "Replace the hard-coded value with the matching global color.": [
+    "Sostituisci il valore impostato manualmente con il colore globale corrispondente."
+  ],
+  "Global colors make the design consistent and easy to update site-wide.": [
+    "I colori globali rendono il design coerente e facile da aggiornare in tutto il sito."
+  ],
+  "Prefer global colors": [
+    "Preferisci i colori globali"
+  ],
+  "Page title is too long.": [
+    "Il titolo della pagina è troppo lungo."
+  ],
+  "Page has no title.": [
+    "La pagina non ha un titolo."
+  ],
+  "Open Page Settings and add a title.": [
+    "Apri le impostazioni della pagina e aggiungi un titolo."
+  ],
+  "Pages need a clear title for SEO and screen-reader navigation.": [
+    "Le pagine richiedono un titolo chiaro per la SEO e la navigazione con lettori di schermo."
+  ],
+  "Page title": [
+    "Titolo della pagina"
+  ],
+  "No featured image set.": [
+    "Nessuna immagine in evidenza impostata."
+  ],
+  "Open Page Settings and set a featured image.": [
+    "Apri le impostazioni della pagina e imposta un’immagine in evidenza."
+  ],
+  "Featured images are used by social shares and many themes for hero visuals.": [
+    "Le immagini in evidenza vengono utilizzate nelle condivisioni social e da molti temi come immagini principali."
+  ],
+  "Page featured image": [
+    "Immagine in evidenza della pagina"
+  ],
+  "Page has no excerpt.": [
+    "La pagina non ha un riassunto."
+  ],
+  "Open Page Settings and write a short excerpt.": [
+    "Apri le impostazioni della pagina e scrivi un breve riassunto."
+  ],
+  "A descriptive excerpt helps search engines and previews summarize the page.": [
+    "Un riassunto descrittivo aiuta i motori di ricerca e le anteprime a presentare la pagina."
+  ],
+  "Page excerpt": [
+    "Riassunto della pagina"
+  ],
+  "Nested boxed container.": [
+    "Contenitore a larghezza fissa annidato."
+  ],
+  "Change the inner container's content width to Full Width.": [
+    "Imposta la larghezza del contenuto del contenitore interno su Larghezza piena."
+  ],
+  "An inner container does not need to be boxed when its parent already is.": [
+    "Non serve una larghezza fissa per un contenitore interno se il contenitore padre la usa già."
+  ],
+  "Boxed container nested inside a boxed parent": [
+    "Contenitore a larghezza fissa annidato in un padre a larghezza fissa"
+  ],
+  "Image is %d KB (over 500 KB).": [
+    "L’immagine occupa %d KB (oltre 500 KB)."
+  ],
+  "Replace the image with a smaller version or enable image optimization.": [
+    "Sostituisci l’immagine con una versione più piccola o attiva l’ottimizzazione delle immagini."
+  ],
+  "Large image files slow down the page.": [
+    "I file immagine grandi rallentano la pagina."
+  ],
+  "Oversized images": [
+    "Immagini troppo grandi"
+  ],
+  "Image is missing alt text.": [
+    "L’immagine non ha un testo alternativo."
+  ],
+  "No images": [
+    "Nessuna immagine"
+  ],
+  "Open the image's settings and add an Alt Text describing the image.": [
+    "Apri le impostazioni dell’immagine e aggiungi un testo alternativo che la descriva."
+  ],
+  "Every image needs a meaningful alt attribute for screen readers and image-search.": [
+    "Ogni immagine richiede un attributo alt significativo per i lettori di schermo e la ricerca di immagini."
+  ],
+  "Element is hidden on all devices.": [
+    "L’elemento è nascosto su tutti i dispositivi."
+  ],
+  "Remove the element or make it visible on at least one device breakpoint.": [
+    "Rimuovi l’elemento o rendilo visibile almeno a un breakpoint."
+  ],
+  "Elements hidden on all devices simultaneously are effectively dead code in the page tree.": [
+    "Gli elementi nascosti contemporaneamente su tutti i dispositivi sono di fatto codice inutilizzato nella struttura della pagina."
+  ],
+  "Heading level skipped.": [
+    "È stato saltato un livello di intestazione."
+  ],
+  "More than one H1 on the page.": [
+    "La pagina contiene più di un H1."
+  ],
+  "No H1 on the page.": [
+    "La pagina non contiene un H1."
+  ],
+  "No headings found on the page.": [
+    "Nessuna intestazione trovata nella pagina."
+  ],
+  "Ensure your page has one H1 and that heading levels do not skip (no H2 → H4).": [
+    "Assicurati che la pagina abbia un solo H1 e che i livelli di intestazione non vengano saltati (evita H2 → H4)."
+  ],
+  "Pages should have exactly one H1 and a non-skipping heading order.": [
+    "Le pagine devono avere esattamente un H1 e intestazioni ordinate senza salti di livello."
+  ],
+  "Heading structure": [
+    "Struttura delle intestazioni"
+  ],
+  "Using deprecated widget.": [
+    "È in uso un widget obsoleto."
+  ],
+  "Replace each deprecated widget with the recommended new widget shown in its panel.": [
+    "Sostituisci ogni widget obsoleto con quello nuovo consigliato nel suo pannello."
+  ],
+  "Deprecated widgets should not be used. For better capabilities use the recommended replacement.": [
+    "Non utilizzare widget obsoleti. Usa la sostituzione consigliata per avere funzionalità migliori."
+  ],
+  "Deprecated widgets": [
+    "Widget obsoleti"
+  ],
+  "Kit appears unchanged from default.": [
+    "Il kit sembra invariato rispetto ai valori predefiniti."
+  ],
+  "Open Site Settings and customize your kit (colors, fonts, layout).": [
+    "Apri Impostazioni sito e personalizza il kit (colori, font, layout)."
+  ],
+  "Your website is using the default design system colors and fonts. Custom branding makes the website feel uniquely yours.": [
+    "Il sito usa colori e font predefiniti del sistema di design. Un’identità personalizzata rende il sito unico."
+  ],
+  "Default website kit": [
+    "Kit del sito predefinito"
+  ],
+  "Container nesting is too deep.": [
+    "I contenitori sono annidati troppo in profondità."
+  ],
+  "No elements": [
+    "Nessun elemento"
+  ],
+  "Flatten the layout by removing unnecessary wrapper containers.": [
+    "Semplifica il layout rimuovendo i contenitori esterni non necessari."
+  ],
+  "Container nesting exceeds the recommended depth. Deep DOM trees hurt rendering performance and readability.": [
+    "L’annidamento dei contenitori supera la profondità consigliata. Strutture DOM troppo profonde riducono prestazioni e leggibilità."
+  ],
+  "Deep container nesting": [
+    "Annidamento eccessivo dei contenitori"
+  ],
+  "Cookiez plugin is not installed or active.": [
+    "Il plugin Cookiez non è installato o attivo."
+  ],
+  "Install the Cookiez plugin to add a cookie policy to your website.": [
+    "Installa il plugin Cookiez per aggiungere un’informativa sui cookie al sito."
+  ],
+  "A cookie policy is required by privacy regulations such as GDPR (EU) or CCPA (US) to inform visitors about tracking and data collection.": [
+    "Le normative sulla privacy, come GDPR (UE) o CCPA (USA), richiedono un’informativa sui cookie per spiegare ai visitatori il tracciamento e la raccolta dei dati."
+  ],
+  "Cookie policy": [
+    "Informativa sui cookie"
+  ],
+  "Ally plugin is not installed or active.": [
+    "Il plugin Ally non è installato o attivo."
+  ],
+  "Install the Ally plugin to add an accessibility policy to your website.": [
+    "Installa il plugin Ally per aggiungere una dichiarazione di accessibilità al sito."
+  ],
+  "An accessibility policy demonstrates your commitment to digital inclusion and may be legally required in some regions.": [
+    "Una dichiarazione di accessibilità dimostra l’impegno per l’inclusione digitale e può essere obbligatoria in alcune aree geografiche."
+  ],
+  "Accessibility policy": [
+    "Dichiarazione di accessibilità"
+  ],
+  "Audit Page": [
+    "Analizza pagina"
+  ],
+  "Run page audit": [
+    "Avvia analisi della pagina"
+  ],
+  "Re-scan": [
+    "Ripeti analisi"
+  ],
+  "Last scan:": [
+    "Ultima analisi:"
+  ],
+  "Issues": [
+    "Problemi"
+  ],
+  "Audit navigation": [
+    "Navigazione dell’analisi"
+  ],
+  "Remaining issues": [
+    "Problemi rimanenti"
+  ],
+  "Audit statuses": [
+    "Stati dell’analisi"
+  ],
+  "Overall score": [
+    "Punteggio complessivo"
+  ],
+  "%d skipped audits, view all": [
+    "%d controlli saltati, mostra tutti"
+  ],
+  "%d failed audits, view all": [
+    "%d controlli non superati, mostra tutti"
+  ],
+  "%d passed audits, view all": [
+    "%d controlli superati, mostra tutti"
+  ],
+  "At risk": [
+    "A rischio"
+  ],
+  "Needs work": [
+    "Da migliorare"
+  ],
+  "Good": [
+    "Buono"
+  ],
+  "All issues": [
+    "Tutti i problemi"
+  ],
+  "Quick wins": [
+    "Interventi rapidi"
+  ],
+  "Optimize all": [
+    "Ottimizza tutto"
+  ],
+  "Generate cookie policy": [
+    "Genera informativa sui cookie"
+  ],
+  "Fix with Cookiez": [
+    "Correggi con Cookiez"
+  ],
+  "%d image": [
+    "%d immagine",
+    "%d immagini"
+  ],
+  "Fix with Ally": [
+    "Correggi con Ally"
+  ],
+  "%d info": [
+    "%d informazione"
+  ],
+  "%d warnings": [
+    "%d avvisi"
+  ],
+  "%d errors": [
+    "%d errori"
+  ],
+  "Warnings": [
+    "Avvisi"
+  ],
+  "Errors": [
+    "Errori"
+  ],
+  "Back to all issues": [
+    "Torna a tutti i problemi"
+  ],
+  "All audits": [
+    "Tutti i controlli"
+  ],
+  "How to resolve": [
+    "Come risolvere"
+  ],
+  "What's the issue": [
+    "Qual è il problema"
+  ],
+  "Fix with Angie": [
+    "Correggi con Angie"
+  ],
+  "Help me fix: %s": [
+    "Aiutami a correggere: %s"
+  ],
+  "Check SEO, accessibility, performance, and best practices. Click \"Run page audit\" to begin.": [
+    "Controlla SEO, accessibilità, prestazioni e buone pratiche. Premi \"Avvia analisi della pagina\" per iniziare."
+  ],
+  "Audit your page!": [
+    "Analizza la tua pagina!"
+  ],
+  "Audit in progress.": [
+    "Analisi in corso."
+  ],
+  "Send": [
+    "Invia"
+  ],
+  "We appreciate your feedback! While we review all submissions, we can't guarantee that every suggestion will result in a change or update.": [
+    "Grazie per il tuo feedback! Esaminiamo tutti i suggerimenti, ma non possiamo garantire che ciascuno porti a una modifica o a un aggiornamento."
+  ],
+  "Tell us what you had in mind, what we can improve or fix to make this feature better.": [
+    "Raccontaci cosa avevi in mente e cosa possiamo migliorare o correggere in questa funzionalità."
+  ],
+  "Let us know what you think": [
+    "Facci sapere cosa ne pensi"
+  ],
+  "Give feedback": [
+    "Invia un feedback"
+  ],
+  "Something went wrong. Please try sending your feedback again.": [
+    "Qualcosa è andato storto. Prova a inviare nuovamente il feedback."
+  ],
+  "Feedback sent. Thanks for helping us out.": [
+    "Feedback inviato. Grazie per il tuo aiuto."
+  ],
+  "Page Audit Tool": [
+    "Strumento di analisi della pagina"
+  ],
+  "Skipped audits": [
+    "Controlli saltati"
+  ],
+  "Passed audits": [
+    "Controlli superati"
+  ],
+  "Failed audits": [
+    "Controlli non superati"
+  ],
+  "Compliance": [
+    "Conformità"
+  ],
+  "SEO": [
+    "SEO"
+  ],
+  "Best Practices": [
+    "Buone pratiche"
+  ],
+  "Help me with": [
+    "Aiutami con"
+  ],
+  "Build with Angie": [
+    "Crea con Angie"
+  ],
+  "Generate full pages with AI": [
+    "Genera pagine complete con l’IA"
+  ],
+  "Describe what you want to build in plain language and Angie generates it in native Elementor structure, fully editable and customizable.": [
+    "Descrivi ciò che vuoi creare con parole semplici: Angie lo genera nella struttura nativa di Elementor, completamente modificabile e personalizzabile."
+  ],
+  "Kit settings are unavailable. Reopen Site Settings and try again.": [
+    "Le impostazioni del kit non sono disponibili. Riapri Impostazioni sito e riprova."
+  ],
+  "Content served at /llms.txt when saved. Leave empty to disable.": [
+    "Una volta salvato, il contenuto viene pubblicato in /llms.txt. Lascia vuoto per disattivare."
+  ],
+  "llms.txt": [
+    "llms.txt"
+  ],
+  "This page was changed externally. Reload to get the latest version.": [
+    "Questa pagina è stata modificata esternamente. Ricarica per ottenere l’ultima versione."
+  ],
+  "Reload": [
+    "Ricarica"
+  ],
+  "Force Save": [
+    "Forza salvataggio"
+  ],
+  "This page was changed externally. Save your changes or reload to get the latest version.": [
+    "Questa pagina è stata modificata esternamente. Salva le tue modifiche o ricarica per ottenere l’ultima versione."
+  ],
+  "Page Updated by AI": [
+    "Pagina aggiornata dall’IA"
+  ],
+  "Edit with WordPress?": [
+    "Modificare con WordPress?"
+  ],
+  "You are about to switch this page from the Elementor editor to the WordPress editor. Your current layout, design, and content may break and need to be rebuilt. Are you sure you want to continue?": [
+    "Stai per passare questa pagina dall’editor Elementor a quello WordPress. Il layout, il design e i contenuti attuali potrebbero danneggiarsi e richiedere una ricostruzione. Vuoi continuare?"
+  ],
+  "Load Angie inside the native Elementor editor panel instead of the legacy push sidebar.": [
+    "Carica Angie nel pannello nativo dell’editor Elementor invece che nella precedente barra laterale a scorrimento."
+  ],
+  "Angie in editor panels": [
+    "Angie nei pannelli dell’editor"
+  ],
+  "Access Elementor's Theme Builder, Dynamic Content, WooCommerce Builder, Popup Builder, 85+ Pro widgets and more when you upgrade to Pro": [
+    "Passa a Pro per accedere a Theme Builder, contenuti dinamici, WooCommerce Builder, Popup Builder, oltre 85 widget Pro e altro"
+  ],
+  "Elevate your site with Elementor Pro": [
+    "Migliora il tuo sito con Elementor Pro"
+  ],
+  "Note: needs Atomic Editor (currently off for this site).": [
+    "Nota: richiede l’editor atomico (attualmente disattivato per questo sito)."
+  ],
+  "This site needs the Atomic Editor turned on before this can be built. Turn it on in WP Admin → Elementor → Settings → Atomic Editor, then try again.": [
+    "Per creare questo elemento, attiva l’editor atomico nel pannello WordPress → Elementor → Impostazioni → Editor atomico, quindi riprova."
+  ],
+  "The editor has unsaved changes for this document. Ask the user to save or discard their changes in the Elementor editor before retrying this operation.": [
+    "L’editor contiene modifiche non salvate per questo documento. Chiedi all’utente di salvarle o annullarle nell’editor Elementor prima di ripetere l’operazione."
+  ],
+  "Unknown resource: %s": [
+    "Risorsa sconosciuta: %s"
+  ],
+  "Unknown tool: %s": [
+    "Strumento sconosciuto: %s"
+  ],
+  "Opinionated WordPress patterns for Elementor builds: repeating layouts (single template vs N pages), include-all + exclude-exceptions condition scoping, Post Content placement, dynamic tags.": [
+    "Modelli WordPress consigliati per Elementor: layout ripetuti (un template rispetto a N pagine), condizioni con inclusione generale ed esclusione delle eccezioni, posizionamento del contenuto dell’articolo e tag dinamici."
+  ],
+  "WordPress Best Practices": [
+    "Buone pratiche WordPress"
+  ],
+  "%1$s You MUST show the user this preview link in your reply (they must be logged into WordPress as an editor): %2$s": [
+    "%1$s Devi mostrare all’utente questo link di anteprima nella risposta (deve aver effettuato l’accesso a WordPress come editore): %2$s"
+  ],
+  "Change saved.": [
+    "Modifica salvata."
+  ],
+  "Direct document-root content was wrapped in an e-div-block element.": [
+    "Il contenuto direttamente alla radice del documento è stato racchiuso in un elemento e-div-block."
+  ],
+  "xml_structure did not contain any elements. Pass raw XML tags (e.g. <e-flexbox configuration-id=\"...\"></e-flexbox>) — do not wrap the value in <![CDATA[...]]> or other text-only content.": [
+    "xml_structure non conteneva elementi. Passa tag XML diretti (ad es. <e-flexbox configuration-id=\"...\"></e-flexbox>), senza racchiudere il valore in <![CDATA[...]]> o altro contenuto di solo testo."
+  ],
+  "Static resource file not found": [
+    "File della risorsa statica non trovato"
+  ],
+  "Design quality guidelines for creating distinctive, intentional aesthetics. Covers typography, color strategy, spacing, motion, and visual hierarchy.": [
+    "Linee guida di qualità per creare un design distintivo e intenzionale. Comprendono tipografia, strategia dei colori, spaziatura, movimento e gerarchia visiva."
+  ],
+  "Style Best Practices": [
+    "Buone pratiche di stile"
+  ],
+  "Global class not found: %s.": [
+    "Classe globale non trovata: %s."
+  ],
+  "order must not contain duplicate class IDs.": [
+    "order non deve contenere ID di classe duplicati."
+  ],
+  "A class cannot be moved relative to itself.": [
+    "Una classe non può essere spostata rispetto a se stessa."
+  ],
+  "position must be before, after, start, or end.": [
+    "position deve essere before, after, start o end."
+  ],
+  "Move %d must be an object.": [
+    "Lo spostamento %d deve essere un oggetto."
+  ],
+  "order must be an array.": [
+    "order deve essere un array."
+  ],
+  "Maximum %d moves per request.": [
+    "Massimo %d spostamenti per richiesta."
+  ],
+  "moves must be a non-empty array.": [
+    "moves deve essere un array non vuoto."
+  ],
+  "Provide exactly one of moves or order.": [
+    "Fornisci esattamente uno tra moves e order."
+  ],
+  "Change the priority of V4 global CSS classes on the active kit. Classes earlier in the order override conflicting CSS declarations from classes later in the order.": [
+    "Modifica la priorità delle classi CSS globali V4 nel kit attivo. Le classi che precedono nell’ordine hanno la precedenza sulle dichiarazioni CSS in conflitto delle classi successive."
+  ],
+  "Reorder Global Classes": [
+    "Riordina le classi globali"
+  ],
+  "Resource not found: %s. Use list-resources to discover available URIs.": [
+    "Risorsa non trovata: %s. Usa list-resources per trovare gli URI disponibili."
+  ],
+  "Resource URI is required. Use list-resources to discover available URIs.": [
+    "L’URI della risorsa è obbligatorio. Usa list-resources per trovare gli URI disponibili."
+  ],
+  "Read Elementor Resource": [
+    "Leggi risorsa Elementor"
+  ],
+  "Document published.": [
+    "Documento pubblicato."
+  ],
+  "Sorry, you are not allowed to publish this document.": [
+    "Non hai i permessi per pubblicare questo documento."
+  ],
+  "Revision IDs cannot be published. Pass the parent document ID.": [
+    "Gli ID delle revisioni non possono essere pubblicati. Passa l’ID del documento padre."
+  ],
+  "Transitions an Elementor document (page, post, theme template, popup) to `publish` so it appears on the front end. Call this AFTER all element edits are complete. Edits via manage-elements or build-composition on published pages are staged in an autosave; calling this promotes the staged autosave to the live document. When there are no pending edits on an already-published document, the call is a no-op success.": [
+    "Porta un documento Elementor (pagina, articolo, template del tema o popup) allo stato `publish` per renderlo visibile sul sito. Esegui questa operazione DOPO aver completato tutte le modifiche agli elementi. Le modifiche tramite manage-elements o build-composition su pagine pubblicate vengono conservate in un salvataggio automatico; questa chiamata le trasferisce al documento pubblicato. Se un documento già pubblicato non ha modifiche pendenti, la chiamata riesce senza apportare cambiamenti."
+  ],
+  "Publish Elementor Document": [
+    "Pubblica documento Elementor"
+  ],
+  "Detailed guide for using the manage-global-variable tool. Covers available types, naming rules, value rules, and operation examples.": [
+    "Guida dettagliata allo strumento manage-global-variable: tipi disponibili, regole per nomi e valori ed esempi di operazioni."
+  ],
+  "Manage Global Variable Guide": [
+    "Guida alla gestione delle variabili globali"
+  ],
+  "Delete requires id.": [
+    "Delete richiede id."
+  ],
+  "Update requires id, label, and value.": [
+    "Update richiede id, label e value."
+  ],
+  "Create requires type, label, and value.": [
+    "Create richiede type, label e value."
+  ],
+  "Manage V4 global variables (color, font, size, custom-size). Bulk create, update, or delete on the active kit (up to 50 operations).": [
+    "Gestisci le variabili globali V4 (color, font, size, custom-size). Creazione, aggiornamento o eliminazione in blocco nel kit attivo (fino a 50 operazioni)."
+  ],
+  "Manage Global Variable": [
+    "Gestisci variabile globale"
+  ],
+  "classes must be an array of global class labels.": [
+    "classes deve essere un array di etichette di classi globali."
+  ],
+  "Interactions experiment is not active. Interactions were not applied.": [
+    "L’esperimento Interazioni non è attivo. Le interazioni non sono state applicate."
+  ],
+  "interactions must be an array of interaction items.": [
+    "interactions deve essere un array di elementi di interazione."
+  ],
+  "Element has no resolvable type.": [
+    "Impossibile determinare il tipo dell’elemento."
+  ],
+  "style_apply_mode must be \"patch\" or \"replace\".": [
+    "style_apply_mode deve essere \"patch\" o \"replace\"."
+  ],
+  "update requires at least one of settings, style, classes, or interactions.": [
+    "update richiede almeno uno tra settings, style, classes o interactions."
+  ],
+  "new_parent_id is required for action=move.": [
+    "new_parent_id è obbligatorio per action=move."
+  ],
+  "Legacy V3 element cannot be modified through this MCP. Edit V3 elements directly in the Elementor editor.": [
+    "Questo elemento V3 non può essere modificato tramite MCP. Modifica gli elementi V3 direttamente nell’editor Elementor."
+  ],
+  "element_id is required.": [
+    "element_id è obbligatorio."
+  ],
+  "Bulk surgical edits on existing V4 (atomic) elements in a document (up to 50 operations applied to a single document tree, saved once). V4 elements and a closed V3 allowlist (%s — see elementor/list-widget-schemas) can be operation targets. Allowlisted V3 updates: settings merge raw without schema validation; classes are written to V3's space-separated _css_classes; style CSS is wrapped in `selector { ... }` and stored in V3's custom_css (requires Elementor Pro, otherwise emits a warning). Other V3 targets return elementor_v3_not_supported per-op and must be edited directly in the Elementor editor. new_parent_id on action=move may reference either V3 or V4 containers. Each operation: action=update merges partial plain settings, plain-CSS string style (with pseudo-state and breakpoint support; breakpoints use @media (--mobile) syntax — NOT pixel queries), global class labels, and native-shape interactions; action=delete removes the element; action=move re-parents it under new_parent_id at optional index; action=duplicate clones the element (with fresh ids) right after the source. WARNING: This tool performs a read-modify-write on the current document. Do NOT use element IDs obtained from a prior get-page-structure read if build-composition was called in between — use only IDs from the build-composition resolved_xml response to avoid silently overwriting its changes.": [
+    "Modifica in modo mirato gli elementi V4 (atomici) esistenti in un documento (fino a 50 operazioni su un’unica struttura, salvata una sola volta). Puoi modificare elementi V4 e i widget V3 dell’elenco consentito (%s; vedi elementor/list-widget-schemas). Per i widget V3 consentiti, settings viene unito senza validazione dello schema; classes viene scritto in _css_classes separando le classi con spazi; il CSS style viene racchiuso in `selector { ... }` e salvato in custom_css (richiede Elementor Pro, altrimenti viene emesso un avviso). Gli altri elementi V3 restituiscono elementor_v3_not_supported per operazione e vanno modificati nell’editor Elementor. new_parent_id con action=move può indicare contenitori V3 o V4. action=update unisce settings parziali, style come stringa CSS con pseudostati e breakpoint (usa @media (--mobile), non query in pixel), etichette di classi globali e interazioni native; action=delete rimuove l’elemento; action=move lo sposta sotto new_parent_id all’eventuale index; action=duplicate lo duplica con nuovi ID subito dopo l’originale. ATTENZIONE: lo strumento legge, modifica e riscrive il documento corrente. Non usare ID ottenuti da get-page-structure se nel frattempo è stato chiamato build-composition: usa soltanto gli ID di resolved_xml restituiti da build-composition per evitare di sovrascriverne le modifiche."
+  ],
+  "Manage Elements": [
+    "Gestisci elementi"
+  ],
+  "Default style not found for this tag.": [
+    "Stile predefinito non trovato per questo tag."
+  ],
+  "update requires css.": [
+    "update richiede css."
+  ],
+  "Invalid HTML tag: %s.": [
+    "Tag HTML non valido: %s."
+  ],
+  "tag is required.": [
+    "tag è obbligatorio."
+  ],
+  "Bulk manage the active kit's site-wide default styles, keyed by HTML wrapper tag (h1..h6, p, a, section, div, ...). These styles apply to every V4 atomic element that renders that tag on the whole site, sitting on top of each widget's built-in base_styles and beneath any inline or global class overrides. Use action=update to upsert (patch or replace) a tag's variants via a raw CSS string (supports @media(--breakpoint) + &:hover/&:focus/&:active), and action=delete to remove a tag's default style entirely.": [
+    "Gestisci in blocco gli stili predefiniti del kit attivo per tutto il sito, identificati dal tag HTML contenitore (h1..h6, p, a, section, div, ...). Si applicano a ogni elemento atomico V4 che usa quel tag, sopra i base_styles del widget e sotto gli stili in linea o delle classi globali. Usa action=update per aggiungere o aggiornare le varianti del tag (patch o replace) con una stringa CSS, inclusi @media(--breakpoint) e &:hover/&:focus/&:active; usa action=delete per rimuovere completamente lo stile predefinito del tag."
+  ],
+  "Manage Default Styles (Site-Wide)": [
+    "Gestisci gli stili predefiniti del sito"
+  ],
+  "You MUST show the user this link to review the component: %s": [
+    "Devi mostrare all’utente questo link per esaminare il componente: %s"
+  ],
+  "element_id was not found on source_post_id.": [
+    "element_id non è stato trovato in source_post_id."
+  ],
+  "source_post_id not found.": [
+    "source_post_id non trovato."
+  ],
+  "You do not have permission to read source_post_id.": [
+    "Non hai i permessi per leggere source_post_id."
+  ],
+  "A component composition must contain exactly one root element.": [
+    "La composizione di un componente deve contenere esattamente un elemento radice."
+  ],
+  "create accepts either xml_structure or source_post_id/element_id, not both.": [
+    "create accetta xml_structure oppure source_post_id/element_id, non entrambi."
+  ],
+  "Failed to save component.": [
+    "Impossibile salvare il componente."
+  ],
+  "update without xml_structure requires non-empty overridable_props.": [
+    "update senza xml_structure richiede overridable_props non vuoto."
+  ],
+  "Failed to publish component.": [
+    "Impossibile pubblicare il componente."
+  ],
+  "publish requires component_id.": [
+    "publish richiede component_id."
+  ],
+  "archive requires a non-empty component_ids array of positive integers.": [
+    "archive richiede un array component_ids non vuoto di numeri interi positivi."
+  ],
+  "Component not found or title could not be updated.": [
+    "Componente non trovato o titolo non aggiornabile."
+  ],
+  "rename requires component_id and a title of at least 2 characters.": [
+    "rename richiede component_id e un titolo di almeno 2 caratteri."
+  ],
+  "update requires component_id.": [
+    "update richiede component_id."
+  ],
+  "Validation failed: ": [
+    "Validazione non riuscita: "
+  ],
+  "create requires a title of at least 2 characters.": [
+    "create richiede un titolo di almeno 2 caratteri."
+  ],
+  "action must be one of: create, update, rename, archive, publish.": [
+    "action deve essere uno tra: create, update, rename, archive, publish."
+  ],
+  "Manage Elementor Component": [
+    "Gestisci componente Elementor"
+  ],
+  "Delete requires id or label.": [
+    "Delete richiede id o label."
+  ],
+  "Update requires id or label.": [
+    "Update richiede id o label."
+  ],
+  "Create requires label and css.": [
+    "Create richiede label e css."
+  ],
+  "Create requires label.": [
+    "Create richiede label."
+  ],
+  "Unknown action: %s.": [
+    "Azione sconosciuta: %s."
+  ],
+  "Invalid operation.": [
+    "Operazione non valida."
+  ],
+  "Maximum %d operations per request.": [
+    "Massimo %d operazioni per richiesta."
+  ],
+  "operations must not be empty.": [
+    "operations non deve essere vuoto."
+  ],
+  "operations array is required.": [
+    "L’array operations è obbligatorio."
+  ],
+  "Manage V4 global CSS classes on the active kit. Bulk create, update, or delete using raw CSS declarations (up to 50 operations). Duplicate labels are auto-renamed with a DUP_ prefix.": [
+    "Gestisci le classi CSS globali V4 nel kit attivo. Crea, aggiorna o elimina in blocco usando dichiarazioni CSS dirette (fino a 50 operazioni). Le etichette duplicate vengono rinominate automaticamente con il prefisso DUP_."
+  ],
+  "Manage Global Classes": [
+    "Gestisci classi globali"
+  ],
+  "List Elementor Widget Schemas": [
+    "Elenca gli schemi dei widget Elementor"
+  ],
+  "List Elementor Resources": [
+    "Elenca le risorse Elementor"
+  ],
+  "Unsupported post type. Allowed values: all, post, page, product.": [
+    "Tipo di contenuto non supportato. Valori ammessi: all, post, page, product."
+  ],
+  "List WordPress Posts": [
+    "Elenca gli articoli WordPress"
+  ],
+  "List of available dynamic tags for binding properties to dynamic sources.": [
+    "Elenco dei tag dinamici disponibili per collegare le proprietà a sorgenti dinamiche."
+  ],
+  "List Elementor Dynamic Tags": [
+    "Elenca i tag dinamici Elementor"
+  ],
+  "Components not found: %s.": [
+    "Componenti non trovati: %s."
+  ],
+  "component_ids must contain positive integers.": [
+    "component_ids deve contenere numeri interi positivi."
+  ],
+  "List Elementor Components": [
+    "Elenca i componenti Elementor"
+  ],
+  "You do not have permission to list media assets.": [
+    "Non hai i permessi per elencare i file multimediali."
+  ],
+  "List Media Library Assets": [
+    "Elenca i file della libreria multimediale"
+  ],
+  "Interaction item shape, enums, and defaults for build-composition.": [
+    "Struttura, enumerazioni e valori predefiniti degli elementi di interazione per build-composition."
+  ],
+  "Native interaction item schema: shape, allowed enums, and defaults for build-composition.": [
+    "Schema nativo dell’elemento di interazione: struttura, enumerazioni ammesse e valori predefiniti per build-composition."
+  ],
+  "Interactions Schema": [
+    "Schema delle interazioni"
+  ],
+  "Design tokens (colors, fonts, sizes) from the active kit; check before styling with variables.": [
+    "Token di design (colori, font, dimensioni) del kit attivo: controllali prima di applicare stili con variabili."
+  ],
+  "Global Variables": [
+    "Variabili globali"
+  ],
+  "Classes are ordered from highest to lowest priority. When classes on the same element set the same CSS property, the earlier class overrides the later one.": [
+    "Le classi sono ordinate dalla priorità più alta alla più bassa. Quando classi dello stesso elemento impostano la stessa proprietà CSS, la classe che precede prevale sulla successiva."
+  ],
+  "Reusable CSS classes from the active kit, ordered from highest to lowest CSS priority. Check first before adding inline styles.": [
+    "Classi CSS riutilizzabili del kit attivo, ordinate dalla priorità CSS più alta alla più bassa. Controllale prima di aggiungere stili in linea."
+  ],
+  "This is a legacy V3 widget and cannot be modified through this MCP. Edit V3 widgets directly in the Elementor editor.": [
+    "Questo widget V3 non può essere modificato tramite MCP. Modifica i widget V3 direttamente nell’editor Elementor."
+  ],
+  "Unknown widget type: %s.": [
+    "Tipo di widget sconosciuto: %s."
+  ],
+  "widget_type is required.": [
+    "widget_type è obbligatorio."
+  ],
+  "Get Elementor Widget Schema": [
+    "Ottieni schema del widget Elementor"
+  ],
+  "Element not found in this document.": [
+    "Elemento non trovato in questo documento."
+  ],
+  "include_content requires element_id.": [
+    "include_content richiede element_id."
+  ],
+  "Returns a lean Elementor element tree skeleton (id, elType, widgetType, version, title, nested elements) for a single post or page ID. Each node is tagged with version=3 (legacy) or version=4 (atomic). Only version=4 nodes can be modified via elementor/manage-elements or referenced by elementor/build-composition element_config; version=3 nodes are returned for context only and must be edited directly in the Elementor editor. Optionally scope to a subtree via element_id. Set include_content=true (requires element_id) to also return each V4 node's settings in the plain shape that manage-elements.update.settings / build-composition.element_config accept, so a value can be sent back as-is, styles (as { __style_id, css } where css is a raw CSS string round-trippable to manage-elements.update.style / build-composition.style in replace mode), interactions, its rendered HTML tag when known, and default_styles (a raw CSS string of the widget base layer followed by the kit's site-wide default layer for that tag, in browser cascade order — includes selectors, @media(--breakpoint) blocks, and pseudo-states as the frontend renders them). V3 nodes are returned with empty settings and styles. Only works for posts that were saved with Elementor.": [
+    "Restituisce una struttura essenziale degli elementi Elementor (id, elType, widgetType, version, title, elementi annidati) per l’ID di un articolo o di una pagina. Ogni nodo indica version=3 (precedente) o version=4 (atomico). Solo i nodi version=4 possono essere modificati tramite elementor/manage-elements o referenziati da elementor/build-composition in element_config; i nodi version=3 sono forniti come contesto e vanno modificati nell’editor Elementor. Puoi limitare la risposta a un sottoalbero con element_id. Imposta include_content=true (richiede element_id) per includere le impostazioni V4 nel formato accettato da manage-elements.update.settings e build-composition.element_config, così da poterle reinviare invariate; gli stili come { __style_id, css }, con CSS riutilizzabile in manage-elements.update.style o build-composition.style in modalità replace; le interazioni; il tag HTML quando noto; e default_styles, stringa CSS dello stile base del widget seguita da quello predefinito del kit per il tag nell’ordine della cascata del browser, inclusi selettori, blocchi @media(--breakpoint) e pseudostati come nel frontend. I nodi V3 hanno settings e styles vuoti. Funziona solo per articoli salvati con Elementor."
+  ],
+  "The provided tag is not an allowed HTML wrapper tag.": [
+    "Il tag indicato non è un tag HTML contenitore consentito."
+  ],
+  "A tag is required.": [
+    "È richiesto un tag."
+  ],
+  "Returns the active kit's site-wide default styles for a single HTML wrapper tag (h1..h6, p, a, section, div, button, ...) as a raw CSS string. Includes selectors, @media(--breakpoint) blocks, and &:hover/&:focus/&:active pseudo-states as the frontend renders them. Widget-specific base styles are NOT included — this is only the kit's site-wide default layer.": [
+    "Restituisce gli stili predefiniti del kit attivo per un tag HTML contenitore (h1..h6, p, a, section, div, button, ...) come stringa CSS. Include selettori, blocchi @media(--breakpoint) e pseudostati &:hover/&:focus/&:active come nel frontend. Non include gli stili base specifici dei widget: restituisce soltanto lo stile predefinito del kit per tutto il sito."
+  ],
+  "Get Default Styles": [
+    "Ottieni stili predefiniti"
+  ],
+  "Could not create a revision snapshot for this post.": [
+    "Impossibile creare una revisione di questo articolo."
+  ],
+  "Sorry, you are not allowed to share a preview of this post.": [
+    "Non hai i permessi per condividere un’anteprima di questo articolo."
+  ],
+  "Create Elementor Public Preview Link": [
+    "Crea link pubblico di anteprima Elementor"
+  ],
+  "Page created.": [
+    "Pagina creata."
+  ],
+  "Duplicate configuration-id \"%s\". Each element must have a unique configuration-id.": [
+    "configuration-id duplicato \"%s\". Ogni elemento deve avere un configuration-id univoco."
+  ],
+  "Failed to parse xml_structure: %s": [
+    "Impossibile analizzare xml_structure: %s"
+  ],
+  "\"%1$s\" requires a direct child \"%2$s\".": [
+    "\"%1$s\" richiede un figlio diretto \"%2$s\"."
+  ],
+  "\"%1$s\" is not allowed as a child of \"%2$s\". Allowed: %3$s.": [
+    "\"%1$s\" non è consentito come figlio di \"%2$s\". Valori ammessi: %3$s."
+  ],
+  "\"%1$s\" is a leaf widget and cannot have children. \"%2$s\" is not allowed as a child of \"%1$s\".": [
+    "\"%1$s\" è un widget terminale e non può avere figli. \"%2$s\" non è consentito come figlio di \"%1$s\"."
+  ],
+  "Unknown element type: %s.": [
+    "Tipo di elemento sconosciuto: %s."
+  ],
+  "Invalid mode \"%1$s\". Must be one of: %2$s": [
+    "Modalità non valida \"%1$s\". Deve essere una tra: %2$s"
+  ],
+  "xml_structure is required and must be a string.": [
+    "xml_structure è obbligatorio e deve essere una stringa."
+  ],
+  "You do not have permission to edit this post.": [
+    "Non hai i permessi per modificare questo articolo."
+  ],
+  "Build Composition": [
+    "Crea composizione"
+  ],
+  "V3 widget styles for `%s` require Elementor Pro (Custom CSS module) and were not applied. Do not retry the `style` field for this widget in the current environment — either fall back to `settings`-only edits, or ask the user to install and activate Elementor Pro.": [
+    "Gli stili del widget V3 `%s` richiedono Elementor Pro (modulo CSS personalizzato) e non sono stati applicati. Non riprovare il campo `style` per questo widget nell’ambiente attuale: modifica solo `settings` oppure chiedi all’utente di installare e attivare Elementor Pro."
+  ],
+  "this V3 widget": [
+    "questo widget V3"
+  ],
+  "Some CSS could not be mapped to V3 settings and was written to custom_css: %s": [
+    "Alcune regole CSS non sono associabili alle impostazioni V3 e sono state scritte in custom_css: %s"
+  ],
+  "Some CSS could not be mapped to V3 settings and was dropped: %s": [
+    "Alcune regole CSS non sono associabili alle impostazioni V3 e sono state ignorate: %s"
+  ],
+  "Failed to save default style.": [
+    "Impossibile salvare lo stile predefinito."
+  ],
+  "Default Styles": [
+    "Stili predefiniti"
+  ],
+  "Default Style": [
+    "Stile predefinito"
+  ],
+  "Enable per-instance class variants on components.": [
+    "Abilita le varianti di classe per ogni istanza dei componenti."
+  ],
+  "Component Variants": [
+    "Varianti dei componenti"
+  ],
+  "Scan the current page for SEO, accessibility, performance, and best-practice issues directly from the editor.": [
+    "Analizza la pagina corrente per individuare problemi di SEO, accessibilità, prestazioni e buone pratiche direttamente nell’editor."
+  ],
+  "Page Audit": [
+    "Analisi della pagina"
+  ],
+  "Enable SVG library support in the SVG element.": [
+    "Abilita il supporto della libreria SVG nell’elemento SVG."
+  ],
+  "SVG Library": [
+    "Libreria SVG"
+  ],
+  "Enable the V4 Accordion element.": [
+    "Abilita l’elemento Fisarmonica V4."
+  ],
+  "Enable the V4 Icon Button element.": [
+    "Abilita l’elemento Pulsante con icona V4."
+  ],
+  "Icon Button": [
+    "Pulsante con icona"
+  ],
+  "Enable the V4 List element.": [
+    "Abilita l’elemento Elenco V4."
+  ],
+  "Item 1": [
+    "Elemento 1"
+  ],
+  "Show Markers": [
+    "Mostra marcatori"
+  ],
+  "List Items": [
+    "Elementi dell’elenco"
+  ],
+  "List item marker": [
+    "Marcatore dell’elemento dell’elenco"
+  ],
+  "List item": [
+    "Elemento dell’elenco"
+  ],
+  "List item content": [
+    "Contenuto dell’elemento dell’elenco"
+  ],
+  "Show Controls": [
+    "Mostra controlli"
+  ],
+  "Background Video": [
+    "Video di sfondo"
+  ],
+  "Play": [
+    "Riproduci"
+  ],
+  "Play video": [
+    "Riproduci video"
+  ],
+  "Play Button": [
+    "Pulsante Riproduci"
+  ],
+  "Pause video": [
+    "Metti in pausa il video"
+  ],
+  "Pause Button": [
+    "Pulsante Pausa"
+  ],
+  "Controls": [
+    "Controlli"
+  ],
+  "Content Area": [
+    "Area dei contenuti"
+  ],
+  "Accordion Item %d": [
+    "Elemento della fisarmonica %d"
+  ],
+  "Show Icon": [
+    "Mostra icona"
+  ],
+  "Accordion Item": [
+    "Elemento della fisarmonica"
+  ],
+  "Expose llms.txt from site settings at the site root for AI agents.": [
+    "Pubblica llms.txt dalle impostazioni del sito nella directory principale per gli agenti IA."
+  ],
+  "Agents llms.txt": [
+    "llms.txt per agenti"
+  ],
+  "Element type not allowed as child of this parent.": [
+    "Questo tipo di elemento non è consentito come figlio di questo genitore."
+  ],
+  "\"%s\" is a widget and cannot be a direct child of the document. Wrap it in a container element such as e-flexbox or e-div-block.": [
+    "\"%s\" è un widget e non può essere figlio diretto del documento. Racchiudilo in un contenitore come e-flexbox o e-div-block."
+  ],
+  "Cannot insert into a widget element.": [
+    "Impossibile inserire in un elemento widget."
+  ],
+  "Could not create autosave revision.": [
+    "Impossibile creare una revisione di salvataggio automatico."
+  ],
+  "Could not save document.": [
+    "Impossibile salvare il documento."
+  ],
+  "Element not found.": [
+    "Elemento non trovato."
+  ],
+  "Parent element not found.": [
+    "Elemento padre non trovato."
+  ],
+  "Agents": [
+    "Agenti"
+  ],
+  "Keeps external CSS files available and consistent for sites behind page caching or a CDN.": [
+    "Mantiene disponibili e coerenti i file CSS esterni nei siti che usano cache delle pagine o una CDN."
+  ],
+  "Optimized CSS Files": [
+    "File CSS ottimizzati"
+  ],
+  "Edit with WordPress": [
+    "Modifica con WordPress"
+  ],
+  "You have unsaved changes in the Variables Manager.": [
+    "Hai modifiche non salvate nel gestore delle variabili."
+  ],
+  "Show Grid Outline": [
+    "Mostra contorno della griglia"
+  ],
+  "We couldn’t download the Website Template due to technical difficulty on our part. Try again in a few minutes and if the problem persists contact": [
+    "Non è stato possibile scaricare il template del sito a causa di un nostro problema tecnico. Riprova tra qualche minuto e, se il problema persiste, contatta"
+  ],
+  "Grid child": [
+    "Elemento figlio della griglia"
+  ],
+  "Updates Elementor document-level settings for a post (for example page layout, title visibility, or custom page settings). Pass only the keys you want to change. Ask the user for the URL or post ID. Use get-page-structure when you also need the element tree. Requires permission to edit the target post.": [
+    "Aggiorna le impostazioni del documento Elementor per un articolo (ad esempio layout della pagina, visibilità del titolo o impostazioni personalizzate). Passa solo le chiavi da modificare. Chiedi all’utente l’URL o l’ID dell’articolo. Usa get-page-structure quando serve anche la struttura degli elementi. Richiede il permesso di modifica dell’articolo."
+  ],
+  "Privacy policy": [
+    "Informativa sulla privacy"
+  ],
+  "Pause": [
+    "Pausa"
+  ],
+  "Component not found.": [
+    "Componente non trovato."
+  ],
+  "Optimize your images to improve site speed and performance. Image Optimization is included in your ONE subscription.": [
+    "Ottimizza le immagini per migliorare velocità e prestazioni del sito. Image Optimization è incluso nel tuo abbonamento ONE."
+  ],
+  "Your ONE subscription includes Web Accessibility. Activate it to place an accessibility widget on your site.": [
+    "Il tuo abbonamento ONE include Web Accessibility. Attivalo per aggiungere un widget di accessibilità al sito."
+  ],
+  "Want to create an inclusive experience? Install Web Accessibility, included in ONE, and add an accessibility widget to your site.": [
+    "Vuoi creare un’esperienza inclusiva? Installa Web Accessibility, incluso in ONE, e aggiungi un widget di accessibilità al sito."
+  ],
+  "Image Optimization is installed and included in your ONE subscription. Activate it to optimize images and improve site performance.": [
+    "Image Optimization è installato e incluso nel tuo abbonamento ONE. Attivalo per ottimizzare le immagini e migliorare le prestazioni del sito."
+  ],
+  "Speed up your website with Image Optimization": [
+    "Velocizza il tuo sito con Image Optimization"
+  ],
+  "Your ONE subscription includes Image Optimization. Activate it to optimize images and improve site performance.": [
+    "Il tuo abbonamento ONE include Image Optimization. Attivalo per ottimizzare le immagini e migliorare le prestazioni del sito."
+  ],
+  "Your ONE subscription includes Web Accessibility. Activate it to create your accessibility statement page quickly.": [
+    "Il tuo abbonamento ONE include Web Accessibility. Attivalo per creare rapidamente la pagina della dichiarazione di accessibilità."
+  ],
+  "Make sure your site has an accessibility statement page. Install Web Accessibility, included in ONE, to create it in a few clicks.": [
+    "Assicurati che il sito abbia una pagina con la dichiarazione di accessibilità. Installa Web Accessibility, incluso in ONE, per crearla in pochi clic."
+  ],
+  "The maximum website template library size is %s GB. To save this file, you can either export it locally as a .zip file or get more storage by": [
+    "La dimensione massima della libreria di template del sito è %s GB. Per salvare il file, esportalo localmente come file .zip oppure ottieni più spazio"
+  ],
+  "Connect the Web Accessibility plugin to your account to access all of it's accessibility features.": [
+    "Collega il plugin Web Accessibility al tuo account per accedere a tutte le sue funzionalità di accessibilità."
+  ],
+  "Activate the Web Accessibility plugin to turn its accessibility features on across your site.": [
+    "Attiva il plugin Web Accessibility per abilitare le funzionalità di accessibilità in tutto il sito."
+  ],
+  "Install Web Accessibility to add an accessibility widget visitors can use to navigate your site.": [
+    "Installa Web Accessibility per aggiungere un widget che aiuti i visitatori a navigare nel sito."
+  ],
+  "To open the Design System, save your page first. You can't continue without saving.": [
+    "Per aprire il sistema di design, salva prima la pagina. Non puoi continuare senza salvare."
+  ],
+  "Create a more inclusive site experience for all your visitors. With Web Accessibility, it's easy to add your statement page in just a few clicks.": [
+    "Crea un’esperienza più inclusiva per tutti i visitatori. Con Web Accessibility puoi aggiungere la pagina della dichiarazione di accessibilità in pochi clic."
+  ],
+  "Global class not found": [
+    "Classe globale non trovata"
+  ],
+  "Launchpad Checklist feature to boost productivity and deliver your site faster": [
+    "Checklist di avvio per aumentare la produttività e completare il sito più rapidamente"
+  ],
+  "Launchpad Checklist": [
+    "Checklist di avvio"
+  ],
+  "Let's get connected.": [
+    "Colleghiamoci."
+  ],
+  "Optimize your images to enhance site performance by using Image Optimization.": [
+    "Ottimizza le immagini per migliorare le prestazioni del sito con Image Optimization."
+  ],
+  "Add a Mouse Track or 3d Tilt effect with Elementor Pro.": [
+    "Aggiungi un effetto di inseguimento del mouse o inclinazione 3D con Elementor Pro."
+  ],
+  "Get Scrolling Effects such as vertical/horizontal scroll, transparency, and more with Elementor Pro.": [
+    "Ottieni effetti di scorrimento verticale e orizzontale, trasparenza e altro con Elementor Pro."
+  ],
+  "Learn more about Website Kits": [
+    "Scopri di più sui kit per siti web"
+  ],
+  "Sorry, you are not allowed to perform this action.": [
+    "Non hai i permessi per eseguire questa azione."
+  ],
+  "Light-weight and fast loading": [
+    "Leggero e veloce nel caricamento"
+  ],
+  "There was a problem activating Hello Theme.": [
+    "Si è verificato un problema nell’attivazione del tema Hello."
+  ],
+  "There was a problem installing Hello Theme.": [
+    "Si è verificato un problema nell’installazione del tema Hello."
+  ],
+  "Continue with Hello Theme": [
+    "Continua con il tema Hello"
+  ],
+  "There are two ways to get started with Elementor:": [
+    "Puoi iniziare con Elementor in due modi:"
+  ],
+  "Hidden elements": [
+    "Elementi nascosti"
+  ],
+  "post_id is required.": [
+    "post_id è obbligatorio."
+  ],
+  "Warning: Please back up your database before making the rollback.": [
+    "Attenzione: esegui un backup del database prima di ripristinare la versione precedente."
+  ],
+  "Images alt text": [
+    "Testo alternativo delle immagini"
+  ]
+}

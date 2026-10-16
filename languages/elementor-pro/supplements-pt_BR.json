@@ -1,0 +1,828 @@
+{
+  "Consider switching to the desired breakpoint in the panel instead of using @media width queries here.": [
+    "Selecione o ponto de interrupção desejado no painel em vez de usar consultas @media de largura aqui."
+  ],
+  "Consider switching to the desired pseudo state in the panel instead of using pseudo-classes here.": [
+    "Selecione o pseudoestado desejado no painel em vez de usar pseudoclasses aqui."
+  ],
+  "Static position": [
+    "Posição fixa"
+  ],
+  "Repeat every": [
+    "Repetir a cada"
+  ],
+  "Apply once": [
+    "Aplicar uma vez"
+  ],
+  "Edit Alternating Item": [
+    "Editar item alternado"
+  ],
+  "You've reached the limit of 5 alternating items for this loop. Please remove an alternating item before creating a new one.": [
+    "Você atingiu o limite de 5 itens alternados neste loop. Remova um item alternado antes de criar outro."
+  ],
+  "Alternating items": [
+    "Itens alternados"
+  ],
+  "Remove Alternating Item": [
+    "Remover item alternado"
+  ],
+  "Alternating Item": [
+    "Item alternado"
+  ],
+  "Add to cart": [
+    "Adicionar ao carrinho"
+  ],
+  "Selectable": [
+    "Selecionável"
+  ],
+  "Product taxonomy": [
+    "Taxonomia do produto"
+  ],
+  "Mode": [
+    "Modo"
+  ],
+  "Failed to save conditions.": [
+    "Não foi possível salvar as condições."
+  ],
+  "You do not have permission to create theme templates.": [
+    "Você não tem permissão para criar modelos do tema."
+  ],
+  "Failed to delete the site part.": [
+    "Não foi possível excluir a parte do site."
+  ],
+  "You do not have permission to delete this template.": [
+    "Você não tem permissão para excluir este modelo."
+  ],
+  "update requires at least one mutable field (currently: conditions).": [
+    "update requer pelo menos um campo modificável (atualmente: conditions)."
+  ],
+  "The given post_id is not a Theme Builder document.": [
+    "O post_id informado não é um documento do construtor de temas."
+  ],
+  "You do not have permission to edit this template.": [
+    "Você não tem permissão para editar este modelo."
+  ],
+  "post_id is required.": [
+    "post_id é obrigatório."
+  ],
+  "Created document is not a Theme_Document.": [
+    "O documento criado não é um Theme_Document."
+  ],
+  "Elementor %s": [
+    "Elementor %s"
+  ],
+  "\"%s\" is not a Theme Builder document type.": [
+    "\"%s\" não é um tipo de documento do construtor de temas."
+  ],
+  "Unknown action: %s.": [
+    "Ação desconhecida: %s."
+  ],
+  "Invalid operation.": [
+    "Operação inválida."
+  ],
+  "Maximum %d operations per request.": [
+    "Máximo de %d operações por solicitação."
+  ],
+  "operations must not be empty.": [
+    "operations não pode estar vazio."
+  ],
+  "operations array is required.": [
+    "O array operations é obrigatório."
+  ],
+  "Manage Elementor site parts (Theme Builder documents: %s). Bulk operations (1-50) with three actions: \"create\" makes a new site part as a draft (optionally assigning display conditions in the same call), \"update\" mutates an existing site part (currently the only mutable field is \"conditions\"; body/settings edits go via manage-elements / build-composition / update-page-settings), and \"delete\" removes a site part. Conditions are slash-separated strings like \"include/general\" (site-wide), \"include/singular/post\", \"exclude/singular/post/42\". Site parts are NOT published by this tool — they stay drafts and must be published separately (matches the editor UX). For repeating-layout patterns (one single template driven by dynamic data instead of N duplicated pages, include-all + exclude-exceptions condition scoping, Post Content placement), read the elementor://wordpress/best-practices resource before creating singles.": [
+    "Gerencia partes do site Elementor (documentos do construtor de temas: %s). Execute de 1 a 50 operações com três ações: \"create\" cria uma parte como rascunho e pode atribuir condições de exibição; \"update\" modifica uma parte existente (atualmente apenas \"conditions\"; conteúdo e configurações usam manage-elements, build-composition ou update-page-settings); \"delete\" remove uma parte. As condições são strings separadas por barras, como \"include/general\" (site inteiro), \"include/singular/post\" ou \"exclude/singular/post/42\". Esta ferramenta não publica as partes: elas permanecem como rascunhos e devem ser publicadas separadamente, como no editor. Antes de criar modelos individuais para layouts repetidos, leia elementor://wordpress/best-practices: um único modelo com dados dinâmicos em vez de N páginas duplicadas, condições de inclusão geral e exclusão de exceções e posicionamento do conteúdo do post."
+  ],
+  "Manage Elementor Site Parts": [
+    "Gerenciar partes do site Elementor"
+  ],
+  "Lists Theme Builder site parts like header, footer, 404 page and more. Each row includes type, title, assignment, publish state, and whether it is rendered. is_active means the site part is published and matches a Theme Builder location on the front end. has_conditions means display conditions are saved on the document regardless of publish state. post_status is the raw WordPress status (draft, publish, private). A draft row with has_conditions true and is_active false means assignment succeeded but the site part will not render until published. Pass active: true to return only site parts that are currently rendered.": [
+    "Lista partes do site do construtor de temas, como cabeçalho, rodapé, página 404 e outras. Cada linha inclui tipo, título, atribuição, estado de publicação e se é exibida. is_active indica que a parte está publicada e corresponde a uma posição do construtor no site público. has_conditions indica condições de exibição salvas no documento, independentemente da publicação. post_status é o estado original do WordPress (draft, publish, private). Um rascunho com has_conditions true e is_active false foi atribuído corretamente, mas não será exibido até ser publicado. Passe active: true para retornar apenas as partes exibidas atualmente."
+  ],
+  "List Site Parts": [
+    "Listar partes do site"
+  ],
+  "Login Form": [
+    "Formulário de acesso"
+  ],
+  "Expire message": [
+    "Mensagem de expiração"
+  ],
+  "Current time": [
+    "Hora atual"
+  ],
+  "Target": [
+    "Destino"
+  ],
+  "%1$d hours, %2$d minutes": [
+    "%1$d horas, %2$d minutos"
+  ],
+  "Interval": [
+    "Intervalo"
+  ],
+  "Evaluates all matching terms in PHP before paging. May impact performance on very large taxonomies.": [
+    "Avalia todos os termos correspondentes em PHP antes da paginação. Pode afetar o desempenho em taxonomias muito grandes."
+  ],
+  "Number of items to skip before the grid starts.": [
+    "Número de itens a ignorar antes do início da grade."
+  ],
+  "Skip items": [
+    "Ignorar itens"
+  ],
+  "Prevents duplicate terms from appearing across multiple loops on the same page. Applies to the frontend only.": [
+    "Evita termos duplicados em vários loops na mesma página. Aplica-se somente ao site público."
+  ],
+  "Avoid duplicates": [
+    "Evitar duplicatas"
+  ],
+  "Hide empty": [
+    "Ocultar vazios"
+  ],
+  "Show all": [
+    "Mostrar tudo"
+  ],
+  "Filter by": [
+    "Filtrar por"
+  ],
+  "Post taxonomy": [
+    "Taxonomia do post"
+  ],
+  "Add Alternating Item": [
+    "Adicionar item alternado"
+  ],
+  "No items found": [
+    "Nenhum item encontrado"
+  ],
+  "Empty state": [
+    "Estado vazio"
+  ],
+  "Form label": [
+    "Rótulo do formulário"
+  ],
+  "Enter default value": [
+    "Digite o valor padrão"
+  ],
+  "Default value": [
+    "Valor padrão"
+  ],
+  "No valid recipient email address.": [
+    "Nenhum endereço de e-mail de destinatário válido."
+  ],
+  "Cross-Sells": [
+    "Vendas cruzadas"
+  ],
+  "Related Products": [
+    "Produtos relacionados"
+  ],
+  "Latest Products": [
+    "Produtos recentes"
+  ],
+  "Ignore Sticky Posts": [
+    "Ignorar posts fixos"
+  ],
+  "Comment Count": [
+    "Número de comentários"
+  ],
+  "Last Modified": [
+    "Última modificação"
+  ],
+  "Menu Order": [
+    "Ordem do menu"
+  ],
+  "Past Year": [
+    "Último ano"
+  ],
+  "Past Quarter": [
+    "Último trimestre"
+  ],
+  "Past Month": [
+    "Último mês"
+  ],
+  "Past Week": [
+    "Última semana"
+  ],
+  "Past Day": [
+    "Último dia"
+  ],
+  "Current Post": [
+    "Post atual"
+  ],
+  "Current Query": [
+    "Consulta atual"
+  ],
+  "Items Per Page": [
+    "Itens por página"
+  ],
+  "Page Reload": [
+    "Recarregamento da página"
+  ],
+  "Load Type": [
+    "Tipo de carregamento"
+  ],
+  "Give your Query a custom unique id to allow server side filtering": [
+    "Atribua um ID exclusivo à consulta para permitir a filtragem no servidor"
+  ],
+  "Manual Selection": [
+    "Seleção manual"
+  ],
+  "Minimum value cannot be greater than maximum value.": [
+    "O valor mínimo não pode ser maior que o máximo."
+  ],
+  "Max": [
+    "Máx."
+  ],
+  "Min": [
+    "Mín."
+  ],
+  "Drag widget here": [
+    "Arraste o widget para cá"
+  ],
+  "Add template": [
+    "Adicionar modelo"
+  ],
+  "Add widget": [
+    "Adicionar widget"
+  ],
+  "Layout Style Panel": [
+    "Painel de estilo do layout"
+  ],
+  "To control the layout of the items use the Style Panel of the \"Loop Layout\".": [
+    "Para controlar o layout dos itens, use o painel de estilo de \"Layout do loop\"."
+  ],
+  "Edit loop item": [
+    "Editar item do loop"
+  ],
+  "Double-click the loop item on your canvas or click the button below to enter Edit mode.": [
+    "Clique duas vezes no item do loop na tela ou no botão abaixo para entrar no modo de edição."
+  ],
+  "Edit your loop item": [
+    "Edite o item do loop"
+  ],
+  "Exit loop editing mode": [
+    "Sair do modo de edição do loop"
+  ],
+  "time format\u0004Use the letters: %s": [
+    "Use as letras: %s"
+  ],
+  "date format\u0004Use the letters: %s": [
+    "Use as letras: %s"
+  ],
+  "Get Your Emails Delivered With Email Deliverability": [
+    "Entregue seus e-mails com o Email Deliverability"
+  ],
+  "Get your emails delivered with Email Deliverability": [
+    "Entregue seus e-mails com o Email Deliverability"
+  ],
+  "Make sure your emails reach the inbox every time with Email Deliverability.": [
+    "Garanta que seus e-mails cheguem sempre à caixa de entrada com o Email Deliverability."
+  ],
+  "Exclude filter": [
+    "Filtro de exclusão"
+  ],
+  "Include filter": [
+    "Filtro de inclusão"
+  ],
+  "Selection": [
+    "Seleção"
+  ],
+  "Template type": [
+    "Tipo de modelo"
+  ],
+  "Pagination type": [
+    "Tipo de paginação"
+  ],
+  "Prev / Next": [
+    "Anterior / Próximo"
+  ],
+  "Structure": [
+    "Estrutura"
+  ],
+  "Page %1$s of %2$s": [
+    "Página %1$s de %2$s"
+  ],
+  "Loop Layout": [
+    "Layout do loop"
+  ],
+  "Next page": [
+    "Próxima página"
+  ],
+  "Previous page": [
+    "Página anterior"
+  ],
+  "Minimum length cannot be greater than maximum length.": [
+    "O comprimento mínimo não pode ser maior que o máximo."
+  ],
+  "Length": [
+    "Comprimento"
+  ],
+  "Renew": [
+    "Renovar"
+  ],
+  "Portfolio Bio": [
+    "Biografia do portfólio"
+  ],
+  "Cannot filter a single-item list, please change from \"Current Query\" to a different query setting.": [
+    "Não é possível filtrar uma lista com um único item. Altere \"Consulta atual\" para outra configuração de consulta."
+  ],
+  "Invalid Setup": [
+    "Configuração inválida"
+  ],
+  "Sale! Upgrade Now": [
+    "Promoção! Atualize agora"
+  ],
+  "property exposed": [
+    "propriedade exposta"
+  ],
+  "Delete property": [
+    "Excluir propriedade"
+  ],
+  "This Facebook widget has been discontinued by Meta and will no longer show any content. Please remove it from your page layout to maintain a professional site appearance. %1$sLearn more%2$s": [
+    "Este widget do Facebook foi descontinuado pela Meta e não exibirá mais conteúdo. Remova-o do layout da página para manter a aparência profissional do site. %1$sSaiba mais%2$s"
+  ],
+  "Loop element for repeating dynamic content. Note: This feature requires the \"Atomic Widgets\" experiment to be enabled.": [
+    "Elemento de loop para repetir conteúdo dinâmico. Observação: requer a ativação do experimento \"Widgets atômicos\"."
+  ],
+  "Time picker": [
+    "Seletor de horário"
+  ],
+  "Multiple selections": [
+    "Seleções múltiplas"
+  ],
+  "Enter radio button group name": [
+    "Digite o nome do grupo de botões de opção"
+  ],
+  "Radio button": [
+    "Botão de opção"
+  ],
+  "File is too large. Maximum size is %d MB.": [
+    "O arquivo é muito grande. O tamanho máximo é %d MB."
+  ],
+  "This file type is not allowed for security reasons.": [
+    "Este tipo de arquivo não é permitido por motivos de segurança."
+  ],
+  "Max files": [
+    "Máximo de arquivos"
+  ],
+  "Multiple files": [
+    "Vários arquivos"
+  ],
+  "Allowed file types": [
+    "Tipos de arquivo permitidos"
+  ],
+  "Max file size": [
+    "Tamanho máximo do arquivo"
+  ],
+  "Send file": [
+    "Enviar arquivo"
+  ],
+  "Unknown upload error.": [
+    "Erro desconhecido no envio."
+  ],
+  "A PHP extension stopped the upload.": [
+    "Uma extensão PHP interrompeu o envio."
+  ],
+  "Failed to write the file to disk.": [
+    "Não foi possível gravar o arquivo no disco."
+  ],
+  "Server is missing a temporary folder for uploads.": [
+    "O servidor não tem uma pasta temporária para envios."
+  ],
+  "The file was only partially uploaded.": [
+    "O arquivo foi enviado apenas parcialmente."
+  ],
+  "The uploaded file exceeds the allowed size.": [
+    "O arquivo enviado excede o tamanho permitido."
+  ],
+  "Could not upload the file.": [
+    "Não foi possível enviar o arquivo."
+  ],
+  "Date picker": [
+    "Seletor de data"
+  ],
+  "Webhook requires form context (form id, form name, post id, field metadata).": [
+    "O webhook requer o contexto do formulário (ID e nome do formulário, ID do post e metadados dos campos)."
+  ],
+  "Webhook URL is required and must be valid": [
+    "A URL do webhook é obrigatória e deve ser válida"
+  ],
+  "Use Atomic Form": [
+    "Usar formulário atômico"
+  ],
+  "Dismiss": [
+    "Dispensar"
+  ],
+  "Switch to the Atomic form for full styling control and unlimited design flexibility.": [
+    "Mude para o formulário atômico para ter controle total do estilo e flexibilidade ilimitada de design."
+  ],
+  "Atomic form": [
+    "Formulário atômico"
+  ],
+  "Custom effect": [
+    "Efeito personalizado"
+  ],
+  "From": [
+    "De"
+  ],
+  "Custom Effect": [
+    "Efeito personalizado"
+  ],
+  "Skew Y": [
+    "Inclinar em Y"
+  ],
+  "Skew X": [
+    "Inclinar em X"
+  ],
+  "Scale Y": [
+    "Escala em Y"
+  ],
+  "Scale X": [
+    "Escala em X"
+  ],
+  "Rotate Z": [
+    "Rotacionar em Z"
+  ],
+  "Rotate Y": [
+    "Rotacionar em Y"
+  ],
+  "Rotate X": [
+    "Rotacionar em X"
+  ],
+  "Move Z": [
+    "Mover em Z"
+  ],
+  "Move Y": [
+    "Mover em Y"
+  ],
+  "Move X": [
+    "Mover em X"
+  ],
+  "Component name is too short. Please enter at least 2 characters.": [
+    "O nome do componente é muito curto. Digite pelo menos 2 caracteres."
+  ],
+  "Component name is required.": [
+    "O nome do componente é obrigatório."
+  ],
+  "Component name already exists": [
+    "O nome do componente já existe"
+  ],
+  "Component name is too long. Please keep it under 50 characters.": [
+    "O nome do componente é muito longo. Use menos de 50 caracteres."
+  ],
+  "This widget isn't compatible with components. Use atomic elements instead.": [
+    "Este widget não é compatível com componentes. Use elementos atômicos."
+  ],
+  "Restore Element": [
+    "Restaurar elemento"
+  ],
+  "Successfully deleted component %s": [
+    "Componente %s excluído com sucesso"
+  ],
+  "Components": [
+    "Componentes"
+  ],
+  "Property name already exists": [
+    "O nome da propriedade já existe"
+  ],
+  "Property name is required": [
+    "O nome da propriedade é obrigatório"
+  ],
+  "Override Property": [
+    "Substituir propriedade"
+  ],
+  "Enter value": [
+    "Digite o valor"
+  ],
+  "Update property": [
+    "Atualizar propriedade"
+  ],
+  "Create new property": [
+    "Criar nova propriedade"
+  ],
+  "Group Name": [
+    "Nome do grupo"
+  ],
+  "Make prop overridable": [
+    "Permitir substituir a propriedade"
+  ],
+  "Overridable property": [
+    "Propriedade substituível"
+  ],
+  "Exit component editing mode": [
+    "Sair do modo de edição do componente"
+  ],
+  "You've reached the limit of %s components. Please remove an existing one to create a new component.": [
+    "Você atingiu o limite de %s componentes. Remova um componente existente para criar outro."
+  ],
+  "Components require atomic elements only. Remove widgets to create this component.": [
+    "Os componentes requerem apenas elementos atômicos. Remova os widgets para criar este componente."
+  ],
+  "Failed to create component. Please try again.": [
+    "Não foi possível criar o componente. Tente novamente."
+  ],
+  "Component created successfully.": [
+    "Componente criado com sucesso."
+  ],
+  "Components are reusable elements that sync across your site.": [
+    "Componentes são elementos reutilizáveis que se sincronizam em todo o site."
+  ],
+  "Create component": [
+    "Criar componente"
+  ],
+  "Create a custom component with Angie": [
+    "Crie um componente personalizado com a Angie"
+  ],
+  "Or": [
+    "Ou"
+  ],
+  "With your current role, you cannot create components. Contact an administrator to create one.": [
+    "Com sua função atual, você não pode criar componentes. Fale com um administrador para criar um."
+  ],
+  "on div-block or flexbox.": [
+    "em um div-block ou flexbox."
+  ],
+  "To create, press": [
+    "Para criar, pressione"
+  ],
+  "Create your first component": [
+    "Crie seu primeiro componente"
+  ],
+  "Create design elements that sync across your entire site.": [
+    "Crie elementos de design que se sincronizam em todo o seu site."
+  ],
+  "Create Reusable Components": [
+    "Criar componentes reutilizáveis"
+  ],
+  "Your Pro subscription has expired. Renew to create new components.": [
+    "Sua assinatura Pro expirou. Renove para criar novos componentes."
+  ],
+  "Create New Components": [
+    "Criar novos componentes"
+  ],
+  "Existing instances on your pages will remain functional. You will no longer find this component in your list.": [
+    "As instâncias existentes nas páginas continuarão funcionando. Este componente não aparecerá mais na sua lista."
+  ],
+  "Delete this component?": [
+    "Excluir este componente?"
+  ],
+  "Create": [
+    "Criar"
+  ],
+  "Create components with Angie": [
+    "Criar componentes com a Angie"
+  ],
+  "Group name already exists": [
+    "O nome do grupo já existe"
+  ],
+  "Group name is required": [
+    "O nome do grupo é obrigatório"
+  ],
+  "Group ID or component ID is missing": [
+    "Falta o ID do grupo ou do componente"
+  ],
+  "To delete the group, first remove all the properties": [
+    "Para excluir o grupo, remova primeiro todas as propriedades"
+  ],
+  "Group actions": [
+    "Ações do grupo"
+  ],
+  "Select any element, then click + next to a setting to expose it.": [
+    "Selecione um elemento e clique em + ao lado de uma configuração para expô-la."
+  ],
+  "Make instances flexible while keeping design synced.": [
+    "Torne as instâncias flexíveis mantendo o design sincronizado."
+  ],
+  "Close panel": [
+    "Fechar painel"
+  ],
+  "Add new group": [
+    "Adicionar novo grupo"
+  ],
+  "Component properties": [
+    "Propriedades do componente"
+  ],
+  "Got it": [
+    "Entendi"
+  ],
+  "Your properties will appear in the Properties panel, where you can organize and manage them anytime.": [
+    "Suas propriedades aparecerão no painel Propriedades, onde você poderá organizá-las e gerenciá-las a qualquer momento."
+  ],
+  "Select any Element, then in the General tab, click next to any setting you want users to customize - like text, images, or links.": [
+    "Selecione um elemento e, na aba Geral, clique ao lado de uma configuração que os usuários poderão personalizar, como texto, imagens ou links."
+  ],
+  "Properties make instances flexible.": [
+    "As propriedades tornam as instâncias flexíveis."
+  ],
+  "Add your first property": [
+    "Adicione sua primeira propriedade"
+  ],
+  "Start building": [
+    "Começar a criar"
+  ],
+  "Build components using simple instructions.": [
+    "Crie componentes usando instruções simples."
+  ],
+  "New": [
+    "Novo"
+  ],
+  "Meet Angie": [
+    "Conheça a Angie"
+  ],
+  "Install Angie": [
+    "Instalar a Angie"
+  ],
+  "Installing…": [
+    "Instalando…"
+  ],
+  "Install Manually": [
+    "Instalar manualmente"
+  ],
+  "Install once to start building directly inside the editor.": [
+    "Instale uma vez para começar a criar diretamente no editor."
+  ],
+  "Angie lets you create components, widgets, sections, and code using simple instructions.": [
+    "A Angie permite criar componentes, widgets, seções e código usando instruções simples."
+  ],
+  "We couldn't install Angie automatically. Click below to install it manually.": [
+    "Não foi possível instalar o Angie automaticamente. Clique abaixo, para instalar manualmente."
+  ],
+  "Install Angie to build components": [
+    "Instale a Angie para criar componentes"
+  ],
+  "Installation failed": [
+    "Falha ao instalar"
+  ],
+  "Akismet spam protection": [
+    "Proteção contra spam do Akismet"
+  ],
+  "Akismet": [
+    "Akismet"
+  ],
+  "Checked": [
+    "Marcado"
+  ],
+  "Enter choice value": [
+    "Digite o valor da opção"
+  ],
+  "Choice value": [
+    "Valor da opção"
+  ],
+  "Enter checkbox group name": [
+    "Digite o nome do grupo de caixas de seleção"
+  ],
+  "Group name": [
+    "Nome do grupo"
+  ],
+  "Form element not found": [
+    "Elemento de formulário não encontrado"
+  ],
+  "Document not found": [
+    "Documento não encontrado"
+  ],
+  "No actions configured for this form": [
+    "Nenhuma ação configurada para este formulário"
+  ],
+  "Your submission was flagged as spam. Please try again or contact the site administrator.": [
+    "Seu envio foi marcado como spam. Tente novamente ou entre em contato com o administrador do site."
+  ],
+  "Webhook returned error status code: %d": [
+    "O webhook retornou o código de erro: %d"
+  ],
+  "Webhook delivered successfully": [
+    "Webhook entregue com sucesso"
+  ],
+  "Webhook request failed: %s": [
+    "Falha na solicitação do webhook: %s"
+  ],
+  "Invalid email address: %s": [
+    "Endereço de e-mail inválido: %s"
+  ],
+  "Email sent successfully": [
+    "E-mail enviado com sucesso"
+  ],
+  "Failed to send email": [
+    "Não foi possível enviar o e-mail"
+  ],
+  "Submission saved successfully": [
+    "Envio salvo com sucesso"
+  ],
+  "Failed to save submission to database": [
+    "Não foi possível salvar o envio no banco de dados"
+  ],
+  "Could not create action: %s": [
+    "Não foi possível criar a ação: %s"
+  ],
+  "Invalid action type: %s": [
+    "Tipo de ação inválido: %s"
+  ],
+  "If you want to ensure your subscription renews on the same plan, we recommend enabling auto-renew in your subscription details.": [
+    "Para garantir a renovação no mesmo plano, recomendamos ativar a renovação automática nos detalhes da assinatura."
+  ],
+  "Upgrade to continue editing with Pro features.": [
+    "Atualize para continuar editando com os recursos Pro."
+  ],
+  "Your Elementor Pro subscription has expired": [
+    "Sua assinatura do Elementor Pro expirou"
+  ],
+  "Renew to keep using Pro features and lock in your current rate.": [
+    "Renove para continuar usando os recursos Pro e manter o preço atual."
+  ],
+  "Your Elementor Pro subscription has expired - %s to renew": [
+    "Sua assinatura do Elementor Pro expirou — %s para renovar"
+  ],
+  "Switch account": [
+    "Trocar de conta"
+  ],
+  "Elevate your designs and unlock the full power of the Atomic Editor. Gain access to dozens of Pro widgets, Website Templates, Theme Builder, Pop Ups, Forms, reusable Components, and WooCommerce building capabilities.": [
+    "Aprimore seus designs e aproveite todo o poder do editor atômico. Acesse dezenas de widgets Pro, modelos de sites, construtor de temas, pop-ups, formulários, componentes reutilizáveis e recursos de criação para WooCommerce."
+  ],
+  "Ensure form submission emails reach the inbox and track delivery with built-in logs. Email Deliverability is included in your ONE subscription. Activate it to continue.": [
+    "Garanta a entrega dos e-mails dos formulários e acompanhe-a com os registros integrados. O Email Deliverability está incluído na sua assinatura ONE. Ative-o para continuar."
+  ],
+  "Ensure form submission emails reach the inbox and track delivery with built-in logs. Email Deliverability is included in your ONE subscription.": [
+    "Garanta a entrega dos e-mails dos formulários e acompanhe-a com os registros integrados. O Email Deliverability está incluído na sua assinatura ONE."
+  ],
+  "Ensure your site’s emails reach the inbox every time. Email Deliverability is included in your ONE subscription. Activate it to continue.": [
+    "Garanta que os e-mails do site cheguem sempre à caixa de entrada. O Email Deliverability está incluído na sua assinatura ONE. Ative-o para continuar."
+  ],
+  "Make sure your site’s emails reach the inbox every time. Email Deliverability is included in your ONE subscription.": [
+    "Garanta que os e-mails do site cheguem sempre à caixa de entrada. O Email Deliverability está incluído na sua assinatura ONE."
+  ],
+  "Experiencing email deliverability issues? Get your emails delivered with Email Deliverability.": [
+    "Problemas com a entrega de e-mails? Use o Email Deliverability."
+  ],
+  "Keep in mind: Certain cache plugins can conflict with your display conditions.": [
+    "Lembre-se: alguns plugins de cache podem entrar em conflito com as condições de exibição."
+  ],
+  "1": [
+    "1"
+  ],
+  "Last modified": [
+    "Última modificação"
+  ],
+  "Page reload": [
+    "Recarregamento da página"
+  ],
+  "Load type": [
+    "Tipo de carregamento"
+  ],
+  "Cross-sells": [
+    "Vendas cruzadas"
+  ],
+  "Items per page": [
+    "Itens por página"
+  ],
+  "%d submission has been successfully updated.": [
+    "%d envio foi atualizado com sucesso.",
+    "%d envios foram atualizados com sucesso."
+  ],
+  "Jello": [
+    "Gelatina"
+  ],
+  "Ignore sticky posts": [
+    "Ignorar posts fixos"
+  ],
+  "Past year": [
+    "Último ano"
+  ],
+  "Past quarter": [
+    "Último trimestre"
+  ],
+  "Past month": [
+    "Último mês"
+  ],
+  "Past week": [
+    "Última semana"
+  ],
+  "Past day": [
+    "Último dia"
+  ],
+  "Related products": [
+    "Produtos relacionados"
+  ],
+  "Latest products": [
+    "Produtos recentes"
+  ],
+  "Give your query a custom unique ID to allow server side filtering.": [
+    "Atribua um ID exclusivo à consulta para permitir a filtragem no servidor."
+  ],
+  "Current query": [
+    "Consulta atual"
+  ],
+  "Your license will expire in %s": [
+    "Sua licença expirará em %s"
+  ],
+  "Comment count": [
+    "Número de comentários"
+  ],
+  "Current post": [
+    "Post atual"
+  ],
+  "Warning: Please back up your database before making the rollback.": [
+    "Atenção: faça um backup do banco de dados antes de reverter a versão."
+  ],
+  "Menu order": [
+    "Ordem do menu"
+  ],
+  "Manual selection": [
+    "Seleção manual"
+  ]
+}

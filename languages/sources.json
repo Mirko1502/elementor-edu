@@ -1,0 +1,30 @@
+[
+  {
+    "domain": "elementor",
+    "locale": "it_IT",
+    "url": "https://translate.wordpress.org/projects/wp-plugins/elementor/stable/it/default/export-translations/?format=po",
+    "sha256": "58f9623b7c138f072ed468c03eeaa8710d1c732a9f35af213fed108bdfc79c08",
+    "bytes": 900210
+  },
+  {
+    "domain": "elementor",
+    "locale": "pt_BR",
+    "url": "https://translate.wordpress.org/projects/wp-plugins/elementor/stable/pt-br/default/export-translations/?format=po",
+    "sha256": "d31aa2af45f420f44405dd2ea36f2adb3161726cad3b1815842fd7b33b1e6f35",
+    "bytes": 927408
+  },
+  {
+    "domain": "elementor-pro",
+    "locale": "it_IT",
+    "url": "https://translate.elementor.com/projects/elementor-pro/it/default/export-translations/?format=po",
+    "sha256": "e0d6d5860c296412723a99a409d7915d3b7394005cc66d2499488c1602692d87",
+    "bytes": 1229242
+  },
+  {
+    "domain": "elementor-pro",
+    "locale": "pt_BR",
+    "url": "https://translate.elementor.com/projects/elementor-pro/pt-br/default/export-translations/?format=po",
+    "sha256": "5204f0966e1d8ba880ac4fc2445f4c077e98ed12c093459620bbf3c0f3695610",
+    "bytes": 1222062
+  }
+]

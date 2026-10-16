@@ -1,0 +1,34 @@
+{
+    "elementor": {
+        "it_IT": {
+            "translated": 4024,
+            "total": 4024,
+            "source_sha256": "58f9623b7c138f072ed468c03eeaa8710d1c732a9f35af213fed108bdfc79c08",
+            "supplements_sha256": "79622431f7dfb9417ad9c6c322a4d123253fba5e8f07b23ec9861bdc99a4c760",
+            "mo_sha256": "7625a5fcf88bdb8a9f9a214f8970a9a1c2c209bafc036904acb46d1ab2e70c02"
+        },
+        "pt_BR": {
+            "translated": 4024,
+            "total": 4024,
+            "source_sha256": "d31aa2af45f420f44405dd2ea36f2adb3161726cad3b1815842fd7b33b1e6f35",
+            "supplements_sha256": "ae709b46ae4ece07235042a68ef424dd431442450595b09d3288af91d6927da8",
+            "mo_sha256": "b60ea0dccd3450e18bdce89835f5d05e97c7ea954f8c5c38a8671b396e7b548a"
+        }
+    },
+    "elementor-pro": {
+        "it_IT": {
+            "translated": 3078,
+            "total": 3078,
+            "source_sha256": "e0d6d5860c296412723a99a409d7915d3b7394005cc66d2499488c1602692d87",
+            "supplements_sha256": "e2c93d30c7ed50043d741a7ad0bf5b056858435abc02bb82065c81d39d9828bc",
+            "mo_sha256": "920158be498f5376393d1e54b7e07202a2265fe5e5bf7ba477709b1de39078d3"
+        },
+        "pt_BR": {
+            "translated": 3078,
+            "total": 3078,
+            "source_sha256": "5204f0966e1d8ba880ac4fc2445f4c077e98ed12c093459620bbf3c0f3695610",
+            "supplements_sha256": "9b78ed681da25970dafa1b2f337c31b9e840a952f7a1f6de6a045c2ba36162f9",
+            "mo_sha256": "50f27a7a3eb711eac622dcd095457cf2dc37ffee6c0f640b3c444e44152bf82b"
+        }
+    }
+}
