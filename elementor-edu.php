@@ -3,7 +3,7 @@
  * Plugin Name: Elementor Edu
  * Description: Elementor in one package for educational and demonstration use.
  * Version: 4.3.2
- * Author: Elementor.com; Elementor Edu packaging
+ * Author: Elementor.com
  * Requires PHP: 7.4
  * Requires at least: 6.8
  * Text Domain: elementor-edu
@@ -137,7 +137,7 @@ final class Elementor_Edu {
 		if ( ELEMENTOR_EDU_PLUGIN_BASE !== $plugin_file ) {
 			return $html;
 		}
-		return esc_html( Elementor_Edu_Course_V3::updates_allowed() ? __( 'Elementor package update', 'elementor-edu' ) : __( 'Updates are unavailable for this copy', 'elementor-edu' ) );
+		return esc_html( Elementor_Edu_Course_V3::updates_allowed() ? __( 'Updates managed by the plugin itself', 'elementor-edu' ) : __( 'Updates are unavailable for this copy', 'elementor-edu' ) );
 	}
 
 	public static function block_rollback() {

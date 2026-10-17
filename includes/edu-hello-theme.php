@@ -9,10 +9,12 @@ final class Elementor_Edu_Hello_Theme {
 	private const ACTION = 'elementor_edu_install_hello';
 
 	public static function boot() {
-		add_action( 'admin_notices', [ __CLASS__, 'notice' ] );
-		add_action( 'network_admin_notices', [ __CLASS__, 'notice' ] );
+		add_action( 'admin_enqueue_scripts', [ __CLASS__, 'enqueue' ] );
+		add_action( 'admin_footer', [ __CLASS__, 'notice' ] );
+		add_action( 'elementor/editor/after_enqueue_scripts', [ __CLASS__, 'enqueue' ] );
+		add_action( 'elementor/editor/footer', [ __CLASS__, 'notice' ] );
 		add_action( 'admin_post_' . self::ACTION, [ __CLASS__, 'handle_install' ] );
-		// Elementor's first-run redirect otherwise hides the post-activation notice.
+		// Keep the first request in the dashboard where the setup dialog is available.
 		add_action( 'admin_init', [ __CLASS__, 'keep_activation_screen' ], 0 );
 	}
 
@@ -22,14 +24,21 @@ final class Elementor_Edu_Hello_Theme {
 		}
 	}
 
+	public static function enqueue() {
+		if ( current_user_can( 'switch_themes' ) && self::SLUG !== get_template() ) {
+			wp_enqueue_script( 'jquery' );
+		}
+	}
+
 	public static function notice() {
 		// A child theme of Hello already uses the intended base: preserve it.
 		if ( ! current_user_can( 'switch_themes' ) || self::SLUG === get_template() ) {
 			return;
 		}
 		$theme = wp_get_theme( self::SLUG );
-		echo '<div class="notice notice-info elementor-edu-hello-notice"><h2>' . esc_html__( 'Complete your setup with Hello Elementor', 'elementor-edu' ) . '</h2>';
-		echo '<p>' . esc_html__( 'We recommend Hello Elementor, the base theme included in Elementor Edu. Your current theme will remain active until you click the button.', 'elementor-edu' ) . '</p>';
+		echo '<div id="elementor-edu-hello-overlay"><section id="elementor-edu-hello-dialog" role="dialog" aria-modal="true" aria-labelledby="elementor-edu-hello-title" aria-describedby="elementor-edu-hello-description" tabindex="-1">';
+		echo '<h2 id="elementor-edu-hello-title">' . esc_html__( 'Complete your setup with Hello Elementor', 'elementor-edu' ) . '</h2>';
+		echo '<p id="elementor-edu-hello-description">' . esc_html__( 'Install and activate Hello Elementor to complete your setup and continue to the dashboard.', 'elementor-edu' ) . '</p>';
 		if ( is_network_admin() ) {
 			echo '<p>' . esc_html__( 'Each site in the network has its own theme. Open the site dashboard to configure it.', 'elementor-edu' ) . '</p><p><a class="button button-primary" href="' . esc_url( admin_url( 'plugins.php' ) ) . '">' . esc_html__( 'Set up this site\'s theme', 'elementor-edu' ) . '</a></p>';
 		} elseif ( ! $theme->exists() && ! current_user_can( 'install_themes' ) ) {
@@ -40,10 +49,46 @@ final class Elementor_Edu_Hello_Theme {
 			echo '<p>' . esc_html__( 'Activating the theme will change the appearance of your site. Your previous theme and content will be preserved.', 'elementor-edu' ) . '</p>';
 			echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php?action=' . self::ACTION ) ) . '">';
 			wp_nonce_field( self::ACTION );
-			submit_button( $theme->exists() ? __( 'Activate Hello Elementor', 'elementor-edu' ) : __( 'Install and activate Hello Elementor', 'elementor-edu' ), 'primary', 'submit', true );
+			submit_button( __( 'Install the Hello Elementor theme', 'elementor-edu' ), 'primary', 'submit', true );
 			echo '</form>';
 		}
-		echo '</div>';
+		echo '</section></div>';
+		?>
+		<style>
+			#elementor-edu-hello-overlay { position: fixed; inset: 0; z-index: 2147483647; display: flex; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box; background: rgba(0, 0, 0, 0.78); }
+			#elementor-edu-hello-dialog { background: #fff; color: #1d2327; width: 100%; max-width: 560px; max-height: calc(100vh - 48px); overflow: auto; padding: 32px; box-sizing: border-box; border-radius: 8px; box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3); }
+			#elementor-edu-hello-dialog h2 { margin: 0 0 20px; font-size: 24px; line-height: 1.3; }
+			#elementor-edu-hello-dialog p { font-size: 14px; line-height: 1.6; }
+			#elementor-edu-hello-dialog .submit { margin-bottom: 0; padding-bottom: 0; }
+			#elementor-edu-hello-dialog .button { display: inline-block; padding: 8px 16px; border: 1px solid #2271b1; border-radius: 3px; background: #2271b1; color: #fff; font-size: 14px; line-height: 1.6; white-space: normal; text-align: center; text-decoration: none; cursor: pointer; }
+			#elementor-edu-hello-dialog .button:focus { outline: 2px solid #2271b1; outline-offset: 3px; }
+			#elementor-edu-hello-dialog .button:disabled { opacity: 0.6; cursor: wait; }
+			body.elementor-edu-hello-required { overflow: hidden; }
+		</style>
+		<script>
+		jQuery(function ($) {
+			var $overlay = $('#elementor-edu-hello-overlay').appendTo(document.body);
+			var $dialog = $('#elementor-edu-hello-dialog');
+			$('body').addClass('elementor-edu-hello-required');
+			$overlay.siblings().not('script, style').prop('inert', true);
+			function focusAction() {
+				var $action = $dialog.find('button:enabled, input[type="submit"]:enabled, a[href]').first();
+				($action.length ? $action : $dialog).trigger('focus');
+			}
+			focusAction();
+			$(document).on('focusin.eduHello', function (event) {
+				if (!$dialog[0].contains(event.target)) { focusAction(); }
+			}).on('keydown.eduHello', function (event) {
+				if (event.key === 'Escape') { event.preventDefault(); event.stopImmediatePropagation(); }
+				if (event.key === 'Tab') { event.preventDefault(); focusAction(); }
+			});
+			$dialog.find('form').on('submit', function () {
+				$dialog.attr('aria-busy', 'true');
+				$(this).find(':submit').prop('disabled', true);
+			});
+		});
+		</script>
+		<?php
 	}
 
 	/** The request guard is separate from the installation for native WP integration tests. */
@@ -60,23 +105,36 @@ final class Elementor_Edu_Hello_Theme {
 	public static function handle_install() {
 		self::authorize_request();
 		require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
-		// admin-post.php has no admin menu bootstrap: use WP's standalone installer shell.
+		$skin = new class( [
+			'url' => admin_url( 'admin-post.php?action=' . self::ACTION ),
+			'nonce' => self::ACTION,
+			'title' => 'Hello Elementor',
+		] ) extends WP_Upgrader_Skin {
+			// Default feedback calls show_message(), which flushes output buffers
+			// and sends headers before the final redirect, even inside ob_start().
+			public function header() {}
+			public function footer() {}
+			public function feedback( $feedback, ...$args ) {}
+		};
+		// Buffer the native installer: success redirects before any HTML is sent.
+		// Keep its filesystem credentials form available on hosts requiring FTP/SSH.
+		ob_start();
+		$result = self::install_and_activate( $skin );
+		$output = ob_get_clean();
+		if ( true === $result ) {
+			delete_transient( 'elementor_activation_redirect' );
+			wp_safe_redirect( admin_url( 'index.php' ) );
+			exit;
+		}
+		// Only errors or a required credentials form need a standalone response.
 		global $hook_suffix;
 		$hook_suffix = 'themes.php';
 		set_current_screen( 'themes' );
 		iframe_header( 'Hello Elementor' );
 		echo '<div class="wrap"><h1>' . esc_html__( 'Hello Elementor setup', 'elementor-edu' ) . '</h1>';
-		$skin = new WP_Upgrader_Skin( [
-			'url' => admin_url( 'admin-post.php?action=' . self::ACTION ),
-			'nonce' => self::ACTION,
-			'title' => 'Hello Elementor',
-		] );
-		$result = self::install_and_activate( $skin );
+		echo $output; // Trusted HTML from the native WordPress installer, including its nonce form.
 		if ( is_wp_error( $result ) ) {
 			echo '<div class="notice notice-error"><p>' . esc_html( $result->get_error_message() ) . '</p></div>';
-		} elseif ( true === $result ) {
-			echo '<div class="notice notice-success"><p>' . esc_html__( 'Hello Elementor is now the active theme for this site.', 'elementor-edu' ) . '</p></div>';
-			echo '<p><a class="button button-primary" href="' . esc_url( admin_url( 'themes.php' ) ) . '">' . esc_html__( 'Go to Themes', 'elementor-edu' ) . '</a> <a class="button" href="' . esc_url( home_url( '/' ) ) . '">' . esc_html__( 'Visit site', 'elementor-edu' ) . '</a></p>';
 		}
 		// false means WordPress displayed its filesystem credentials form.
 		echo '</div>';

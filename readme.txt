@@ -14,7 +14,7 @@ This educational distribution is intended only for activities directly related t
 1. Deactivate any separate Elementor and Elementor Pro installations.
 2. In Plugins > Add New Plugin > Upload Plugin, upload the Elementor Edu ZIP file.
 3. Activate Elementor Edu. Both included engines load together and reuse existing Elementor pages, settings and data.
-4. Optionally select "Install and activate Hello Elementor" to use the included Hello Elementor 3.5.1 theme. Your current theme changes only after you click. An existing Hello installation is reused without being overwritten; an active Hello child theme is preserved. WordPress theme installation and activation permissions are required. On multisite, the change applies only to the current site.
+4. In the setup dialog, select "Install the Hello Elementor theme" to install and activate the included Hello Elementor 3.5.1 theme, then return automatically to the dashboard. The dialog remains visible across admin pages until Hello is active and cannot be dismissed. Your current theme changes only after you click. An existing Hello installation is reused without being overwritten; an active Hello child theme is preserved. WordPress theme installation and activation permissions are required. On multisite, the change applies only to the current site.
 
 == Languages ==
 English is the source language. Italian (it_IT) and Brazilian Portuguese (pt_BR) translations are included for Elementor Edu and both Elementor engines, including PHP interfaces and JavaScript editor panels.

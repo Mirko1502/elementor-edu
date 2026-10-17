@@ -11,9 +11,6 @@ msgstr ""
 msgid "Deactivate the separate Elementor and Elementor Pro plugins on every site before activating Elementor Edu across the network."
 msgstr ""
 
-msgid "Elementor package update"
-msgstr ""
-
 msgid "Updates are unavailable for this copy"
 msgstr ""
 
@@ -21,9 +18,6 @@ msgid "To change versions, upload a complete Elementor Edu package. Rolling back
 msgstr ""
 
 msgid "Complete your setup with Hello Elementor"
-msgstr ""
-
-msgid "We recommend Hello Elementor, the base theme included in Elementor Edu. Your current theme will remain active until you click the button."
 msgstr ""
 
 msgid "Each site in the network has its own theme. Open the site dashboard to configure it."
@@ -41,12 +35,6 @@ msgstr ""
 msgid "Activating the theme will change the appearance of your site. Your previous theme and content will be preserved."
 msgstr ""
 
-msgid "Activate Hello Elementor"
-msgstr ""
-
-msgid "Install and activate Hello Elementor"
-msgstr ""
-
 msgid "Use the Hello Elementor installation button."
 msgstr ""
 
@@ -54,15 +42,6 @@ msgid "You do not have permission to change this site's theme."
 msgstr ""
 
 msgid "Hello Elementor setup"
-msgstr ""
-
-msgid "Hello Elementor is now the active theme for this site."
-msgstr ""
-
-msgid "Go to Themes"
-msgstr ""
-
-msgid "Visit site"
 msgstr ""
 
 msgid "You do not have permission to change the theme."
@@ -269,12 +248,18 @@ msgstr ""
 msgid "Some Elementor translations could not be updated. Existing translations remain available. Another attempt will run automatically."
 msgstr ""
 
-msgid "Elementor.com; Elementor Edu packaging"
-msgstr ""
-
 msgid "Elementor Edu – Educational notice"
 msgstr ""
 
 msgid "Maintains educational notices and usage conditions for Elementor Edu."
+msgstr ""
+
+msgid "Updates managed by the plugin itself"
+msgstr ""
+
+msgid "Install and activate Hello Elementor to complete your setup and continue to the dashboard."
+msgstr ""
+
+msgid "Install the Hello Elementor theme"
 msgstr ""
 
