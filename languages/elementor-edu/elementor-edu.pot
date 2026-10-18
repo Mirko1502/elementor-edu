@@ -257,3 +257,33 @@ msgstr ""
 msgid "The update period for this educational copy has ended. Elementor Edu will continue to work normally. If you would like to keep receiving updates, you can install the official %s."
 msgstr ""
 
+msgid "Elementor Edu"
+msgstr ""
+
+msgid "Choose which Altervista integration features to restore on this site."
+msgstr ""
+
+msgid "Settings saved."
+msgstr ""
+
+msgid "Keep Altervista disabled (recommended)"
+msgstr ""
+
+msgid "Restore only Server to server"
+msgstr ""
+
+msgid "Restore all Altervista features"
+msgstr ""
+
+msgid "The Server to server option re-enables only the matching settings screen and service callbacks. Full restore reactivates the Altervista plugin and its integrations."
+msgstr ""
+
+msgid "Save changes"
+msgstr ""
+
+msgid "You are not allowed to access this page."
+msgstr ""
+
+msgid "You are not allowed to change these settings."
+msgstr ""
+

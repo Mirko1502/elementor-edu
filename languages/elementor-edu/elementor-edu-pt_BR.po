@@ -260,3 +260,33 @@ msgstr "Instalar o tema Hello Elementor"
 msgid "The update period for this educational copy has ended. Elementor Edu will continue to work normally. If you would like to keep receiving updates, you can install the official %s."
 msgstr "O período de atualizações desta cópia educacional terminou. O Elementor Edu continuará funcionando normalmente. Se quiser continuar recebendo atualizações, você pode instalar a versão oficial do %s."
 
+msgid "Elementor Edu"
+msgstr "Elementor Edu"
+
+msgid "Choose which Altervista integration features to restore on this site."
+msgstr "Escolha quais integrações do Altervista restaurar neste site."
+
+msgid "Settings saved."
+msgstr "Configurações salvas."
+
+msgid "Keep Altervista disabled (recommended)"
+msgstr "Manter o Altervista desativado (recomendado)"
+
+msgid "Restore only Server to server"
+msgstr "Restaurar apenas Server to server"
+
+msgid "Restore all Altervista features"
+msgstr "Restaurar todos os recursos do Altervista"
+
+msgid "The Server to server option re-enables only the matching settings screen and service callbacks. Full restore reactivates the Altervista plugin and its integrations."
+msgstr "A opção Server to server reativa apenas a tela correspondente e os callbacks do serviço. A restauração completa reativa o plugin Altervista e suas integrações."
+
+msgid "Save changes"
+msgstr "Salvar alterações"
+
+msgid "You are not allowed to access this page."
+msgstr "Você não tem permissão para acessar esta página."
+
+msgid "You are not allowed to change these settings."
+msgstr "Você não tem permissão para alterar estas configurações."
+

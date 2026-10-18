@@ -79,9 +79,12 @@ final class Elementor_Edu {
 		add_filter( 'elementor/onboarding/steps', '__return_empty_array', PHP_INT_MAX );
 		// Educational installations do not collect or transmit Elementor usage telemetry.
 		update_option( 'elementor_allow_tracking', 'no', false );
-		// Altervista stores these two opt-outs as standard WordPress options.
-		update_option( 'av_disable_audience_tracking', '1', false );
-		update_option( 'av_disable_google_analytics', '1', false );
+		// Keep Altervista tracking disabled unless an administrator explicitly
+		// chooses the full integration restore in Elementor Edu settings.
+		if ( ! class_exists( 'Elementor_Edu_Altervista' ) || 'all' !== Elementor_Edu_Altervista::get_mode() ) {
+			update_option( 'av_disable_audience_tracking', '1', false );
+			update_option( 'av_disable_google_analytics', '1', false );
+		}
 		add_filter( 'pre_update_option_elementor_allow_tracking', [ __CLASS__, 'disable_tracking' ], PHP_INT_MAX );
 
 		add_filter( 'pre_set_site_transient_update_plugins', [ __CLASS__, 'filter_updates' ], PHP_INT_MAX );
@@ -98,8 +101,10 @@ final class Elementor_Edu {
 		if ( ! get_option( 'elementor_onboarded' ) ) {
 			update_option( 'elementor_onboarded', 'elementor-edu', false );
 		}
-		update_option( 'av_disable_audience_tracking', '1', false );
-		update_option( 'av_disable_google_analytics', '1', false );
+		if ( ! class_exists( 'Elementor_Edu_Altervista' ) || 'all' !== Elementor_Edu_Altervista::get_mode() ) {
+			update_option( 'av_disable_audience_tracking', '1', false );
+			update_option( 'av_disable_google_analytics', '1', false );
+		}
 	}
 
 	public static function disable_tracking( $value ) {
@@ -122,6 +127,9 @@ final class Elementor_Edu {
 					wp_die( esc_html( __( 'Deactivate the separate Elementor and Elementor Pro plugins on every site before activating Elementor Edu across the network.', 'elementor-edu' ) ), 'Elementor Edu', [ 'back_link' => true ] );
 				}
 			}
+		}
+		if ( class_exists( 'Elementor_Edu_Altervista' ) ) {
+			Elementor_Edu_Altervista::apply_activation_policy( $network_wide );
 		}
 	}
 
