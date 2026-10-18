@@ -14,8 +14,18 @@ final class Elementor_Edu_Hello_Theme {
 		add_action( 'elementor/editor/after_enqueue_scripts', [ __CLASS__, 'enqueue' ] );
 		add_action( 'elementor/editor/footer', [ __CLASS__, 'notice' ] );
 		add_action( 'admin_post_' . self::ACTION, [ __CLASS__, 'handle_install' ] );
+		add_filter( 'hello-plus-theme/rest/admin-config', [ __CLASS__, 'suppress_welcome_banner' ], PHP_INT_MAX );
 		// Keep the first request in the dashboard where the setup dialog is available.
 		add_action( 'admin_init', [ __CLASS__, 'keep_activation_screen' ], 0 );
+	}
+
+	/** Elementor Edu has its own setup flow; never show Hello's competing welcome banner. */
+	public static function suppress_welcome_banner( $config ) {
+		if ( is_array( $config ) ) {
+			$config['welcome'] = [];
+		}
+
+		return $config;
 	}
 
 	public static function keep_activation_screen() {

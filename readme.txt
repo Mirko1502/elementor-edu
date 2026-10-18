@@ -16,6 +16,8 @@ This educational distribution is intended only for activities directly related t
 3. Activate Elementor Edu. Both included engines load together and reuse existing Elementor pages, settings and data.
 4. In the setup dialog, select "Install the Hello Elementor theme" to install and activate the included Hello Elementor 3.5.1 theme, then return automatically to the dashboard. The dialog remains visible across admin pages until Hello is active and cannot be dismissed. Your current theme changes only after you click. An existing Hello installation is reused without being overwritten; an active Hello child theme is preserved. WordPress theme installation and activation permissions are required. On multisite, the change applies only to the current site.
 
+For new Elementor pages, Page Settings > Hide Title defaults to Yes. A value already saved on a page is preserved. The separate Hello Theme welcome banner is suppressed; Elementor Edu provides its own setup dialog.
+
 == Languages ==
 English is the source language. Italian (it_IT) and Brazilian Portuguese (pt_BR) translations are included for Elementor Edu and both Elementor engines, including PHP interfaces and JavaScript editor panels.
 
@@ -23,7 +25,10 @@ In the dashboard and editor, the language follows the current user's WordPress p
 
 Translation catalogues are included and work offline. While the update period is active, WordPress Cron refreshes the Italian and Brazilian Portuguese catalogues daily from the public WordPress.org and Elementor translation projects. It also refreshes them when preparing a combined Elementor update, and schedules a refresh after a manually installed new version. No manual language-pack installation is needed.
 
-Only translation data is downloaded; remote PHP files are never installed or executed. Supplementary translations for missing strings are preserved. If a source is unavailable, existing catalogues are retained, an administrator notice is shown after a failed scheduled refresh, and a later automatic attempt is scheduled. Newly introduced strings without an available translation appear in English until a translated catalogue becomes available. WordPress Cron depends on site visits or a server cron job.
+Only translation data is downloaded; remote PHP files are never installed or executed. Supplementary translations for missing strings are preserved. If a source is unavailable, existing catalogues are retained and a later automatic attempt is scheduled silently. Refresh errors are recorded internally without a dashboard notice. Newly introduced strings without an available translation appear in English until a translated catalogue becomes available. WordPress Cron depends on site visits or a server cron job.
+
+== Altervista presentation ==
+While Elementor Edu is active, it removes administrative presentation callbacks identified by their source in the Altervista integration plugin: promotional notices, menus, dashboard widgets, toolbar additions and admin styling. It also hides the frontend paragraph with the av-credit-link class. This starts on activation without a scheduled cleanup. Hosting files, account settings, authentication, content and other plugins are preserved. Deactivating Elementor Edu restores the hosting presentation. Customizations outside the recognized integration or injected independently by the server may require a specific adaptation.
 
 == Updates ==
 While the educational update period is active, the plugin checks daily for a newer Pro release at https://www.gpl-astra.com/elementor-pro/. Only a newer Pro release triggers an Elementor update offer. Clicking "Update Elementor now" downloads both current engines, validates the packages and installs the combined update through WordPress. A newer Elementor release alone does not trigger an update.

@@ -13,8 +13,6 @@ final class Elementor_Edu_Translation_Updater {
 	public static function boot() {
 		add_action( 'init', [ __CLASS__, 'schedule' ], 5 );
 		add_action( self::EVENT, [ __CLASS__, 'refresh' ] );
-		add_action( 'admin_notices', [ __CLASS__, 'notice' ] );
-		add_action( 'network_admin_notices', [ __CLASS__, 'notice' ] );
 	}
 
 	private static function versions() {
@@ -157,14 +155,6 @@ final class Elementor_Edu_Translation_Updater {
 		}
 		file_put_contents( $directory . '/catalogues.json', wp_json_encode( $catalogues, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ) );
 		return $catalogues;
-	}
-
-	public static function notice() {
-		$state = get_site_option( self::STATE, [] );
-		if ( ! current_user_can( 'update_plugins' ) || empty( $state['error'] ) || ! Elementor_Edu_Course_V3::updates_allowed() ) {
-			return;
-		}
-		echo '<div class="notice notice-warning"><p>' . esc_html__( 'Some Elementor translations could not be updated. Existing translations remain available. Another attempt will run automatically.', 'elementor-edu' ) . '</p></div>';
 	}
 
 	private static function prune( $keep ) {

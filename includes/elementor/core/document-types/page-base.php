@@ -1,4 +1,5 @@
 <?php
+// Elementor Edu: adapted for the combined educational distribution.
 namespace Elementor\Core\DocumentTypes;
 
 use Elementor\Controls_Manager;
@@ -95,6 +96,7 @@ abstract class PageBase extends Document {
 			[
 				'label' => esc_html__( 'Hide Title', 'elementor' ),
 				'type' => Controls_Manager::SWITCHER,
+				'default' => 'yes',
 				'description' => sprintf(
 					/* translators: 1: Link open tag, 2: Link close tag. */
 					esc_html__( 'Set a different selector for the title in the %1$sLayout panel%2$s.', 'elementor' ),

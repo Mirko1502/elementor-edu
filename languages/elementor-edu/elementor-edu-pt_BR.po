@@ -248,9 +248,6 @@ msgstr "Não foi possível salvar as traduções. As traduções existentes fora
 msgid "A translation source is unavailable. Existing translations have been kept; another attempt is scheduled."
 msgstr "Uma fonte de traduções está indisponível. As traduções existentes foram mantidas; uma nova tentativa está agendada."
 
-msgid "Some Elementor translations could not be updated. Existing translations remain available. Another attempt will run automatically."
-msgstr "Não foi possível atualizar algumas traduções do Elementor. As traduções existentes continuam disponíveis. Uma nova tentativa será feita automaticamente."
-
 msgid "Elementor Edu – Educational notice"
 msgstr "Elementor Edu – Aviso educacional"
 

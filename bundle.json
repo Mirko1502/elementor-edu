@@ -51,6 +51,7 @@
   "requires_wordpress": "6.8",
   "modified_engine_files": [
     "elementor/core/admin/canary-deployment.php",
+    "elementor/core/document-types/page-base.php",
     "elementor/elementor.php",
     "elementor/includes/beta-testers.php",
     "elementor/includes/settings/tools.php",

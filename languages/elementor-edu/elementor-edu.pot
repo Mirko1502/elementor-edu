@@ -245,9 +245,6 @@ msgstr ""
 msgid "A translation source is unavailable. Existing translations have been kept; another attempt is scheduled."
 msgstr ""
 
-msgid "Some Elementor translations could not be updated. Existing translations remain available. Another attempt will run automatically."
-msgstr ""
-
 msgid "Elementor Edu – Educational notice"
 msgstr ""
 

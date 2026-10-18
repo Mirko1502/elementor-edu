@@ -66,9 +66,13 @@ final class Elementor_Edu {
 		require_once __DIR__ . '/includes/edu-hello-theme.php';
 		require_once __DIR__ . '/includes/edu-updater.php';
 		require_once __DIR__ . '/includes/edu-translation-updater.php';
+		require_once __DIR__ . '/includes/edu-altervista.php';
+		require_once __DIR__ . '/includes/edu-editor-promotions.php';
 		Elementor_Edu_Hello_Theme::boot();
 		Elementor_Edu_Updater::boot();
 		Elementor_Edu_Translation_Updater::boot();
+		Elementor_Edu_Altervista::boot();
+		Elementor_Edu_Editor_Promotions::boot();
 
 		add_filter( 'pre_set_site_transient_update_plugins', [ __CLASS__, 'filter_updates' ], PHP_INT_MAX );
 		add_filter( 'site_transient_update_plugins', [ __CLASS__, 'filter_updates' ], PHP_INT_MAX );
