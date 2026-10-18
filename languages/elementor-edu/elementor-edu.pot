@@ -215,12 +215,6 @@ msgstr ""
 msgid "Elementor: educational use only."
 msgstr ""
 
-msgid "This copy will keep working, but its update period has ended. Elementor updates will no longer be checked for or installed through this copy."
-msgstr ""
-
-msgid "Please deactivate this copy and replace it with an official installation of %s. Switch to the official version of Elementor Pro to keep receiving Elementor updates."
-msgstr ""
-
 msgid "Elementor Pro from the official website"
 msgstr ""
 
@@ -258,5 +252,8 @@ msgid "Install and activate Hello Elementor to complete your setup and continue 
 msgstr ""
 
 msgid "Install the Hello Elementor theme"
+msgstr ""
+
+msgid "The update period for this educational copy has ended. Elementor Edu will continue to work normally. If you would like to keep receiving updates, you can install the official %s."
 msgstr ""
 

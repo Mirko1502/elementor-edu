@@ -218,12 +218,6 @@ msgstr "Impossibile salvare temporaneamente il pacchetto."
 msgid "Elementor: educational use only."
 msgstr "Elementor: copia a uso puramente didattico."
 
-msgid "This copy will keep working, but its update period has ended. Elementor updates will no longer be checked for or installed through this copy."
-msgstr "Questa copia continua a funzionare, ma il periodo previsto per ricevere gli aggiornamenti è terminato. Da questo momento non vengono più cercati né installati aggiornamenti di Elementor tramite questa copia."
-
-msgid "Please deactivate this copy and replace it with an official installation of %s. Switch to the official version of Elementor Pro to keep receiving Elementor updates."
-msgstr "Ti invitiamo a disattivarla e a sostituirla con un’installazione regolare di %s. Per continuare a ricevere gli aggiornamenti di Elementor, passa alla versione ufficiale di Elementor Pro."
-
 msgid "Elementor Pro from the official website"
 msgstr "Elementor Pro dal sito ufficiale"
 
@@ -262,4 +256,7 @@ msgstr "Installa e attiva Hello Elementor per completare la configurazione e pro
 
 msgid "Install the Hello Elementor theme"
 msgstr "Installa il tema Hello Elementor"
+
+msgid "The update period for this educational copy has ended. Elementor Edu will continue to work normally. If you would like to keep receiving updates, you can install the official %s."
+msgstr "Il periodo di aggiornamento per questa copia didattica è terminato. Elementor Edu continuerà a funzionare normalmente. Se desideri continuare a ricevere gli aggiornamenti, puoi installare la versione ufficiale di %s."
 
