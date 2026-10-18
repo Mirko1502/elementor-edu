@@ -227,7 +227,7 @@ msgstr ""
 msgid "Elementor Edu – Educational use only."
 msgstr ""
 
-msgid "This plugin is intended only for course demonstrations and exercises. It must not be used outside activities directly related to the course."
+msgid "This plugin was developed exclusively for educational and training purposes. It must never be used outside activities strictly related to education."
 msgstr ""
 
 msgid "Elementor Edu requires PHP %s or later."

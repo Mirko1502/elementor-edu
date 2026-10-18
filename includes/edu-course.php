@@ -206,7 +206,7 @@ if ( ! class_exists( 'Elementor_Edu_Course_V3', false ) ) {
 				return;
 			}
 			echo '<div class="notice notice-warning elementor-edu-educational-notice"><p><strong>' . esc_html__( 'Elementor Edu – Educational use only.', 'elementor-edu' ) . '</strong> '
-				. esc_html__( 'This plugin is intended only for course demonstrations and exercises. It must not be used outside activities directly related to the course.', 'elementor-edu' ) . '</p></div>';
+				. esc_html__( 'This plugin was developed exclusively for educational and training purposes. It must never be used outside activities strictly related to education.', 'elementor-edu' ) . '</p></div>';
 		}
 	}
 }

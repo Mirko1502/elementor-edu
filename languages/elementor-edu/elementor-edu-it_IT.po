@@ -230,8 +230,8 @@ msgstr "Elementor Pro dal sito ufficiale"
 msgid "Elementor Edu – Educational use only."
 msgstr "Elementor Edu – Utilizzo esclusivamente educativo."
 
-msgid "This plugin is intended only for course demonstrations and exercises. It must not be used outside activities directly related to the course."
-msgstr "Questo plugin è destinato esclusivamente alle dimostrazioni e alle esercitazioni del corso. Non deve in nessun caso essere utilizzato al di fuori delle attività strettamente legate al corso."
+msgid "This plugin was developed exclusively for educational and training purposes. It must never be used outside activities strictly related to education."
+msgstr "Questo plugin è stato sviluppato esclusivamente a scopo educativo e di esercitazione. Non deve in nessun caso essere utilizzato al di fuori delle attività strettamente legate alla didattica."
 
 msgid "Elementor Edu requires PHP %s or later."
 msgstr "Elementor Edu richiede PHP %s o successivo."
