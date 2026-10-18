@@ -13,6 +13,7 @@ final class Elementor_Edu_Altervista {
 		'admin_print_styles', 'admin_print_scripts', 'admin_print_footer_scripts',
 		'in_admin_header', 'in_admin_footer', 'welcome_panel',
 		'admin_bar_menu', 'wp_before_admin_bar_render',
+		'wp_head', 'wp_footer', 'wp_enqueue_scripts', 'wp_print_scripts', 'wp_print_footer_scripts',
 	];
 	private const FILTERS = [ 'admin_footer_text', 'update_footer', 'admin_body_class' ];
 
@@ -29,14 +30,22 @@ final class Elementor_Edu_Altervista {
 			add_action( $hook, [ __CLASS__, 'remove_registered_ui' ], PHP_INT_MAX );
 		}
 		add_action( 'wp_before_admin_bar_render', [ __CLASS__, 'clean_toolbar' ], PHP_INT_MAX );
-		add_action( 'admin_print_styles', [ __CLASS__, 'remove_admin_assets' ], 0 );
-		add_action( 'admin_print_scripts', [ __CLASS__, 'remove_admin_assets' ], 0 );
-		add_action( 'admin_print_footer_scripts', [ __CLASS__, 'remove_admin_assets' ], 0 );
+		foreach ( [ 'admin_print_styles', 'admin_print_scripts', 'admin_print_footer_scripts', 'wp_print_scripts', 'wp_print_footer_scripts' ] as $hook ) {
+			add_action( $hook, [ __CLASS__, 'remove_admin_assets' ], 0 );
+		}
 		add_action( 'wp_head', [ __CLASS__, 'hide_credit' ], 0 );
 		add_action( 'admin_head', [ __CLASS__, 'hide_credit' ], 0 );
 		add_action( 'wp_footer', [ __CLASS__, 'remove_credit_markup' ], PHP_INT_MAX );
 		add_action( 'admin_footer', [ __CLASS__, 'remove_credit_markup' ], PHP_INT_MAX );
+		// Replace the hosting favicon on the public site and admin bar with
+		// WordPress's bundled mark while Elementor Edu is active.
+		add_filter( 'get_site_icon_url', [ __CLASS__, 'wordpress_site_icon' ], PHP_INT_MAX );
+		add_filter( 'site_icon_url', [ __CLASS__, 'wordpress_site_icon' ], PHP_INT_MAX );
 		self::remove_presentation_callbacks();
+	}
+
+	public static function wordpress_site_icon( $url ) {
+		return includes_url( 'images/w-logo-blue.png' );
 	}
 
 	/** Match the integration directory, never a site's name or a translated label. */
@@ -69,6 +78,10 @@ final class Elementor_Edu_Altervista {
 	}
 
 	private static function presentation_hook( $hook ) {
+		// Allow Altervista to register its menus; remove its promotional pages below.
+		if ( in_array( $hook, [ 'admin_menu', 'network_admin_menu', 'user_admin_menu' ], true ) ) {
+			return false;
+		}
 		return in_array( $hook, self::ACTIONS, true ) || in_array( $hook, self::FILTERS, true )
 			|| preg_match( '/^admin_(?:head|footer|print_styles|print_scripts|print_footer_scripts)-/', $hook );
 	}
@@ -90,6 +103,9 @@ final class Elementor_Edu_Altervista {
 	}
 
 	private static function owns_page( $slug, $parent = '' ) {
+		if ( 'av-domain-unlocking' === $slug ) {
+			return false;
+		}
 		global $wp_filter;
 		$hook = get_plugin_page_hookname( $slug, $parent );
 		if ( empty( $wp_filter[ $hook ] ) ) {
@@ -105,18 +121,35 @@ final class Elementor_Edu_Altervista {
 		return false;
 	}
 
+	private static function remove_page_callback( $slug, $parent = '' ) {
+		$hook = get_plugin_page_hookname( $slug, $parent );
+		global $wp_filter;
+		if ( empty( $wp_filter[ $hook ] ) ) {
+			return;
+		}
+		foreach ( $wp_filter[ $hook ]->callbacks as $priority => $callbacks ) {
+			foreach ( $callbacks as $callback ) {
+				if ( self::owns_callback( $callback['function'] ) ) {
+					remove_action( $hook, $callback['function'], $priority );
+				}
+			}
+		}
+	}
+
 	/** Catch menus/widgets registered before their usual setup hooks. */
 	public static function remove_registered_ui() {
 		global $menu, $submenu, $wp_meta_boxes;
 		foreach ( (array) $submenu as $parent => $items ) {
 			foreach ( $items as $item ) {
 				if ( self::owns_page( $item[2], $parent ) ) {
+					self::remove_page_callback( $item[2], $parent );
 					remove_submenu_page( $parent, $item[2] );
 				}
 			}
 		}
 		foreach ( (array) $menu as $item ) {
 			if ( self::owns_page( $item[2] ) ) {
+				self::remove_page_callback( $item[2] );
 				remove_menu_page( $item[2] );
 			}
 		}
@@ -172,6 +205,9 @@ final class Elementor_Edu_Altervista {
 	public static function hide_credit() {
 		// Cover frontend and dashboard output, including late hosting-side injection.
 		echo '<style id="elementor-edu-altervista-credit">p.av-credit-link{display:none!important}</style>';
+		if ( is_admin() ) {
+			echo '<script id="elementor-edu-altervista-settings">document.addEventListener("DOMContentLoaded",function(){["av_disable_audience_tracking","av_disable_google_analytics"].forEach(function(id){var field=document.getElementById(id);if(field){var row=field.closest("tr");if(row){row.remove();}}});});</script>';
+		}
 	}
 
 	/** Remove the credit node from the rendered page as well as hiding it. */

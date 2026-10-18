@@ -73,6 +73,16 @@ final class Elementor_Edu {
 		Elementor_Edu_Translation_Updater::boot();
 		Elementor_Edu_Altervista::boot();
 		Elementor_Edu_Editor_Promotions::boot();
+		// Elementor's activation transient redirects administrators into its setup wizard.
+		// Mark onboarding complete persistently and clear the redirect on every load.
+		add_action( 'admin_init', [ __CLASS__, 'suppress_onboarding' ], PHP_INT_MIN );
+		add_filter( 'elementor/onboarding/steps', '__return_empty_array', PHP_INT_MAX );
+		// Educational installations do not collect or transmit Elementor usage telemetry.
+		update_option( 'elementor_allow_tracking', 'no', false );
+		// Altervista stores these two opt-outs as standard WordPress options.
+		update_option( 'av_disable_audience_tracking', '1', false );
+		update_option( 'av_disable_google_analytics', '1', false );
+		add_filter( 'pre_update_option_elementor_allow_tracking', [ __CLASS__, 'disable_tracking' ], PHP_INT_MAX );
 
 		add_filter( 'pre_set_site_transient_update_plugins', [ __CLASS__, 'filter_updates' ], PHP_INT_MAX );
 		add_filter( 'site_transient_update_plugins', [ __CLASS__, 'filter_updates' ], PHP_INT_MAX );
@@ -81,6 +91,19 @@ final class Elementor_Edu {
 		add_action( 'admin_post_elementor_rollback', [ __CLASS__, 'block_rollback' ], -100 );
 		add_action( 'admin_post_elementor_pro_rollback', [ __CLASS__, 'block_rollback' ], -100 );
 		add_filter( 'elementor/admin/show_beta_tester', '__return_false' );
+	}
+
+	public static function suppress_onboarding() {
+		delete_transient( 'elementor_activation_redirect' );
+		if ( ! get_option( 'elementor_onboarded' ) ) {
+			update_option( 'elementor_onboarded', 'elementor-edu', false );
+		}
+		update_option( 'av_disable_audience_tracking', '1', false );
+		update_option( 'av_disable_google_analytics', '1', false );
+	}
+
+	public static function disable_tracking( $value ) {
+		return 'no';
 	}
 
 	private static function has_conflict() {
