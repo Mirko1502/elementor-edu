@@ -33,6 +33,9 @@ final class Elementor_Edu_Altervista {
 		add_action( 'admin_print_scripts', [ __CLASS__, 'remove_admin_assets' ], 0 );
 		add_action( 'admin_print_footer_scripts', [ __CLASS__, 'remove_admin_assets' ], 0 );
 		add_action( 'wp_head', [ __CLASS__, 'hide_credit' ], 0 );
+		add_action( 'admin_head', [ __CLASS__, 'hide_credit' ], 0 );
+		add_action( 'wp_footer', [ __CLASS__, 'remove_credit_markup' ], PHP_INT_MAX );
+		add_action( 'admin_footer', [ __CLASS__, 'remove_credit_markup' ], PHP_INT_MAX );
 		self::remove_presentation_callbacks();
 	}
 
@@ -167,11 +170,12 @@ final class Elementor_Edu_Altervista {
 	}
 
 	public static function hide_credit() {
-		if ( ! is_dir( WP_PLUGIN_DIR . '/altervista' ) ) {
-			return;
-		}
-
-		// Applies also if the hosting platform injects this exact block after wp_footer.
+		// Cover frontend and dashboard output, including late hosting-side injection.
 		echo '<style id="elementor-edu-altervista-credit">p.av-credit-link{display:none!important}</style>';
+	}
+
+	/** Remove the credit node from the rendered page as well as hiding it. */
+	public static function remove_credit_markup() {
+		echo '<script id="elementor-edu-altervista-credit-removal">(function(){function removeCredit(){document.querySelectorAll("p.av-credit-link").forEach(function(node){node.remove();});}removeCredit();if(document.documentElement&&window.MutationObserver){new MutationObserver(removeCredit).observe(document.documentElement,{childList:true,subtree:true});}})();</script>';
 	}
 }
