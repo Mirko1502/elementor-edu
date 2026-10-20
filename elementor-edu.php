@@ -32,7 +32,30 @@ final class Elementor_Edu {
 	private static $maintenance_warning = '';
 	private const ORIGINAL_PLUGINS = [ 'elementor/elementor.php', 'elementor-pro/elementor-pro.php' ];
 
+	/** Remove only Elementor Safe Mode leftovers from an older Edu installation. */
+	private static function cleanup_legacy_safe_mode() {
+		if ( defined( 'WPMU_PLUGIN_DIR' ) ) {
+			$file = trailingslashit( WPMU_PLUGIN_DIR ) . 'elementor-safe-mode.php';
+			if ( is_file( $file ) && ! is_link( $file ) ) {
+				$contents = @file_get_contents( $file );
+				if ( false !== $contents && false !== strpos( $contents, 'Plugin Name: Elementor Safe Mode' ) && false !== strpos( $contents, 'class Safe_Mode' ) ) {
+					@unlink( $file );
+				}
+			}
+		}
+
+		delete_option( 'elementor_safe_mode' );
+		delete_option( 'elementor_safe_mode_allowed_plugins' );
+		delete_option( 'elementor_safe_mode_created_mu_dir' );
+		delete_option( 'elementor_safe_mode_token' );
+		delete_option( 'theme_mods_elementor-safe' );
+	}
+
 	public static function boot() {
+		// MU-plugins load before regular plugins. Remove the known upstream
+		// Safe Mode remnant early so it cannot affect subsequent requests.
+		self::cleanup_legacy_safe_mode();
+
 		// Validate before the activation callbacks registered by the engines.
 		register_activation_hook( ELEMENTOR_EDU__FILE__, [ __CLASS__, 'activate' ] );
 

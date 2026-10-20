@@ -42,7 +42,20 @@ if ( defined( 'WPMU_PLUGIN_DIR' ) ) {
 			@unlink( $legacy_monitor );
 		}
 	}
+	$safe_mode = trailingslashit( WPMU_PLUGIN_DIR ) . 'elementor-safe-mode.php';
+	if ( is_file( $safe_mode ) && ! is_link( $safe_mode ) ) {
+		$contents = @file_get_contents( $safe_mode );
+		if ( false !== $contents && false !== strpos( $contents, 'Plugin Name: Elementor Safe Mode' ) && false !== strpos( $contents, 'class Safe_Mode' ) ) {
+			@unlink( $safe_mode );
+		}
+	}
 }
+
+delete_option( 'elementor_safe_mode' );
+delete_option( 'elementor_safe_mode_allowed_plugins' );
+delete_option( 'elementor_safe_mode_created_mu_dir' );
+delete_option( 'elementor_safe_mode_token' );
+delete_option( 'theme_mods_elementor-safe' );
 
 global $wpdb;
 if ( isset( $wpdb->usermeta ) ) {
