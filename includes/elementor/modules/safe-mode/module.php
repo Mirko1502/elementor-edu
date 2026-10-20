@@ -1,4 +1,5 @@
 <?php
+// Elementor Edu: adapted for the combined educational distribution.
 namespace Elementor\Modules\SafeMode;
 
 use Elementor\Plugin;
@@ -84,47 +85,22 @@ class Module extends \Elementor\Core\Base\Module {
 		return false;
 	}
 
+	/** Safe Mode is disabled in Elementor Edu because upstream requires an MU-plugin. */
 	public function enable_safe_mode() {
-		if ( ! current_user_can( 'install_plugins' ) ) {
-			return;
-		}
-
-		WP_Filesystem();
-
-		$this->update_allowed_plugins();
-
-		if ( ! is_dir( WPMU_PLUGIN_DIR ) ) {
-			wp_mkdir_p( WPMU_PLUGIN_DIR );
-			add_option( 'elementor_safe_mode_created_mu_dir', true );
-		}
-
-		if ( ! is_dir( WPMU_PLUGIN_DIR ) ) {
-			wp_die( esc_html__( 'Cannot enable Safe Mode', 'elementor' ) );
-		}
-
-		$results = copy_dir( __DIR__ . '/mu-plugin/', WPMU_PLUGIN_DIR );
-
-		if ( is_wp_error( $results ) ) {
-			return;
-		}
-
-		$token = hash( 'sha256', wp_rand() );
-
-		// Only who own this key can use 'elementor-safe-mode'.
-		update_option( self::OPTION_TOKEN, $token );
-
-		// Save for later use.
-		setcookie( self::OPTION_TOKEN, $token, time() + HOUR_IN_SECONDS, COOKIEPATH, '', is_ssl(), true );
+		return;
 	}
 
 	public function disable_safe_mode() {
-		if ( ! current_user_can( 'install_plugins' ) ) {
+		if ( ! current_user_can( 'install_plugins' ) && ! defined( 'ELEMENTOR_EDU__FILE__' ) ) {
 			return;
 		}
 
 		$file_path = WP_CONTENT_DIR . '/mu-plugins/elementor-safe-mode.php';
-		if ( file_exists( $file_path ) ) {
-			unlink( $file_path );
+		if ( is_file( $file_path ) && ! is_link( $file_path ) ) {
+			$contents = @file_get_contents( $file_path );
+			if ( false !== $contents && false !== strpos( $contents, 'Plugin Name: Elementor Safe Mode' ) && false !== strpos( $contents, 'class Safe_Mode' ) ) {
+				@unlink( $file_path );
+			}
 		}
 
 		if ( get_option( 'elementor_safe_mode_created_mu_dir' ) ) {
@@ -138,7 +114,9 @@ class Module extends \Elementor\Core\Base\Module {
 		delete_option( 'elementor_safe_mode_created_mu_dir' );
 
 		delete_option( self::OPTION_TOKEN );
-		setcookie( self::OPTION_TOKEN, '', 1, '', '', is_ssl(), true );
+		if ( ! headers_sent() ) {
+			setcookie( self::OPTION_TOKEN, '', 1, '', '', is_ssl(), true );
+		}
 	}
 
 	public function filter_preview_url( $url ) {
@@ -510,6 +488,12 @@ class Module extends \Elementor\Core\Base\Module {
 	}
 
 	public function __construct() {
+		if ( defined( 'ELEMENTOR_EDU__FILE__' ) ) {
+			if ( $this->is_enabled() ) {
+				$this->disable_safe_mode();
+			}
+			return;
+		}
 		if ( current_user_can( 'install_plugins' ) ) {
 			add_action( 'elementor/admin/after_create_settings/elementor-tools', [ $this, 'add_admin_button' ] );
 		}

@@ -35,7 +35,7 @@ While the educational update period is active, the plugin checks daily for a new
 
 When the update period ends, the plugin keeps working and can still be reactivated. Automatic engine and translation checks stop, and this copy no longer installs updates. Existing translations remain available. A permanent dashboard notice explains the educational status and recommends replacing this copy with an official Elementor Pro installation to continue receiving updates: https://elementor.com/pro/.
 
-Updates and manual deactivation preserve the educational period. Deleting the plugin removes its record; a later installation starts a new period. Elementor Edu does not install or use MU-plugins. If an earlier version already deactivated the plugin, reactivate it normally after replacing the package.
+Updates and manual deactivation preserve the educational period. Deleting the plugin removes its record; a later installation starts a new period. Elementor Edu does not install or use MU-plugins. Elementor Safe Mode is unavailable in this combined package because its upstream implementation requires an MU-plugin. If an earlier version already deactivated the plugin, reactivate it normally after replacing the package.
 
 == Sources and remote services ==
 This package includes customizations from an altered Pro distribution. It retains the proxy https://elementor.gpltimes.com for some Elementor service requests. It does not grant an official license or guarantee template or cloud-service availability. Features requiring other plugins, such as WooCommerce, retain those dependencies.

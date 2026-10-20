@@ -57,6 +57,8 @@
     "elementor/includes/settings/tools.php",
     "elementor/includes/utils.php",
     "elementor/modules/compatibility-tag/module.php",
+    "elementor/modules/safe-mode/module.php",
+    "elementor/modules/safe-mode/mu-plugin/elementor-safe-mode.php",
     "elementor-pro/core/admin/admin.php",
     "elementor-pro/elementor-pro.php",
     "elementor-pro/license/admin.php",
