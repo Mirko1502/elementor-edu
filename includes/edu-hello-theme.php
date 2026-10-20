@@ -156,6 +156,11 @@ final class Elementor_Edu_Hello_Theme {
 	public static function install_and_activate( $skin ) {
 		$previous_stylesheet = get_stylesheet();
 		$previous_template = get_template();
+		// Installing a theme fires upgrader_process_complete. WordPress may then
+		// run Language_Pack_Upgrader::async_upgrade() with its own page-rendering
+		// skin, which breaks this POST response and prevents the dashboard redirect.
+		// Defer only those automatic translation updates to a normal admin request.
+		add_filter( 'async_update_translation', [ __CLASS__, 'defer_async_translation_update' ], PHP_INT_MAX, 2 );
 		try {
 			return self::install_and_activate_safely( $skin );
 		} catch ( Throwable $error ) {
@@ -170,7 +175,14 @@ final class Elementor_Edu_Hello_Theme {
 				}
 			}
 			return new WP_Error( 'edu_theme_operation_failed', __( 'WordPress could not complete the Hello Elementor theme operation. Your previous theme was restored where possible. Check the site error log and try again.', 'elementor-edu' ) );
+		} finally {
+			remove_filter( 'async_update_translation', [ __CLASS__, 'defer_async_translation_update' ], PHP_INT_MAX );
 		}
+	}
+
+	/** Keep WordPress's translation updater from hijacking the theme-install response. */
+	public static function defer_async_translation_update( $update, $language_update ) {
+		return false;
 	}
 
 	/** @return true|false|WP_Error False allows the native credentials form to continue. */
