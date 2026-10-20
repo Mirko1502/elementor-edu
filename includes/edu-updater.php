@@ -360,22 +360,24 @@ final class Elementor_Edu_Updater {
 			self::remove_tree( $root );
 			return $patches;
 		}
-		self::replace_version( $bundle . '/elementor-edu.php', 'Version', ELEMENTOR_PRO_VERSION, $pro_version );
-		self::replace_constant( $bundle . '/elementor-edu.php', 'ELEMENTOR_EDU_VERSION', ELEMENTOR_PRO_VERSION, $pro_version );
+		$edu_version = $pro_version . '.0';
+		self::replace_version( $bundle . '/elementor-edu.php', 'Version', ELEMENTOR_EDU_VERSION, $edu_version );
+		self::replace_constant( $bundle . '/elementor-edu.php', 'ELEMENTOR_EDU_VERSION', ELEMENTOR_EDU_VERSION, $edu_version );
 		$manifest_path = $bundle . '/bundle.json';
 		$manifest = json_decode( file_get_contents( $manifest_path ), true );
 		if ( ! is_array( $manifest ) ) {
 			self::remove_tree( $root );
 			return new WP_Error( 'elementor_edu_manifest', __( 'The installed package manifest is invalid.', 'elementor-edu' ) );
 		}
-		$manifest['version'] = $pro_version;
+		$manifest['version'] = $edu_version;
+		$manifest['build_number'] = 0;
 		$manifest['elementor'] = $core_version;
 		$manifest['elementor_pro'] = $pro_version;
 		self::replace_header_value( $bundle . '/elementor-edu.php', 'Requires PHP', $manifest['requires_php'], $minimum_php );
 		self::replace_header_value( $bundle . '/elementor-edu.php', 'Requires at least', $manifest['requires_wordpress'], $minimum_wp );
 		self::replace_header_value( $bundle . '/readme.txt', 'Requires PHP', $manifest['requires_php'], $minimum_php );
 		self::replace_header_value( $bundle . '/readme.txt', 'Requires at least', $manifest['requires_wordpress'], $minimum_wp );
-		self::replace_header_value( $bundle . '/readme.txt', 'Stable tag', ELEMENTOR_PRO_VERSION, $pro_version );
+		self::replace_header_value( $bundle . '/readme.txt', 'Stable tag', ELEMENTOR_EDU_VERSION, $edu_version );
 		$readme_path = $bundle . '/readme.txt';
 		$readme_contents = file_get_contents( $readme_path );
 		$readme_contents = str_replace( 'Elementor ' . ELEMENTOR_VERSION, 'Elementor ' . $core_version, $readme_contents );

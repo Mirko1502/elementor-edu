@@ -290,3 +290,21 @@ msgstr "Mostra tutte le schermate Altervista"
 msgid "These choices affect the interface only. The Altervista plugin and its theme initialization, authentication and background services are preserved."
 msgstr "Queste scelte riguardano solo l’interfaccia. Il plugin Altervista e i suoi servizi di inizializzazione del tema, autenticazione e attività in background vengono preservati."
 
+msgid "Setup complete"
+msgstr "Configurazione completata"
+
+msgid "Elementor and Hello Elementor are active. Everything is ready: you can create a page and start building with Elementor."
+msgstr "Elementor e Hello Elementor sono attivi. È tutto pronto: puoi creare una pagina e iniziare a lavorare con Elementor."
+
+msgid "Create your first page"
+msgstr "Crea la tua prima pagina"
+
+msgid "Close"
+msgstr "Chiudi"
+
+msgid "WordPress could not complete the Hello Elementor theme operation. Your previous theme was restored where possible. Check the site error log and try again."
+msgstr "WordPress non è riuscito a completare l’operazione sul tema Hello Elementor. Il tema precedente è stato ripristinato quando possibile. Controlla il registro degli errori del sito e riprova."
+
+msgid "The Altervista plugin and its theme initialization, authentication and background services are preserved."
+msgstr "Il plugin Altervista e i suoi servizi di inizializzazione del tema, autenticazione e attività in background vengono preservati."
+

@@ -1,7 +1,7 @@
 === Elementor Edu ===
 Requires at least: 6.8
 Requires PHP: 7.4
-Stable tag: 4.3.2
+Stable tag: 4.3.2.0
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,8 +15,9 @@ This educational distribution is intended only for activities directly related t
 2. In Plugins > Add New Plugin > Upload Plugin, upload the Elementor Edu ZIP file.
 3. Activate Elementor Edu. Both included engines load together and reuse existing Elementor pages, settings and data.
 4. In the setup dialog, select "Install the Hello Elementor theme" to install and activate the included Hello Elementor 3.5.1 theme, then return automatically to the dashboard. The dialog remains visible across admin pages until Hello is active and cannot be dismissed. Your current theme changes only after you click. An existing Hello installation is reused without being overwritten; an active Hello child theme is preserved. WordPress theme installation and activation permissions are required. On multisite, the change applies only to the current site.
+5. When Elementor and Hello Elementor are both active, a one-time confirmation explains that you can start building with Elementor and links to create a page. It can be dismissed. If Hello is already active when Elementor Edu is activated, WordPress returns to Installed Plugins rather than Add Plugins.
 
-For new Elementor pages, Page Settings > Hide Title defaults to Yes. A value already saved on a page is preserved. The separate Hello Theme welcome banner and Elementor's first-activation onboarding wizard are suppressed. Elementor Edu's Hello installation prompt remains available until the theme is active.
+For new Elementor pages, Page Settings > Hide Title defaults to Yes. A value already saved on a page is preserved. The separate Hello Theme welcome banner and Elementor's first-activation onboarding wizard are suppressed. Elementor Edu's Hello installation prompt remains available until the theme is active. Confirmation and setup text follow the WordPress user's profile language in English, Italian and Brazilian Portuguese.
 
 == Languages ==
 English is the source language. Italian (it_IT) and Brazilian Portuguese (pt_BR) translations are included for Elementor Edu and both Elementor engines, including PHP interfaces and JavaScript editor panels.

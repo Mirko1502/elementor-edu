@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Elementor Edu
  * Description: Elementor in one package for educational and demonstration use.
- * Version: 4.3.2
+ * Version: 4.3.2.0
  * Author: Elementor.com
  * Requires PHP: 7.4
  * Requires at least: 6.8
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ELEMENTOR_EDU_VERSION', '4.3.2' );
+define( 'ELEMENTOR_EDU_VERSION', '4.3.2.0' );
 define( 'ELEMENTOR_EDU__FILE__', __FILE__ );
 define( 'ELEMENTOR_EDU_PLUGIN_BASE', plugin_basename( __FILE__ ) );
 

@@ -287,3 +287,21 @@ msgstr ""
 msgid "These choices affect the interface only. The Altervista plugin and its theme initialization, authentication and background services are preserved."
 msgstr ""
 
+msgid "Setup complete"
+msgstr ""
+
+msgid "Elementor and Hello Elementor are active. Everything is ready: you can create a page and start building with Elementor."
+msgstr ""
+
+msgid "Create your first page"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "WordPress could not complete the Hello Elementor theme operation. Your previous theme was restored where possible. Check the site error log and try again."
+msgstr ""
+
+msgid "The Altervista plugin and its theme initialization, authentication and background services are preserved."
+msgstr ""
+

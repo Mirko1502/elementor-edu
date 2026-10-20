@@ -7,12 +7,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 final class Elementor_Edu_Hello_Theme {
 	private const SLUG = 'hello-elementor';
 	private const ACTION = 'elementor_edu_install_hello';
+	private const SUCCESS_PENDING = 'elementor_edu_setup_success_pending';
+	private const SUCCESS_SEEN = 'elementor_edu_setup_success_seen';
 
 	public static function boot() {
 		add_action( 'admin_enqueue_scripts', [ __CLASS__, 'enqueue' ] );
 		add_action( 'admin_footer', [ __CLASS__, 'notice' ] );
+		add_action( 'admin_footer', [ __CLASS__, 'success_notice' ], 20 );
 		add_action( 'elementor/editor/after_enqueue_scripts', [ __CLASS__, 'enqueue' ] );
 		add_action( 'elementor/editor/footer', [ __CLASS__, 'notice' ] );
+		add_action( 'activated_plugin', [ __CLASS__, 'on_plugin_activated' ], 10, 2 );
+		add_action( 'switch_theme', [ __CLASS__, 'on_theme_switched' ], 10, 3 );
+		add_action( 'admin_init', [ __CLASS__, 'redirect_after_activation' ], 0 );
 		add_action( 'admin_post_' . self::ACTION, [ __CLASS__, 'handle_install' ] );
 		add_filter( 'hello-plus-theme/rest/admin-config', [ __CLASS__, 'suppress_welcome_banner' ], PHP_INT_MAX );
 		// Keep the first request in the dashboard where the setup dialog is available.
@@ -35,9 +41,113 @@ final class Elementor_Edu_Hello_Theme {
 	}
 
 	public static function enqueue() {
-		if ( current_user_can( 'switch_themes' ) && self::SLUG !== get_template() ) {
+		if ( ( current_user_can( 'switch_themes' ) && self::SLUG !== get_template() ) || self::has_pending_success() ) {
 			wp_enqueue_script( 'jquery' );
 		}
+	}
+
+	/** Queue one confirmation for the administrator who completes the setup. */
+	public static function on_plugin_activated( $plugin, $network_wide = false ) {
+		if ( defined( 'ELEMENTOR_EDU_PLUGIN_BASE' ) && ELEMENTOR_EDU_PLUGIN_BASE === $plugin ) {
+			self::queue_success_if_ready();
+			global $pagenow;
+			$user_id = get_current_user_id();
+			if ( $user_id && self::SLUG === get_template() && in_array( $pagenow, [ 'plugin-install.php', 'update.php' ], true ) ) {
+				set_transient( 'elementor_edu_plugins_redirect_' . $user_id, 1, 120 );
+			}
+		}
+	}
+
+	/** Keep Edu activation from returning an already-complete setup to Add Plugins. */
+	public static function redirect_after_activation() {
+		global $pagenow;
+		$user_id = get_current_user_id();
+		$key = $user_id ? 'elementor_edu_plugins_redirect_' . $user_id : '';
+		if ( 'plugin-install.php' !== $pagenow || ! $key || ! get_transient( $key ) ) {
+			return;
+		}
+		delete_transient( $key );
+		wp_safe_redirect( admin_url( 'plugins.php' ) );
+		exit;
+	}
+
+	/** Theme activation can be the final step when Hello is installed after Edu. */
+	public static function on_theme_switched( $new_name, $new_theme, $old_theme = null ) {
+		self::queue_success_if_ready();
+	}
+
+	private static function queue_success_if_ready() {
+		$user_id = get_current_user_id();
+		if ( ! $user_id || get_user_meta( $user_id, self::SUCCESS_SEEN, true ) || ! self::setup_is_ready() ) {
+			return;
+		}
+		update_user_meta( $user_id, self::SUCCESS_PENDING, 1 );
+	}
+
+	private static function has_pending_success() {
+		$user_id = get_current_user_id();
+		return $user_id && (bool) get_user_meta( $user_id, self::SUCCESS_PENDING, true ) && self::setup_is_ready();
+	}
+
+	private static function setup_is_ready() {
+		return self::SLUG === get_template() && defined( 'ELEMENTOR_VERSION' );
+	}
+
+	/** Show and consume the one-time confirmation after both products are active. */
+	public static function success_notice() {
+		$user_id = get_current_user_id();
+		if ( ! $user_id || ! self::has_pending_success() ) {
+			return;
+		}
+		delete_user_meta( $user_id, self::SUCCESS_PENDING );
+		update_user_meta( $user_id, self::SUCCESS_SEEN, 1 );
+		$create_page_url = admin_url( 'post-new.php?post_type=page' );
+		?>
+		<div id="elementor-edu-ready-overlay">
+			<section id="elementor-edu-ready-dialog" role="dialog" aria-modal="true" aria-labelledby="elementor-edu-ready-title" aria-describedby="elementor-edu-ready-description" tabindex="-1">
+				<button type="button" class="elementor-edu-ready-close" aria-label="<?php echo esc_attr__( 'Close', 'elementor-edu' ); ?>">&times;</button>
+				<h2 id="elementor-edu-ready-title"><?php esc_html_e( 'Setup complete', 'elementor-edu' ); ?></h2>
+				<p id="elementor-edu-ready-description"><?php esc_html_e( 'Elementor and Hello Elementor are active. Everything is ready: you can create a page and start building with Elementor.', 'elementor-edu' ); ?></p>
+				<p><a class="button button-primary" href="<?php echo esc_url( $create_page_url ); ?>"><?php esc_html_e( 'Create your first page', 'elementor-edu' ); ?></a></p>
+			</section>
+		</div>
+		<style>
+			#elementor-edu-ready-overlay { position: fixed; inset: 0; z-index: 2147483646; display: flex; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box; background: rgba(0, 0, 0, 0.68); }
+			#elementor-edu-ready-dialog { position: relative; background: #fff; color: #1d2327; width: 100%; max-width: 560px; padding: 32px; box-sizing: border-box; border-radius: 8px; box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3); }
+			#elementor-edu-ready-dialog h2 { margin: 0 32px 20px 0; font-size: 24px; line-height: 1.3; }
+			#elementor-edu-ready-dialog p { font-size: 14px; line-height: 1.6; }
+			#elementor-edu-ready-dialog .elementor-edu-ready-close { position: absolute; top: 12px; right: 14px; border: 0; background: transparent; color: #50575e; font-size: 28px; line-height: 1; cursor: pointer; }
+			#elementor-edu-ready-dialog .button { padding: 8px 16px; white-space: normal; }
+			#elementor-edu-ready-dialog :focus { outline: 2px solid #2271b1; outline-offset: 3px; }
+			body.elementor-edu-ready-open { overflow: hidden; }
+		</style>
+		<script>
+		jQuery(function ($) {
+			var $overlay = $('#elementor-edu-ready-overlay').appendTo(document.body);
+			var $dialog = $('#elementor-edu-ready-dialog');
+			var previousFocus = document.activeElement;
+			$('body').addClass('elementor-edu-ready-open');
+			$overlay.siblings().not('script, style').prop('inert', true);
+			$dialog.find('.elementor-edu-ready-close').trigger('focus');
+			function closeDialog() {
+				$overlay.remove();
+				$('body').removeClass('elementor-edu-ready-open');
+				$('body').children().prop('inert', false);
+				if (previousFocus && previousFocus.focus) { previousFocus.focus(); }
+			}
+			$dialog.find('.elementor-edu-ready-close').on('click', closeDialog);
+			$overlay.on('click', function (event) { if (event.target === $overlay[0]) { closeDialog(); } });
+			$(document).on('keydown.eduReady', function (event) {
+				if (event.key === 'Escape') { closeDialog(); }
+				if (event.key === 'Tab') {
+					var $focusable = $dialog.find('a[href], button:enabled');
+					if (event.shiftKey && document.activeElement === $focusable[0]) { event.preventDefault(); $focusable.last().trigger('focus'); }
+					else if (!event.shiftKey && document.activeElement === $focusable.last()[0]) { event.preventDefault(); $focusable.first().trigger('focus'); }
+				}
+			});
+		});
+		</script>
+		<?php
 	}
 
 	public static function notice() {
