@@ -22,7 +22,7 @@ if ( ! function_exists( 'elementor_edu_course_extend_existing_window' ) ) {
 		$record = is_multisite()
 			? get_network_option( get_main_network_id(), $record_key, [] )
 			: get_option( $record_key, [] );
-		if ( ! is_array( $record ) || empty( $record['installed_at'] ) ) {
+		if ( ! is_array( $record ) || ! isset( $record['installed_at'], $record['expires_at'] ) || ! is_numeric( $record['installed_at'] ) || ! is_numeric( $record['expires_at'] ) || (int) $record['installed_at'] < 1 ) {
 			return;
 		}
 		$installed = (int) $record['installed_at'];
@@ -83,6 +83,25 @@ if ( ! class_exists( 'Elementor_Edu_Course_V3', false ) ) {
 				: get_option( self::RECORD, [] );
 		}
 
+		/** Reject damaged database state without replacing it or restarting its deadline. */
+		private static function record_is_valid( $record ) {
+			if ( ! is_array( $record ) || ! isset( $record['installed_at'], $record['expires_at'], $record['plugins'] ) ) {
+				return false;
+			}
+			if ( ! is_numeric( $record['installed_at'] ) || ! is_numeric( $record['expires_at'] ) || (int) $record['installed_at'] < 1 || (int) $record['expires_at'] < (int) $record['installed_at'] ) {
+				return false;
+			}
+			if ( ! is_array( $record['plugins'] ) ) {
+				return false;
+			}
+			foreach ( $record['plugins'] as $plugin ) {
+				if ( ! is_string( $plugin ) || '' === $plugin || '/' === $plugin[0] || false !== strpos( $plugin, '..' ) || false !== strpos( $plugin, '\\' ) || false !== strpos( $plugin, "\0" ) ) {
+					return false;
+				}
+			}
+			return true;
+		}
+
 		private static function save( array $record, $create = false ) {
 			if ( is_multisite() ) {
 				return $create
@@ -96,7 +115,10 @@ if ( ! class_exists( 'Elementor_Edu_Course_V3', false ) ) {
 		public static function prepare( $plugin_file ) {
 			$record = self::record();
 			$base = plugin_basename( $plugin_file );
-			if ( ! $record ) {
+			if ( [] !== $record && null !== $record && false !== $record && ! self::record_is_valid( $record ) ) {
+				return 'The Elementor Edu educational settings are damaged. Existing settings were preserved; ask the site administrator to restore the database record.';
+			}
+			if ( [] === $record || null === $record || false === $record ) {
 				// WP does not execute inactive plugins at upload time. Capture the
 				// installed file's filesystem timestamp when it first executes.
 				$installed = filectime( $plugin_file );
@@ -155,8 +177,12 @@ if ( ! class_exists( 'Elementor_Edu_Course_V3', false ) ) {
 
 		public static function expired() {
 			$record = self::record();
-			if ( ! $record ) {
+			if ( [] === $record || null === $record || false === $record ) {
 				return false;
+			}
+			if ( ! self::record_is_valid( $record ) ) {
+				// Keep all editing and rendering available, but fail closed for updates.
+				return true;
 			}
 			if ( ! empty( $record['expired'] ) ) {
 				return true;
@@ -244,7 +270,9 @@ if ( ! class_exists( 'Elementor_Edu_Course_V3', false ) ) {
 		}
 
 		public static function load_translations() {
-			foreach ( self::record()['plugins'] ?? [] as $plugin ) {
+			$record = self::record();
+			$plugins = self::record_is_valid( $record ) ? $record['plugins'] : [];
+			foreach ( $plugins as $plugin ) {
 				$root = dirname( WP_PLUGIN_DIR . '/' . $plugin );
 				if ( is_readable( $root . '/includes/edu-i18n.php' ) ) {
 					require_once $root . '/includes/edu-i18n.php';
@@ -256,7 +284,7 @@ if ( ! class_exists( 'Elementor_Edu_Course_V3', false ) ) {
 
 		public static function notice() {
 			$record = self::record();
-			if ( ! $record ) {
+			if ( ! self::record_is_valid( $record ) ) {
 				return;
 			}
 			$installed = false;

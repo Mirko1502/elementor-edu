@@ -154,6 +154,27 @@ final class Elementor_Edu_Hello_Theme {
 
 	/** @return true|false|WP_Error False allows the native credentials form to continue. */
 	public static function install_and_activate( $skin ) {
+		$previous_stylesheet = get_stylesheet();
+		$previous_template = get_template();
+		try {
+			return self::install_and_activate_safely( $skin );
+		} catch ( Throwable $error ) {
+			// A theme/upgrader callback can throw while WordPress is switching themes.
+			// Restore the saved theme pair without dispatching the same callbacks again.
+			if ( $previous_stylesheet && $previous_template && ( get_stylesheet() !== $previous_stylesheet || get_template() !== $previous_template ) ) {
+				try {
+					switch_theme( $previous_stylesheet );
+				} catch ( Throwable $restore_error ) {
+					update_option( 'template', $previous_template );
+					update_option( 'stylesheet', $previous_stylesheet );
+				}
+			}
+			return new WP_Error( 'edu_theme_operation_failed', __( 'WordPress could not complete the Hello Elementor theme operation. Your previous theme was restored where possible. Check the site error log and try again.', 'elementor-edu' ) );
+		}
+	}
+
+	/** @return true|false|WP_Error False allows the native credentials form to continue. */
+	private static function install_and_activate_safely( $skin ) {
 		if ( ! current_user_can( 'switch_themes' ) ) {
 			return new WP_Error( 'edu_theme_forbidden', __( 'You do not have permission to change the theme.', 'elementor-edu' ) );
 		}

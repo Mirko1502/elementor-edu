@@ -59,6 +59,7 @@
     "elementor/modules/compatibility-tag/module.php",
     "elementor-pro/core/admin/admin.php",
     "elementor-pro/elementor-pro.php",
+    "elementor-pro/license/admin.php",
     "elementor-pro/license/updater.php"
   ],
   "source_entry_sha256": {

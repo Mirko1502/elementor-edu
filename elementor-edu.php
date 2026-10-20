@@ -65,6 +65,12 @@ final class Elementor_Edu {
 			Elementor_Edu_I18n::boot( __DIR__ );
 			require_once __DIR__ . '/includes/edu-course.php';
 			self::$error = Elementor_Edu_Course_V3::prepare( ELEMENTOR_EDU__FILE__ );
+			if ( 'The Elementor Edu educational settings are damaged. Existing settings were preserved; ask the site administrator to restore the database record.' === self::$error ) {
+				self::$monitor_warning = self::$error;
+				self::$error = '';
+				add_action( 'admin_notices', [ __CLASS__, 'monitor_notice' ] );
+				add_action( 'network_admin_notices', [ __CLASS__, 'monitor_notice' ] );
+			}
 			// Also handle an older V3 MU class already loaded in this request.
 			// A saved database record remains persistent on restricted hosting.
 			if ( in_array( self::$error, [
@@ -169,8 +175,22 @@ final class Elementor_Edu {
 		echo '<div class="notice notice-error"><p><strong>Elementor Edu:</strong> ' . esc_html( self::error_message() ) . '</p></div>';
 	}
 
+	/** Convert recoverable PHP errors during plugin boot into an admin notice. */
+	public static function handle_bootstrap_failure( Throwable $error ) {
+		self::$error = 'The Elementor Edu package is incomplete. Reinstall the complete ZIP file.';
+		if ( function_exists( 'error_log' ) ) {
+			error_log( 'Elementor Edu could not complete plugin startup: ' . $error->getMessage() );
+		}
+		add_action( 'admin_notices', [ __CLASS__, 'notice' ] );
+		add_action( 'network_admin_notices', [ __CLASS__, 'notice' ] );
+	}
+
 	public static function monitor_notice() {
 		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
+		if ( 'The Elementor Edu educational settings are damaged. Existing settings were preserved; ask the site administrator to restore the database record.' === self::$monitor_warning ) {
+			echo '<div class="notice notice-warning"><p>' . esc_html__( 'Elementor Edu found damaged educational settings. It preserved the stored data and paused update checks; Elementor and Elementor Pro remain available. Ask the site administrator to restore the database record.', 'elementor-edu' ) . '</p></div>';
 			return;
 		}
 		echo '<div class="notice notice-warning"><p>' . esc_html__( 'Elementor Edu is active. Educational settings are saved in the database, but the persistent notice monitor could not be installed. Notices remain available while the plugin is active. Check write access to the WordPress mu-plugins directory; setup will be retried automatically.', 'elementor-edu' ) . '</p><p>' . esc_html( translate( self::$monitor_warning, 'elementor-edu' ) ) . '</p></div>';
@@ -213,4 +233,8 @@ final class Elementor_Edu {
 	}
 }
 
-Elementor_Edu::boot();
+try {
+	Elementor_Edu::boot();
+} catch ( Throwable $error ) {
+	Elementor_Edu::handle_bootstrap_failure( $error );
+}

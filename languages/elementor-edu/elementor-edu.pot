@@ -8,6 +8,12 @@ msgstr ""
 msgid "The Elementor Edu package is incomplete. Reinstall the complete ZIP file."
 msgstr ""
 
+msgid "The Elementor Edu educational settings are damaged. Existing settings were preserved; ask the site administrator to restore the database record."
+msgstr ""
+
+msgid "Elementor Edu found damaged educational settings. It preserved the stored data and paused update checks; Elementor and Elementor Pro remain available. Ask the site administrator to restore the database record."
+msgstr ""
+
 msgid "Deactivate the separate Elementor and Elementor Pro plugins on every site before activating Elementor Edu across the network."
 msgstr ""
 

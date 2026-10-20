@@ -1,4 +1,5 @@
 <?php
+// Elementor Edu: adapted for the combined educational distribution.
 namespace ElementorPro\License;
 
 use Elementor\Core\Admin\Admin_Notices;
@@ -492,7 +493,7 @@ class Admin {
 	private function is_block_editor_page() {
 		$current_screen = get_current_screen();
 
-		if ( method_exists( $current_screen, 'is_block_editor' ) && $current_screen->is_block_editor() ) {
+		if ( $current_screen && method_exists( $current_screen, 'is_block_editor' ) && $current_screen->is_block_editor() ) {
 			return true;
 		}
 

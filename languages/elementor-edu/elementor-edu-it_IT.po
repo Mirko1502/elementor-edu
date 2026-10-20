@@ -11,6 +11,12 @@ msgstr "Disattiva Elementor ed Elementor Pro separati prima di attivare Elemento
 msgid "The Elementor Edu package is incomplete. Reinstall the complete ZIP file."
 msgstr "Il pacchetto Elementor Edu è incompleto. Reinstalla lo ZIP completo."
 
+msgid "The Elementor Edu educational settings are damaged. Existing settings were preserved; ask the site administrator to restore the database record."
+msgstr "Le impostazioni didattiche di Elementor Edu sono danneggiate. I dati esistenti sono stati conservati; chiedi all'amministratore del sito di ripristinare il record nel database."
+
+msgid "Elementor Edu found damaged educational settings. It preserved the stored data and paused update checks; Elementor and Elementor Pro remain available. Ask the site administrator to restore the database record."
+msgstr "Elementor Edu ha rilevato impostazioni didattiche danneggiate. Ha conservato i dati e sospeso il controllo degli aggiornamenti; Elementor e Elementor Pro restano disponibili. Chiedi all'amministratore del sito di ripristinare il record nel database."
+
 msgid "Deactivate the separate Elementor and Elementor Pro plugins on every site before activating Elementor Edu across the network."
 msgstr "Disattiva Elementor ed Elementor Pro separati in tutti i siti della rete prima di attivare Elementor Edu nella rete."
 
