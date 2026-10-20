@@ -254,22 +254,7 @@ msgstr ""
 msgid "Elementor Edu"
 msgstr ""
 
-msgid "Choose which Altervista integration features to restore on this site."
-msgstr ""
-
 msgid "Settings saved."
-msgstr ""
-
-msgid "Keep Altervista disabled (recommended)"
-msgstr ""
-
-msgid "Restore only Server to server"
-msgstr ""
-
-msgid "Restore all Altervista features"
-msgstr ""
-
-msgid "The Server to server option re-enables only the matching settings screen and service callbacks. Full restore reactivates the Altervista plugin and its integrations."
 msgstr ""
 
 msgid "Save changes"
@@ -285,5 +270,20 @@ msgid "Elementor Edu is active, but one maintenance task needs attention:"
 msgstr ""
 
 msgid "The old Elementor Edu MU monitor could not be removed from mu-plugins. Elementor Edu no longer uses this file; check its permissions and remove only the obsolete Elementor Edu monitor."
+msgstr ""
+
+msgid "Choose which Altervista screens to show. Hosting services remain active for theme compatibility."
+msgstr ""
+
+msgid "Hide Altervista screens (recommended)"
+msgstr ""
+
+msgid "Show only Server to server"
+msgstr ""
+
+msgid "Show all Altervista screens"
+msgstr ""
+
+msgid "These choices affect the interface only. The Altervista plugin and its theme initialization, authentication and background services are preserved."
 msgstr ""
 

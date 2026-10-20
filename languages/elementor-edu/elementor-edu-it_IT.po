@@ -257,23 +257,8 @@ msgstr "Il periodo di aggiornamento per questa copia didattica è terminato. Ele
 msgid "Elementor Edu"
 msgstr "Elementor Edu"
 
-msgid "Choose which Altervista integration features to restore on this site."
-msgstr "Scegli quali integrazioni Altervista ripristinare su questo sito."
-
 msgid "Settings saved."
 msgstr "Impostazioni salvate."
-
-msgid "Keep Altervista disabled (recommended)"
-msgstr "Mantieni Altervista disattivato (consigliato)"
-
-msgid "Restore only Server to server"
-msgstr "Ripristina solo Server to server"
-
-msgid "Restore all Altervista features"
-msgstr "Ripristina tutte le funzioni Altervista"
-
-msgid "The Server to server option re-enables only the matching settings screen and service callbacks. Full restore reactivates the Altervista plugin and its integrations."
-msgstr "L’opzione Server to server riattiva solo la schermata corrispondente e i callback del servizio. Il ripristino completo riattiva il plugin Altervista e le sue integrazioni."
 
 msgid "Save changes"
 msgstr "Salva le modifiche"
@@ -289,4 +274,19 @@ msgstr "Elementor Edu è attivo, ma una manutenzione richiede attenzione:"
 
 msgid "The old Elementor Edu MU monitor could not be removed from mu-plugins. Elementor Edu no longer uses this file; check its permissions and remove only the obsolete Elementor Edu monitor."
 msgstr "Non è stato possibile rimuovere il vecchio monitor MU di Elementor Edu da mu-plugins. Elementor Edu non usa più questo file: controlla i permessi e rimuovi soltanto il vecchio monitor di Elementor Edu."
+
+msgid "Choose which Altervista screens to show. Hosting services remain active for theme compatibility."
+msgstr "Scegli quali schermate Altervista mostrare. I servizi dell’hosting restano attivi per la compatibilità con il tema."
+
+msgid "Hide Altervista screens (recommended)"
+msgstr "Nascondi le schermate Altervista (consigliato)"
+
+msgid "Show only Server to server"
+msgstr "Mostra solo Server to server"
+
+msgid "Show all Altervista screens"
+msgstr "Mostra tutte le schermate Altervista"
+
+msgid "These choices affect the interface only. The Altervista plugin and its theme initialization, authentication and background services are preserved."
+msgstr "Queste scelte riguardano solo l’interfaccia. Il plugin Altervista e i suoi servizi di inizializzazione del tema, autenticazione e attività in background vengono preservati."
 
