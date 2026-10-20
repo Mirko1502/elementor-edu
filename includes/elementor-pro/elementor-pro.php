@@ -487,7 +487,7 @@ function elementor_pro_compare_major_version( $left, $right, $operator ) {
 
 add_action( 'plugins_loaded', 'elementor_pro_load_plugin' );
 
-function print_error( $message ) {
+function elementor_edu_pro_print_error( $message ) {
 	if ( ! $message ) {
 		return;
 	}
@@ -531,7 +531,7 @@ function elementor_pro_fail_load() {
 		$message .= '<p>' . sprintf( '<a href="%s" class="button-primary">%s</a>', $install_url, esc_html__( 'Install Now', 'elementor-pro' ) ) . '</p>';
 	}
 
-	print_error( $message );
+	elementor_edu_pro_print_error( $message );
 }
 
 function elementor_pro_fail_load_out_of_date() {
@@ -551,7 +551,7 @@ function elementor_pro_fail_load_out_of_date() {
 		esc_html__( 'Update Now', 'elementor-pro' )
 	);
 
-	print_error( $message );
+	elementor_edu_pro_print_error( $message );
 }
 
 function elementor_pro_admin_notice_upgrade_recommendation() {
@@ -612,7 +612,7 @@ function elementor_pro_print_upgrade_recommendation_legacy_notice( string $upgra
 		esc_html__( 'Update Now', 'elementor-pro' )
 	);
 
-	print_error( $message );
+	elementor_edu_pro_print_error( $message );
 }
 
 if ( ! function_exists( '_is_elementor_installed' ) ) {

@@ -29,20 +29,14 @@ final class Elementor_Edu {
 
 	private static $error = '';
 	private static $error_args = [];
+	private static $monitor_warning = '';
 	private const ORIGINAL_PLUGINS = [ 'elementor/elementor.php', 'elementor-pro/elementor-pro.php' ];
 
 	public static function boot() {
 		// Validate before the activation callbacks registered by the engines.
 		register_activation_hook( ELEMENTOR_EDU__FILE__, [ __CLASS__, 'activate' ] );
 
-		require_once __DIR__ . '/includes/edu-i18n.php';
-		Elementor_Edu_I18n::boot( __DIR__ );
-		require_once __DIR__ . '/includes/edu-course.php';
-		$course_error = Elementor_Edu_Course_V3::prepare( ELEMENTOR_EDU__FILE__ );
-
-		if ( $course_error ) {
-			self::$error = $course_error;
-		} elseif ( version_compare( PHP_VERSION, '7.4', '<' ) ) {
+		if ( version_compare( PHP_VERSION, '7.4', '<' ) ) {
 			self::$error = 'Elementor Edu requires PHP %s or later.';
 			self::$error_args = [ '7.4' ];
 		} elseif ( version_compare( get_bloginfo( 'version' ), '6.8', '<' ) ) {
@@ -50,8 +44,40 @@ final class Elementor_Edu {
 			self::$error_args = [ '6.8' ];
 		} elseif ( self::has_conflict() ) {
 			self::$error = 'Deactivate the separate Elementor and Elementor Pro plugins before activating Elementor Edu. Existing content will be preserved.';
-		} elseif ( ! is_readable( __DIR__ . '/includes/elementor/elementor.php' ) || ! is_readable( __DIR__ . '/includes/elementor-pro/elementor-pro.php' ) ) {
-			self::$error = 'The Elementor Edu package is incomplete. Reinstall the complete ZIP file.';
+		}
+
+		// Validate all bootstrap files before requiring any of them or creating
+		// the persistent record. Interrupted uploads must produce a useful error.
+		foreach ( [
+			'edu-i18n.php', 'edu-course.php', 'edu-hello-theme.php',
+			'edu-updater.php', 'edu-translation-updater.php', 'edu-translation-catalog.php',
+			'edu-altervista.php', 'edu-editor-promotions.php',
+			'elementor/elementor.php', 'elementor/includes/plugin.php',
+			'elementor-pro/elementor-pro.php', 'elementor-pro/plugin.php',
+		] as $file ) {
+			if ( ! self::$error && ! is_readable( __DIR__ . '/includes/' . $file ) ) {
+				self::$error = 'The Elementor Edu package is incomplete. Reinstall the complete ZIP file.';
+			}
+		}
+
+		if ( ! self::$error ) {
+			require_once __DIR__ . '/includes/edu-i18n.php';
+			Elementor_Edu_I18n::boot( __DIR__ );
+			require_once __DIR__ . '/includes/edu-course.php';
+			self::$error = Elementor_Edu_Course_V3::prepare( ELEMENTOR_EDU__FILE__ );
+			// Also handle an older V3 MU class already loaded in this request.
+			// A saved database record remains persistent on restricted hosting.
+			if ( in_array( self::$error, [
+				'Could not set up educational notices: an incompatible file exists at mu-plugins/elementor-edu-course.php.',
+				'Elementor Edu needs write access to the WordPress mu-plugins directory to maintain educational notices.',
+				'Could not set up Elementor Edu educational notices. Check the mu-plugins directory permissions.',
+				'Could not save Elementor Edu educational notices. Check the mu-plugins directory permissions.',
+			], true ) ) {
+				self::$monitor_warning = self::$error;
+				self::$error = '';
+				add_action( 'admin_notices', [ __CLASS__, 'monitor_notice' ] );
+				add_action( 'network_admin_notices', [ __CLASS__, 'monitor_notice' ] );
+			}
 		}
 
 		if ( self::$error ) {
@@ -141,6 +167,13 @@ final class Elementor_Edu {
 
 	public static function notice() {
 		echo '<div class="notice notice-error"><p><strong>Elementor Edu:</strong> ' . esc_html( self::error_message() ) . '</p></div>';
+	}
+
+	public static function monitor_notice() {
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
+		echo '<div class="notice notice-warning"><p>' . esc_html__( 'Elementor Edu is active. Educational settings are saved in the database, but the persistent notice monitor could not be installed. Notices remain available while the plugin is active. Check write access to the WordPress mu-plugins directory; setup will be retried automatically.', 'elementor-edu' ) . '</p><p>' . esc_html( translate( self::$monitor_warning, 'elementor-edu' ) ) . '</p></div>';
 	}
 
 	/** Never install a single upstream engine over the combined plugin. */

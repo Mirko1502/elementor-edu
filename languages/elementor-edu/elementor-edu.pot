@@ -287,3 +287,6 @@ msgstr ""
 msgid "You are not allowed to change these settings."
 msgstr ""
 
+msgid "Elementor Edu is active. Educational settings are saved in the database, but the persistent notice monitor could not be installed. Notices remain available while the plugin is active. Check write access to the WordPress mu-plugins directory; setup will be retried automatically."
+msgstr ""
+

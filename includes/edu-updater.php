@@ -557,6 +557,7 @@ final class Elementor_Edu_Updater {
 			[ 'elementor/elementor.php', "define( 'ELEMENTOR_PLUGIN_BASE', plugin_basename( ELEMENTOR__FILE__ ) );", "define( 'ELEMENTOR_PLUGIN_BASE', ELEMENTOR_EDU_PLUGIN_BASE );", 1 ],
 			[ 'elementor-pro/elementor-pro.php', "define( 'ELEMENTOR_PRO_PLUGIN_BASE', plugin_basename( ELEMENTOR_PRO__FILE__ ) );", "define( 'ELEMENTOR_PRO_PLUGIN_BASE', ELEMENTOR_EDU_PLUGIN_BASE );", 1 ],
 			[ 'elementor-pro/elementor-pro.php', "'elementor/elementor.php'", 'ELEMENTOR_PLUGIN_BASE', 4 ],
+			[ 'elementor-pro/elementor-pro.php', 'print_error(', 'elementor_edu_pro_print_error(', 4 ],
 			[ 'elementor/includes/utils.php', "return 'elementor-pro/elementor-pro.php';", 'return ELEMENTOR_EDU_PLUGIN_BASE;', 1 ],
 			[ 'elementor/modules/compatibility-tag/module.php', "'elementor/elementor.php',", 'ELEMENTOR_EDU_PLUGIN_BASE,', 1 ],
 		];

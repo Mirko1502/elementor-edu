@@ -124,12 +124,12 @@ if ( ! class_exists( 'Elementor_Edu_Course_V3', false ) ) {
 
 		private static function install_monitor( $source ) {
 			$target = WPMU_PLUGIN_DIR . '/elementor-edu-course.php';
-			$contents = file_get_contents( $source );
+			$contents = @file_get_contents( $source );
 			if ( false === $contents ) {
 				return 'The Elementor Edu package is incomplete. Reinstall the complete ZIP file.';
 			}
 			if ( is_file( $target ) ) {
-				$current = file_get_contents( $target );
+				$current = @file_get_contents( $target );
 				if ( $current === $contents ) {
 					return '';
 				}
@@ -140,12 +140,12 @@ if ( ! class_exists( 'Elementor_Edu_Course_V3', false ) ) {
 			if ( ! wp_mkdir_p( WPMU_PLUGIN_DIR ) || ! is_writable( WPMU_PLUGIN_DIR ) ) {
 				return 'Elementor Edu needs write access to the WordPress mu-plugins directory to maintain educational notices.';
 			}
-			$temp = tempnam( WPMU_PLUGIN_DIR, 'edu-' );
+			$temp = @tempnam( WPMU_PLUGIN_DIR, 'edu-' );
 			if ( false === $temp ) {
 				return 'Could not set up Elementor Edu educational notices. Check the mu-plugins directory permissions.';
 			}
-			$written = file_put_contents( $temp, $contents, LOCK_EX );
-			if ( strlen( $contents ) !== $written || ! rename( $temp, $target ) ) {
+			$written = @file_put_contents( $temp, $contents, LOCK_EX );
+			if ( strlen( $contents ) !== $written || ! @rename( $temp, $target ) ) {
 				@unlink( $temp );
 				return 'Could not save Elementor Edu educational notices. Check the mu-plugins directory permissions.';
 			}

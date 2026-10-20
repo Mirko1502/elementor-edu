@@ -290,3 +290,6 @@ msgstr "Non hai i permessi per accedere a questa pagina."
 msgid "You are not allowed to change these settings."
 msgstr "Non hai i permessi per modificare queste impostazioni."
 
+msgid "Elementor Edu is active. Educational settings are saved in the database, but the persistent notice monitor could not be installed. Notices remain available while the plugin is active. Check write access to the WordPress mu-plugins directory; setup will be retried automatically."
+msgstr "Elementor Edu è attivo. Le impostazioni didattiche sono salvate nel database, ma non è stato possibile installare il monitor persistente degli avvisi. Gli avvisi restano disponibili mentre il plugin è attivo. Verifica i permessi di scrittura della cartella mu-plugins di WordPress; la configurazione verrà ritentata automaticamente."
+
