@@ -60,4 +60,6 @@ delete_option( 'theme_mods_elementor-safe' );
 global $wpdb;
 if ( isset( $wpdb->usermeta ) ) {
 	$wpdb->delete( $wpdb->usermeta, [ 'meta_key' => 'elementor_edu_expiration_notice_dismissed_until' ], [ '%s' ] );
+	$wpdb->delete( $wpdb->usermeta, [ 'meta_key' => 'elementor_edu_setup_success_pending' ], [ '%s' ] );
+	$wpdb->delete( $wpdb->usermeta, [ 'meta_key' => 'elementor_edu_setup_success_seen' ], [ '%s' ] );
 }
