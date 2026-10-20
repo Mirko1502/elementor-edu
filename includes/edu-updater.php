@@ -32,7 +32,7 @@ final class Elementor_Edu_Updater {
 	}
 
 	public static function schedule() {
-		if ( ! Elementor_Edu_Course_V3::updates_allowed() ) {
+		if ( ! Elementor_Edu_Course_V4::updates_allowed() ) {
 			return;
 		}
 		if ( ! wp_next_scheduled( self::EVENT ) ) {
@@ -41,7 +41,7 @@ final class Elementor_Edu_Updater {
 	}
 
 	public static function check_release() {
-		if ( ! Elementor_Edu_Course_V3::updates_allowed() ) {
+		if ( ! Elementor_Edu_Course_V4::updates_allowed() ) {
 			return;
 		}
 		$response = self::request( self::PAGE, 12 );
@@ -52,7 +52,7 @@ final class Elementor_Edu_Updater {
 		if ( ! preg_match( '/Elementor\s+Pro\s+v([0-9]+(?:\.[0-9]+)+)\s+Plugin/i', $html, $match ) ) {
 			return;
 		}
-		if ( ! Elementor_Edu_Course_V3::updates_allowed() ) {
+		if ( ! Elementor_Edu_Course_V4::updates_allowed() ) {
 			return;
 		}
 		$remote = $match[1];
@@ -64,7 +64,7 @@ final class Elementor_Edu_Updater {
 	}
 
 	public static function enqueue_notice() {
-		if ( ! Elementor_Edu_Course_V3::updates_allowed() ) {
+		if ( ! Elementor_Edu_Course_V4::updates_allowed() ) {
 			return;
 		}
 		if ( ! current_user_can( 'update_plugins' ) ) {
@@ -102,7 +102,7 @@ final class Elementor_Edu_Updater {
 			wp_die( __( 'Use the Elementor update button.', 'elementor-edu' ), '', [ 'response' => 405 ] );
 		}
 		check_admin_referer( 'elementor_edu_update' );
-		if ( ! Elementor_Edu_Course_V3::updates_allowed() ) {
+		if ( ! Elementor_Edu_Course_V4::updates_allowed() ) {
 			wp_die( esc_html( self::expiry_error()->get_error_message() ), 'Elementor', [ 'response' => 403 ] );
 		}
 		$available = get_site_option( self::AVAILABLE );
@@ -115,7 +115,7 @@ final class Elementor_Edu_Updater {
 			wp_die( esc_html__( 'Could not prepare the Elementor update. Please try again later.', 'elementor-edu' ), esc_html__( 'Elementor update', 'elementor-edu' ), [ 'back_link' => true ] );
 		}
 
-		if ( ! Elementor_Edu_Course_V3::updates_allowed() ) {
+		if ( ! Elementor_Edu_Course_V4::updates_allowed() ) {
 			@unlink( $result['path'] );
 			wp_die( esc_html( self::expiry_error()->get_error_message() ), 'Elementor', [ 'response' => 403 ] );
 		}
@@ -149,7 +149,7 @@ final class Elementor_Edu_Updater {
 	}
 
 	public static function has_prepared_update( $transient ) {
-		if ( ! Elementor_Edu_Course_V3::updates_allowed() ) {
+		if ( ! Elementor_Edu_Course_V4::updates_allowed() ) {
 			return false;
 		}
 		$prepared = get_site_transient( self::PREPARED );
@@ -162,7 +162,7 @@ final class Elementor_Edu_Updater {
 		if ( self::PACKAGE_MARKER !== $package ) {
 			return $reply;
 		}
-		if ( ! Elementor_Edu_Course_V3::updates_allowed() ) {
+		if ( ! Elementor_Edu_Course_V4::updates_allowed() ) {
 			return self::expiry_error();
 		}
 		$prepared = get_site_transient( self::PREPARED );
@@ -181,7 +181,7 @@ final class Elementor_Edu_Updater {
 	}
 
 	public static function inject_prepared_update( $transient ) {
-		if ( ! Elementor_Edu_Course_V3::updates_allowed() ) {
+		if ( ! Elementor_Edu_Course_V4::updates_allowed() ) {
 			return $transient;
 		}
 		$prepared = get_site_transient( self::PREPARED );
@@ -234,14 +234,14 @@ final class Elementor_Edu_Updater {
 		if ( isset( $extra['plugin'] ) ) {
 			$plugins[] = $extra['plugin'];
 		}
-		if ( in_array( ELEMENTOR_EDU_PLUGIN_BASE, $plugins, true ) && ! Elementor_Edu_Course_V3::updates_allowed() ) {
+		if ( in_array( ELEMENTOR_EDU_PLUGIN_BASE, $plugins, true ) && ! Elementor_Edu_Course_V4::updates_allowed() ) {
 			return self::expiry_error();
 		}
 		return $response;
 	}
 
 	private static function build_package( $expected_pro ) {
-		if ( ! Elementor_Edu_Course_V3::updates_allowed() ) {
+		if ( ! Elementor_Edu_Course_V4::updates_allowed() ) {
 			return self::expiry_error();
 		}
 		if ( ! class_exists( 'ZipArchive' ) ) {
@@ -629,7 +629,7 @@ final class Elementor_Edu_Updater {
 	}
 
 	private static function request( $url, $timeout, $referer = '', $deadline = 0 ) {
-		if ( ! Elementor_Edu_Course_V3::updates_allowed() ) {
+		if ( ! Elementor_Edu_Course_V4::updates_allowed() ) {
 			return self::expiry_error();
 		}
 		if ( 'https' !== strtolower( (string) wp_parse_url( $url, PHP_URL_SCHEME ) ) ) {
@@ -638,7 +638,7 @@ final class Elementor_Edu_Updater {
 		$initial_host = strtolower( (string) wp_parse_url( $url, PHP_URL_HOST ) );
 		$current = $url;
 		for ( $redirects = 0; $redirects <= 3; $redirects++ ) {
-			if ( ! Elementor_Edu_Course_V3::updates_allowed() ) {
+			if ( ! Elementor_Edu_Course_V4::updates_allowed() ) {
 				return self::expiry_error();
 			}
 			$remaining = $deadline ? (int) ceil( $deadline - microtime( true ) ) : $timeout;

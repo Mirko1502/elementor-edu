@@ -74,18 +74,6 @@ msgstr "Hello Elementor è installato, ma non è stato possibile attivarlo. Ripr
 msgid "Could not save the Elementor Edu educational settings. Check the WordPress database."
 msgstr "Impossibile salvare la configurazione didattica di Elementor Edu. Verifica il database di WordPress."
 
-msgid "Could not set up educational notices: an incompatible file exists at mu-plugins/elementor-edu-course.php."
-msgstr "Impossibile predisporre gli avvisi didattici: esiste un file incompatibile in mu-plugins/elementor-edu-course.php."
-
-msgid "Elementor Edu needs write access to the WordPress mu-plugins directory to maintain educational notices."
-msgstr "Elementor Edu richiede che la cartella mu-plugins di WordPress sia scrivibile per mantenere gli avvisi didattici."
-
-msgid "Could not set up Elementor Edu educational notices. Check the mu-plugins directory permissions."
-msgstr "Impossibile predisporre gli avvisi didattici di Elementor Edu. Verifica i permessi della cartella mu-plugins."
-
-msgid "Could not save Elementor Edu educational notices. Check the mu-plugins directory permissions."
-msgstr "Impossibile salvare gli avvisi didattici di Elementor Edu. Verifica i permessi della cartella mu-plugins."
-
 msgid "An Elementor update is available"
 msgstr "Aggiornamento Elementor disponibile"
 
@@ -296,6 +284,9 @@ msgstr "Non hai i permessi per accedere a questa pagina."
 msgid "You are not allowed to change these settings."
 msgstr "Non hai i permessi per modificare queste impostazioni."
 
-msgid "Elementor Edu is active. Educational settings are saved in the database, but the persistent notice monitor could not be installed. Notices remain available while the plugin is active. Check write access to the WordPress mu-plugins directory; setup will be retried automatically."
-msgstr "Elementor Edu è attivo. Le impostazioni didattiche sono salvate nel database, ma non è stato possibile installare il monitor persistente degli avvisi. Gli avvisi restano disponibili mentre il plugin è attivo. Verifica i permessi di scrittura della cartella mu-plugins di WordPress; la configurazione verrà ritentata automaticamente."
+msgid "Elementor Edu is active, but one maintenance task needs attention:"
+msgstr "Elementor Edu è attivo, ma una manutenzione richiede attenzione:"
+
+msgid "The old Elementor Edu MU monitor could not be removed from mu-plugins. Elementor Edu no longer uses this file; check its permissions and remove only the obsolete Elementor Edu monitor."
+msgstr "Non è stato possibile rimuovere il vecchio monitor MU di Elementor Edu da mu-plugins. Elementor Edu non usa più questo file: controlla i permessi e rimuovi soltanto il vecchio monitor di Elementor Edu."
 

@@ -1,10 +1,6 @@
 <?php
 /**
- * Plugin Name: Elementor Edu – Educational notice
- * Description: Maintains educational notices and usage conditions for Elementor Edu.
- * Text Domain: elementor-edu
- *
- * Elementor Edu course monitor. Retained outside the regular plugin on removal.
+ * Elementor Edu course lifecycle coordinator.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,11 +9,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Extend the original deadline without restarting a site's course window.
- * This runs before boot so it can also repair a V3 monitor loaded earlier in
- * the same request.
+ * This runs before boot so it can also repair an older monitor loaded earlier
+ * in the same request.
  */
-if ( ! function_exists( 'elementor_edu_course_extend_existing_window' ) ) {
-	function elementor_edu_course_extend_existing_window() {
+if ( ! function_exists( 'elementor_edu_course_extend_existing_window_v4' ) ) {
+	function elementor_edu_course_extend_existing_window_v4() {
 		$record_key = 'elementor_edu_course_record';
 		$record = is_multisite()
 			? get_network_option( get_main_network_id(), $record_key, [] )
@@ -43,10 +39,10 @@ if ( ! function_exists( 'elementor_edu_course_extend_existing_window' ) ) {
 	}
 }
 
-elementor_edu_course_extend_existing_window();
+elementor_edu_course_extend_existing_window_v4();
 
-if ( ! class_exists( 'Elementor_Edu_Course_V3', false ) ) {
-	final class Elementor_Edu_Course_V3 {
+if ( ! class_exists( 'Elementor_Edu_Course_V4', false ) ) {
+	final class Elementor_Edu_Course_V4 {
 		private const RECORD = 'elementor_edu_course_record';
 		private const INTERVAL = 7776000;
 		private const EVENT = 'elementor_edu_course_check';
@@ -68,12 +64,16 @@ if ( ! class_exists( 'Elementor_Edu_Course_V3', false ) ) {
 			add_action( self::EVENT, [ __CLASS__, 'enforce' ] );
 			// The former MU monitor may already be loaded in this request.
 			foreach ( [ 'admin_notices' => 'notice', 'network_admin_notices' => 'notice', self::EVENT => 'enforce' ] as $hook => $method ) {
-				remove_action( $hook, [ 'Elementor_Edu_Course', $method ] );
-				remove_action( $hook, [ 'Elementor_Edu_Course_V2', $method ] );
+				foreach ( [ 'Elementor_Edu_Course', 'Elementor_Edu_Course_V2', 'Elementor_Edu_Course_V3' ] as $legacy_class ) {
+					remove_action( $hook, [ $legacy_class, $method ] );
+				}
 			}
-			remove_action( 'activate_plugin', [ 'Elementor_Edu_Course', 'check_activation' ], -100 );
-			remove_filter( 'pre_update_option_active_plugins', [ 'Elementor_Edu_Course', 'filter_activation' ], PHP_INT_MAX );
-			remove_filter( 'pre_update_site_option_active_sitewide_plugins', [ 'Elementor_Edu_Course', 'filter_network_activation' ], PHP_INT_MAX );
+			foreach ( [ 'Elementor_Edu_Course', 'Elementor_Edu_Course_V2', 'Elementor_Edu_Course_V3' ] as $legacy_class ) {
+				remove_action( 'activate_plugin', [ $legacy_class, 'check_activation' ], -100 );
+				remove_filter( 'pre_update_option_active_plugins', [ $legacy_class, 'filter_activation' ], PHP_INT_MAX );
+				remove_filter( 'pre_update_site_option_active_sitewide_plugins', [ $legacy_class, 'filter_network_activation' ], PHP_INT_MAX );
+			}
+			self::remove_legacy_monitor();
 			self::enforce();
 		}
 
@@ -111,7 +111,7 @@ if ( ! class_exists( 'Elementor_Edu_Course_V3', false ) ) {
 			return $create ? add_option( self::RECORD, $record, '', false ) : update_option( self::RECORD, $record, false );
 		}
 
-		/** Register once; replacing or reinstalling the plugin never resets the record. */
+		/** Register once; normal updates and deactivation preserve the deadline. */
 		public static function prepare( $plugin_file ) {
 			$record = self::record();
 			$base = plugin_basename( $plugin_file );
@@ -139,40 +139,36 @@ if ( ! class_exists( 'Elementor_Edu_Course_V3', false ) ) {
 				self::save( $record );
 			}
 			self::enforce();
-			$error = self::install_monitor( dirname( $plugin_file ) . '/includes/edu-course.php' );
 			self::schedule();
-			return $error;
+			return self::remove_legacy_monitor();
 		}
 
-		private static function install_monitor( $source ) {
-			$target = WPMU_PLUGIN_DIR . '/elementor-edu-course.php';
-			$contents = @file_get_contents( $source );
-			if ( false === $contents ) {
-				return 'The Elementor Edu package is incomplete. Reinstall the complete ZIP file.';
+		/** Remove only the known monitor left by earlier Elementor Edu releases. */
+		public static function remove_legacy_monitor() {
+			if ( ! defined( 'WPMU_PLUGIN_DIR' ) ) {
+				return '';
 			}
-			if ( is_file( $target ) ) {
-				$current = @file_get_contents( $target );
-				if ( $current === $contents ) {
-					return '';
-				}
-				if ( false === $current || false === strpos( $current, 'Elementor Edu course monitor.' ) ) {
-					return 'Could not set up educational notices: an incompatible file exists at mu-plugins/elementor-edu-course.php.';
-				}
+			$target = trailingslashit( WPMU_PLUGIN_DIR ) . 'elementor-edu-course.php';
+			if ( ! file_exists( $target ) && ! is_link( $target ) ) {
+				return '';
 			}
-			if ( ! wp_mkdir_p( WPMU_PLUGIN_DIR ) || ! is_writable( WPMU_PLUGIN_DIR ) ) {
-				return 'Elementor Edu needs write access to the WordPress mu-plugins directory to maintain educational notices.';
+			if ( is_link( $target ) || ! is_file( $target ) ) {
+				return '';
 			}
-			$temp = @tempnam( WPMU_PLUGIN_DIR, 'edu-' );
-			if ( false === $temp ) {
-				return 'Could not set up Elementor Edu educational notices. Check the mu-plugins directory permissions.';
+			$contents = @file_get_contents( $target );
+			if ( false === $contents || false === strpos( $contents, 'Elementor Edu course monitor.' ) || false === strpos( $contents, 'Plugin Name: Elementor Edu' ) ) {
+				return '';
 			}
-			$written = @file_put_contents( $temp, $contents, LOCK_EX );
-			if ( strlen( $contents ) !== $written || ! @rename( $temp, $target ) ) {
-				@unlink( $temp );
-				return 'Could not save Elementor Edu educational notices. Check the mu-plugins directory permissions.';
+			if ( @unlink( $target ) || ! file_exists( $target ) ) {
+				return '';
 			}
-			@chmod( $target, defined( 'FS_CHMOD_FILE' ) ? FS_CHMOD_FILE : 0644 );
-			return '';
+			return 'The old Elementor Edu MU monitor could not be removed from mu-plugins. Elementor Edu no longer uses this file; check its permissions and remove only the obsolete Elementor Edu monitor.';
+		}
+
+		/** Keep the stored deadline on deactivation while dropping its inactive cron event. */
+		public static function deactivate() {
+			wp_clear_scheduled_hook( self::EVENT );
+			self::remove_legacy_monitor();
 		}
 
 		public static function expired() {
@@ -310,4 +306,4 @@ if ( ! class_exists( 'Elementor_Edu_Course_V3', false ) ) {
 	}
 }
 
-Elementor_Edu_Course_V3::boot();
+Elementor_Edu_Course_V4::boot();

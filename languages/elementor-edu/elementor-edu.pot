@@ -71,18 +71,6 @@ msgstr ""
 msgid "Could not save the Elementor Edu educational settings. Check the WordPress database."
 msgstr ""
 
-msgid "Could not set up educational notices: an incompatible file exists at mu-plugins/elementor-edu-course.php."
-msgstr ""
-
-msgid "Elementor Edu needs write access to the WordPress mu-plugins directory to maintain educational notices."
-msgstr ""
-
-msgid "Could not set up Elementor Edu educational notices. Check the mu-plugins directory permissions."
-msgstr ""
-
-msgid "Could not save Elementor Edu educational notices. Check the mu-plugins directory permissions."
-msgstr ""
-
 msgid "An Elementor update is available"
 msgstr ""
 
@@ -293,6 +281,9 @@ msgstr ""
 msgid "You are not allowed to change these settings."
 msgstr ""
 
-msgid "Elementor Edu is active. Educational settings are saved in the database, but the persistent notice monitor could not be installed. Notices remain available while the plugin is active. Check write access to the WordPress mu-plugins directory; setup will be retried automatically."
+msgid "Elementor Edu is active, but one maintenance task needs attention:"
+msgstr ""
+
+msgid "The old Elementor Edu MU monitor could not be removed from mu-plugins. Elementor Edu no longer uses this file; check its permissions and remove only the obsolete Elementor Edu monitor."
 msgstr ""
 

@@ -20,7 +20,7 @@ final class Elementor_Edu_Translation_Updater {
 	}
 
 	public static function schedule() {
-		if ( ! Elementor_Edu_Course_V3::updates_allowed() ) {
+		if ( ! Elementor_Edu_Course_V4::updates_allowed() ) {
 			wp_clear_scheduled_hook( self::EVENT );
 			return;
 		}
@@ -50,7 +50,7 @@ final class Elementor_Edu_Translation_Updater {
 	}
 
 	public static function refresh() {
-		if ( ! Elementor_Edu_Course_V3::updates_allowed() ) {
+		if ( ! Elementor_Edu_Course_V4::updates_allowed() ) {
 			return;
 		}
 		// add_site_option is an atomic lock on both single-site and multisite.
@@ -68,7 +68,7 @@ final class Elementor_Edu_Translation_Updater {
 			$result = self::collect( $target, dirname( ELEMENTOR_EDU__FILE__ ) . '/languages' );
 			$state['attempted_at'] = time();
 			$state['attempted_versions'] = self::versions();
-			if ( is_wp_error( $result ) || ! Elementor_Edu_Course_V3::updates_allowed() ) {
+			if ( is_wp_error( $result ) || ! Elementor_Edu_Course_V4::updates_allowed() ) {
 				$state['error'] = is_wp_error( $result ) ? $result->get_error_code() : 'expired';
 				self::remove_directory( $target );
 			} else {
@@ -119,7 +119,7 @@ final class Elementor_Edu_Translation_Updater {
 		$catalogues = [];
 		foreach ( [ 'elementor', 'elementor-pro' ] as $domain ) {
 			foreach ( [ 'it_IT' => 'it', 'pt_BR' => 'pt-br' ] as $locale => $slug ) {
-				if ( ! Elementor_Edu_Course_V3::updates_allowed() ) {
+				if ( ! Elementor_Edu_Course_V4::updates_allowed() ) {
 					return new WP_Error( 'edu_translation_expired' );
 				}
 				$url = 'elementor' === $domain

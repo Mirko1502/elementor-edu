@@ -29,7 +29,7 @@ final class Elementor_Edu {
 
 	private static $error = '';
 	private static $error_args = [];
-	private static $monitor_warning = '';
+	private static $maintenance_warning = '';
 	private const ORIGINAL_PLUGINS = [ 'elementor/elementor.php', 'elementor-pro/elementor-pro.php' ];
 
 	public static function boot() {
@@ -64,25 +64,11 @@ final class Elementor_Edu {
 			require_once __DIR__ . '/includes/edu-i18n.php';
 			Elementor_Edu_I18n::boot( __DIR__ );
 			require_once __DIR__ . '/includes/edu-course.php';
-			self::$error = Elementor_Edu_Course_V3::prepare( ELEMENTOR_EDU__FILE__ );
-			if ( 'The Elementor Edu educational settings are damaged. Existing settings were preserved; ask the site administrator to restore the database record.' === self::$error ) {
-				self::$monitor_warning = self::$error;
-				self::$error = '';
-				add_action( 'admin_notices', [ __CLASS__, 'monitor_notice' ] );
-				add_action( 'network_admin_notices', [ __CLASS__, 'monitor_notice' ] );
-			}
-			// Also handle an older V3 MU class already loaded in this request.
-			// A saved database record remains persistent on restricted hosting.
-			if ( in_array( self::$error, [
-				'Could not set up educational notices: an incompatible file exists at mu-plugins/elementor-edu-course.php.',
-				'Elementor Edu needs write access to the WordPress mu-plugins directory to maintain educational notices.',
-				'Could not set up Elementor Edu educational notices. Check the mu-plugins directory permissions.',
-				'Could not save Elementor Edu educational notices. Check the mu-plugins directory permissions.',
-			], true ) ) {
-				self::$monitor_warning = self::$error;
-				self::$error = '';
-				add_action( 'admin_notices', [ __CLASS__, 'monitor_notice' ] );
-				add_action( 'network_admin_notices', [ __CLASS__, 'monitor_notice' ] );
+			register_deactivation_hook( ELEMENTOR_EDU__FILE__, [ Elementor_Edu_Course_V4::class, 'deactivate' ] );
+			self::$maintenance_warning = Elementor_Edu_Course_V4::prepare( ELEMENTOR_EDU__FILE__ );
+			if ( self::$maintenance_warning ) {
+				add_action( 'admin_notices', [ __CLASS__, 'maintenance_notice' ] );
+				add_action( 'network_admin_notices', [ __CLASS__, 'maintenance_notice' ] );
 			}
 		}
 
@@ -185,15 +171,15 @@ final class Elementor_Edu {
 		add_action( 'network_admin_notices', [ __CLASS__, 'notice' ] );
 	}
 
-	public static function monitor_notice() {
+	public static function maintenance_notice() {
 		if ( ! current_user_can( 'activate_plugins' ) ) {
 			return;
 		}
-		if ( 'The Elementor Edu educational settings are damaged. Existing settings were preserved; ask the site administrator to restore the database record.' === self::$monitor_warning ) {
+		if ( 'The Elementor Edu educational settings are damaged. Existing settings were preserved; ask the site administrator to restore the database record.' === self::$maintenance_warning ) {
 			echo '<div class="notice notice-warning"><p>' . esc_html__( 'Elementor Edu found damaged educational settings. It preserved the stored data and paused update checks; Elementor and Elementor Pro remain available. Ask the site administrator to restore the database record.', 'elementor-edu' ) . '</p></div>';
 			return;
 		}
-		echo '<div class="notice notice-warning"><p>' . esc_html__( 'Elementor Edu is active. Educational settings are saved in the database, but the persistent notice monitor could not be installed. Notices remain available while the plugin is active. Check write access to the WordPress mu-plugins directory; setup will be retried automatically.', 'elementor-edu' ) . '</p><p>' . esc_html( translate( self::$monitor_warning, 'elementor-edu' ) ) . '</p></div>';
+		echo '<div class="notice notice-warning"><p>' . esc_html__( 'Elementor Edu is active, but one maintenance task needs attention:', 'elementor-edu' ) . ' ' . esc_html( translate( self::$maintenance_warning, 'elementor-edu' ) ) . '</p></div>';
 	}
 
 	/** Never install a single upstream engine over the combined plugin. */
@@ -225,7 +211,7 @@ final class Elementor_Edu {
 		if ( ELEMENTOR_EDU_PLUGIN_BASE !== $plugin_file ) {
 			return $html;
 		}
-		return esc_html( Elementor_Edu_Course_V3::updates_allowed() ? __( 'Updates managed by the plugin itself', 'elementor-edu' ) : __( 'Updates are unavailable for this copy', 'elementor-edu' ) );
+		return esc_html( Elementor_Edu_Course_V4::updates_allowed() ? __( 'Updates managed by the plugin itself', 'elementor-edu' ) : __( 'Updates are unavailable for this copy', 'elementor-edu' ) );
 	}
 
 	public static function block_rollback() {
