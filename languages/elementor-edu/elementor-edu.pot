@@ -296,7 +296,7 @@ msgstr ""
 msgid "Show only Server to server"
 msgstr ""
 
-msgid "Show other Altervista screens"
+msgid "Show all Altervista screens"
 msgstr ""
 
 msgid "These choices affect the interface only. The Altervista plugin and its theme initialization, authentication and background services are preserved."

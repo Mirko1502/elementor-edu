@@ -299,8 +299,8 @@ msgstr "Ocultar telas do Altervista (recomendado)"
 msgid "Show only Server to server"
 msgstr "Mostrar apenas Server to server"
 
-msgid "Show other Altervista screens"
-msgstr "Mostrar as outras telas do Altervista"
+msgid "Show all Altervista screens"
+msgstr "Mostrar todas as telas do Altervista"
 
 msgid "These choices affect the interface only. The Altervista plugin and its theme initialization, authentication and background services are preserved."
 msgstr "Estas opções afetam apenas a interface. O plugin Altervista e seus serviços de inicialização do tema, autenticação e tarefas em segundo plano são preservados."
