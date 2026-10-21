@@ -275,6 +275,9 @@ msgstr "O Elementor Edu está ativo, mas uma tarefa de manutenção requer aten�
 msgid "The old Elementor Edu MU monitor could not be removed from mu-plugins. Elementor Edu no longer uses this file; check its permissions and remove only the obsolete Elementor Edu monitor."
 msgstr "Não foi possível remover o antigo monitor MU do Elementor Edu em mu-plugins. O Elementor Edu não usa mais esse arquivo: verifique as permissões e remova somente o antigo monitor do Elementor Edu."
 
+msgid "Elementor Edu brings Elementor and Elementor Pro together in one plugin for lessons, demonstrations and guided practice. It preserves the familiar editor and existing content while managing the included components as one educational package."
+msgstr "O Elementor Edu reúne Elementor e Elementor Pro em um único plugin para aulas, demonstrações e exercícios orientados. Preserva o editor familiar e o conteúdo existente, gerenciando os componentes incluídos como um único pacote educacional."
+
 msgid "Choose which Altervista screens to show. Hosting services remain active for theme compatibility."
 msgstr "Escolha quais telas do Altervista exibir. Os serviços da hospedagem permanecem ativos para compatibilidade com o tema."
 

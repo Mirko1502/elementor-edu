@@ -46,12 +46,16 @@ final class Elementor_Edu_Altervista {
 	public static function register_settings_page() {
 		if ( ! current_user_can( 'manage_options' ) ) { return; }
 		add_submenu_page( 'elementor', __( 'Elementor Edu', 'elementor-edu' ), __( 'Elementor Edu', 'elementor-edu' ), 'manage_options', 'elementor-edu-settings', [ __CLASS__, 'render_settings_page' ] );
+		// Editor One uses a separate top-level menu. Keep the settings entry in
+		// Elementor's editor flyout and also place it after Editor (20), before
+		// Theme Builder (70), in the visible WordPress admin menu.
+		add_submenu_page( 'elementor-home', __( 'Elementor Edu', 'elementor-edu' ), __( 'Elementor Edu', 'elementor-edu' ), 'manage_options', 'elementor-edu-settings', [ __CLASS__, 'render_settings_page' ], 30 );
 	}
 
 	public static function render_settings_page() {
 		if ( ! current_user_can( 'manage_options' ) ) { wp_die( esc_html__( 'You are not allowed to access this page.', 'elementor-edu' ) ); }
 		$mode = self::get_mode();
-		echo '<div class="wrap"><h1>' . esc_html__( 'Elementor Edu', 'elementor-edu' ) . '</h1><p>' . esc_html__( 'Choose which Altervista screens to show. Hosting services remain active for theme compatibility.', 'elementor-edu' ) . '</p>';
+		echo '<div class="wrap"><h1>' . esc_html__( 'Elementor Edu', 'elementor-edu' ) . '</h1><p>' . esc_html__( 'Elementor Edu brings Elementor and Elementor Pro together in one plugin for lessons, demonstrations and guided practice. It preserves the familiar editor and existing content while managing the included components as one educational package.', 'elementor-edu' ) . '</p><p>' . esc_html__( 'Choose which Altervista screens to show. Hosting services remain active for theme compatibility.', 'elementor-edu' ) . '</p>';
 		if ( isset( $_GET['updated'] ) ) { echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Settings saved.', 'elementor-edu' ) . '</p></div>'; }
 		if ( isset( $_GET['window_reset'] ) ) { echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'The 90-day update period has been restarted.', 'elementor-edu' ) . '</p></div>'; }
 		if ( isset( $_GET['window_error'] ) ) { echo '<div class="notice notice-error"><p>' . esc_html__( 'The update period could not be restarted. The existing record was kept.', 'elementor-edu' ) . '</p></div>'; }

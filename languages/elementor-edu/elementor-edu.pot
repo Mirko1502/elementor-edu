@@ -272,6 +272,9 @@ msgstr ""
 msgid "The old Elementor Edu MU monitor could not be removed from mu-plugins. Elementor Edu no longer uses this file; check its permissions and remove only the obsolete Elementor Edu monitor."
 msgstr ""
 
+msgid "Elementor Edu brings Elementor and Elementor Pro together in one plugin for lessons, demonstrations and guided practice. It preserves the familiar editor and existing content while managing the included components as one educational package."
+msgstr ""
+
 msgid "Choose which Altervista screens to show. Hosting services remain active for theme compatibility."
 msgstr ""
 
