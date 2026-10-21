@@ -62,4 +62,5 @@ if ( isset( $wpdb->usermeta ) ) {
 	$wpdb->delete( $wpdb->usermeta, [ 'meta_key' => 'elementor_edu_expiration_notice_dismissed_until' ], [ '%s' ] );
 	$wpdb->delete( $wpdb->usermeta, [ 'meta_key' => 'elementor_edu_setup_success_pending' ], [ '%s' ] );
 	$wpdb->delete( $wpdb->usermeta, [ 'meta_key' => 'elementor_edu_setup_success_seen' ], [ '%s' ] );
+	$wpdb->delete( $wpdb->usermeta, [ 'meta_key' => 'elementor_edu_install_complete_pending' ], [ '%s' ] );
 }

@@ -26,6 +26,18 @@ msgstr ""
 msgid "Complete your setup with Hello Elementor"
 msgstr ""
 
+msgid "Elementor Edu installed successfully"
+msgstr ""
+
+msgid "Elementor Edu updated successfully"
+msgstr ""
+
+msgid "You can continue to the installed plugins page."
+msgstr ""
+
+msgid "Continue"
+msgstr ""
+
 msgid "Each site in the network has its own theme. Open the site dashboard to configure it."
 msgstr ""
 
@@ -284,7 +296,7 @@ msgstr ""
 msgid "Show only Server to server"
 msgstr ""
 
-msgid "Show all Altervista screens"
+msgid "Show other Altervista screens"
 msgstr ""
 
 msgid "These choices affect the interface only. The Altervista plugin and its theme initialization, authentication and background services are preserved."

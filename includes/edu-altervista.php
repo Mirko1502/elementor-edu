@@ -25,6 +25,7 @@ final class Elementor_Edu_Altervista {
 		foreach ( [ 'admin_menu', 'network_admin_menu', 'user_admin_menu', 'wp_dashboard_setup', 'wp_network_dashboard_setup', 'admin_head', 'admin_footer', 'wp_before_admin_bar_render' ] as $hook ) {
 			add_action( $hook, [ __CLASS__, 'filter_admin_ui' ], PHP_INT_MAX );
 		}
+		add_filter( 'add_menu_classes', [ __CLASS__, 'filter_menu_classes' ], PHP_INT_MAX );
 		foreach ( [ 'admin_notices', 'all_admin_notices', 'network_admin_notices', 'user_admin_notices' ] as $hook ) {
 			add_action( $hook, [ __CLASS__, 'filter_admin_notices' ], PHP_INT_MIN );
 		}
@@ -61,7 +62,7 @@ final class Elementor_Edu_Altervista {
 		if ( isset( $_GET['window_error'] ) ) { echo '<div class="notice notice-error"><p>' . esc_html__( 'The update period could not be restarted. The existing record was kept.', 'elementor-edu' ) . '</p></div>'; }
 		echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="elementor_edu_altervista_mode">';
 		wp_nonce_field( 'elementor_edu_altervista_mode' );
-		foreach ( [ 'disabled' => __( 'Hide Altervista screens (recommended)', 'elementor-edu' ), 'server_to_server' => __( 'Show only Server to server', 'elementor-edu' ), 'all' => __( 'Show all Altervista screens', 'elementor-edu' ) ] as $value => $label ) {
+		foreach ( [ 'disabled' => __( 'Hide Altervista screens (recommended)', 'elementor-edu' ), 'server_to_server' => __( 'Show only Server to server', 'elementor-edu' ), 'all' => __( 'Show other Altervista screens', 'elementor-edu' ) ] as $value => $label ) {
 			echo '<p><label><input type="radio" name="altervista_mode" value="' . esc_attr( $value ) . '" ' . checked( $mode, $value, false ) . '> ' . esc_html( $label ) . '</label></p>';
 		}
 		echo '<p class="description">' . esc_html__( 'These choices affect the interface only. The Altervista plugin and its theme initialization, authentication and background services are preserved.', 'elementor-edu' ) . '</p><p><button class="button button-primary">' . esc_html__( 'Save changes', 'elementor-edu' ) . '</button></p></form>';
@@ -141,7 +142,10 @@ final class Elementor_Edu_Altervista {
 
 	/** Restrict cosmetic cleanup to registered admin UI, never runtime hooks. */
 	public static function filter_admin_ui() {
-		if ( 'all' === self::$mode ) { return; }
+		if ( 'all' === self::$mode ) {
+			self::remove_registered_ui();
+			return;
+		}
 		// Server to server is registered by the hosting's admin_menu callback.
 		// Let it register, then remove every other hosting page below.
 		if ( 'server_to_server' !== self::$mode || 'admin_menu' !== current_filter() ) {
@@ -301,6 +305,7 @@ final class Elementor_Edu_Altervista {
 
 	/** Catch menus/widgets registered before their usual setup hooks. */
 	public static function remove_registered_ui() {
+		self::remove_unwanted_top_level_menus();
 		if ( 'all' === self::$mode ) { return; }
 		global $menu, $submenu, $wp_meta_boxes;
 		foreach ( (array) $submenu as $parent => $items ) {
@@ -331,12 +336,36 @@ final class Elementor_Edu_Altervista {
 		}
 	}
 
+	/** These three hosting promotions are unwanted even when other screens are shown. */
+	private static function remove_unwanted_top_level_menus() {
+		if ( ! is_dir( WP_PLUGIN_DIR . '/altervista' ) ) { return; }
+		global $menu;
+		foreach ( (array) $menu as $item ) {
+			if ( self::is_unwanted_top_level_menu( $item ) ) {
+				remove_menu_page( $item[2] );
+			}
+		}
+	}
+
+	/** Apply once more as WordPress prepares menu markup, including late entries. */
+	public static function filter_menu_classes( $items ) {
+		self::remove_unwanted_top_level_menus();
+		if ( ! is_dir( WP_PLUGIN_DIR . '/altervista' ) ) { return $items; }
+		foreach ( $items as $index => $item ) {
+			if ( self::is_unwanted_top_level_menu( $item ) ) { unset( $items[ $index ] ); }
+		}
+		return $items;
+	}
+
+	private static function is_unwanted_top_level_menu( $item ) {
+		$label = trim( html_entity_decode( wp_strip_all_tags( (string) ( $item[0] ?? '' ) ), ENT_QUOTES, get_bloginfo( 'charset' ) ?: 'UTF-8' ) );
+		return in_array( $label, [ 'Account', 'Guadagna', 'Promuovi', 'Earn', 'Promote', 'Conta', 'Ganhe', 'Promova' ], true );
+	}
+
 	/** Match the hosting's exact labels and its namespaced page slugs. */
 	private static function is_hosting_menu_item( $item ) {
-		$label = trim( html_entity_decode( wp_strip_all_tags( (string) ( $item[0] ?? '' ) ), ENT_QUOTES, get_bloginfo( 'charset' ) ?: 'UTF-8' ) );
 		$slug  = (string) ( $item[2] ?? '' );
-		return in_array( $label, [ 'Account', 'Guadagna', 'Promuovi', 'Earn', 'Promote', 'Conta', 'Ganhe', 'Promova' ], true )
-			&& (bool) preg_match( '/^(?:av|altervista)[_-]/i', $slug );
+		return self::is_unwanted_top_level_menu( $item ) && (bool) preg_match( '/^(?:av|altervista)[_-]/i', $slug );
 	}
 
 	private static function owns_asset( $url ) {

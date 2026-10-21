@@ -29,6 +29,18 @@ msgstr "Para mudar de versão, envie um pacote completo do Elementor Edu. Não �
 msgid "Complete your setup with Hello Elementor"
 msgstr "Conclua a configuração com o Hello Elementor"
 
+msgid "Elementor Edu installed successfully"
+msgstr "Elementor Edu instalado com sucesso"
+
+msgid "Elementor Edu updated successfully"
+msgstr "Elementor Edu atualizado com sucesso"
+
+msgid "You can continue to the installed plugins page."
+msgstr "Você pode continuar para a página de plugins instalados."
+
+msgid "Continue"
+msgstr "Prosseguir"
+
 msgid "Each site in the network has its own theme. Open the site dashboard to configure it."
 msgstr "Cada site da rede tem seu próprio tema. Abra o painel do site para configurá-lo."
 
@@ -287,8 +299,8 @@ msgstr "Ocultar telas do Altervista (recomendado)"
 msgid "Show only Server to server"
 msgstr "Mostrar apenas Server to server"
 
-msgid "Show all Altervista screens"
-msgstr "Mostrar todas as telas do Altervista"
+msgid "Show other Altervista screens"
+msgstr "Mostrar as outras telas do Altervista"
 
 msgid "These choices affect the interface only. The Altervista plugin and its theme initialization, authentication and background services are preserved."
 msgstr "Estas opções afetam apenas a interface. O plugin Altervista e seus serviços de inicialização do tema, autenticação e tarefas em segundo plano são preservados."

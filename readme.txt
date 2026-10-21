@@ -1,7 +1,7 @@
 === Elementor Edu ===
 Requires at least: 6.8
 Requires PHP: 7.4
-Stable tag: 4.3.2.5
+Stable tag: 4.3.2.6
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,7 +15,7 @@ This educational distribution is intended only for activities directly related t
 2. In Plugins > Add New Plugin > Upload Plugin, upload the Elementor Edu ZIP file.
 3. Activate Elementor Edu. Both included engines load together and reuse existing Elementor pages, settings and data.
 4. In the setup dialog, select "Install the Hello Elementor theme" to install and activate the included Hello Elementor 3.5.1 theme, then return automatically to the dashboard. The dialog remains visible across admin pages until Hello is active and cannot be dismissed. Your current theme changes only after you click. An existing Hello installation is reused without being overwritten; an active Hello child theme is preserved. WordPress theme installation and activation permissions are required. On multisite, the change applies only to the current site.
-5. When Elementor and Hello Elementor are both active, a one-time confirmation explains that you can start building with Elementor and links to create a page. It can be dismissed. If Hello is already active when Elementor Edu is activated, WordPress returns to Installed Plugins rather than Add Plugins.
+5. After activation, Elementor Edu confirms the installation in a dialog with a Continue button leading to Installed Plugins. Successful updates receive the same confirmation; the native post-update Add Plugins link is removed. If Hello still needs setup, its required dialog follows the confirmation. Completing Hello setup later shows the separate one-time ready message.
 
 For new Elementor pages, Page Settings > Hide Title defaults to Yes. A value already saved on a page is preserved. The separate Hello Theme welcome banner and Elementor's first-activation onboarding wizard are suppressed. Elementor Edu's Hello installation prompt remains available until the theme is active. Confirmation and setup text follow the WordPress user's profile language in English, Italian and Brazilian Portuguese.
 
@@ -29,7 +29,7 @@ Translation catalogues are included and work offline. While the update period is
 Only translation data is downloaded; remote PHP files are never installed or executed. Supplementary translations for missing strings are preserved. If a source is unavailable, existing catalogues are retained and a later automatic attempt is scheduled silently. Refresh errors are recorded internally without a dashboard notice. Newly introduced strings without an available translation appear in English until a translated catalogue becomes available. WordPress Cron depends on site visits or a server cron job.
 
 == Altervista presentation ==
-Elementor Edu preserves the Altervista plugin and its runtime services, including Seamless theme initialization, authentication and background tasks. If an older Edu version disabled the installed integration, Edu restores it before the theme loads. Altervista screens, dashboard widgets, notices, menu entries, admin assets and branding are hidden so WordPress administration remains standard; the native plugin directory page and WordPress admin-bar logo are restored. These changes affect presentation only and do not remove hosting callbacks needed by the theme. Plugin files and data are preserved, and deactivating Edu leaves the hosting integration available.
+Elementor Edu preserves the Altervista plugin and its runtime services, including Seamless theme initialization, authentication and background tasks. If an older Edu version disabled the installed integration, Edu restores it before the theme loads. Administrators can hide hosting screens, show Server to server, or show other hosting screens. The top-level Account, Earn and Promote menus remain hidden in every mode. Dashboard widgets, notices, admin assets and branding are hidden in the default mode so WordPress administration remains standard; the native plugin directory page and WordPress admin-bar logo are restored. These changes affect presentation only and do not remove hosting callbacks needed by the theme. Plugin files and data are preserved, and deactivating Edu leaves the hosting integration available.
 
 == Updates ==
 While the educational update period is active, the plugin checks daily for a newer Pro release at https://www.gpl-astra.com/elementor-pro/. Only a newer Pro release triggers an Elementor update offer. Clicking "Update Elementor now" downloads both current engines, validates the packages and installs the combined update through WordPress. A newer Elementor release alone does not trigger an update.

@@ -9,16 +9,22 @@ final class Elementor_Edu_Hello_Theme {
 	private const ACTION = 'elementor_edu_install_hello';
 	private const SUCCESS_PENDING = 'elementor_edu_setup_success_pending';
 	private const SUCCESS_SEEN = 'elementor_edu_setup_success_seen';
+	private const COMPLETE_PENDING = 'elementor_edu_install_complete_pending';
 
 	public static function boot() {
 		add_action( 'admin_enqueue_scripts', [ __CLASS__, 'enqueue' ] );
 		add_action( 'admin_footer', [ __CLASS__, 'notice' ] );
 		add_action( 'admin_footer', [ __CLASS__, 'success_notice' ], 20 );
+		add_action( 'admin_footer', [ __CLASS__, 'completion_notice' ], 30 );
 		add_action( 'elementor/editor/after_enqueue_scripts', [ __CLASS__, 'enqueue' ] );
 		add_action( 'elementor/editor/footer', [ __CLASS__, 'notice' ] );
 		add_action( 'activated_plugin', [ __CLASS__, 'on_plugin_activated' ], 10, 2 );
 		add_action( 'switch_theme', [ __CLASS__, 'on_theme_switched' ], 10, 3 );
 		add_action( 'admin_init', [ __CLASS__, 'redirect_after_activation' ], 0 );
+		add_action( 'admin_init', [ __CLASS__, 'continue_to_plugins' ], 1 );
+		add_action( 'upgrader_process_complete', [ __CLASS__, 'on_plugin_upgraded' ], 20, 2 );
+		add_filter( 'install_plugin_complete_actions', [ __CLASS__, 'install_complete_actions' ], PHP_INT_MAX, 3 );
+		add_filter( 'update_plugin_complete_actions', [ __CLASS__, 'update_complete_actions' ], PHP_INT_MAX, 2 );
 		add_action( 'admin_post_' . self::ACTION, [ __CLASS__, 'handle_install' ] );
 		add_filter( 'hello-plus-theme/rest/admin-config', [ __CLASS__, 'suppress_welcome_banner' ], PHP_INT_MAX );
 		// Keep the first request in the dashboard where the setup dialog is available.
@@ -41,7 +47,8 @@ final class Elementor_Edu_Hello_Theme {
 	}
 
 	public static function enqueue() {
-		if ( ( current_user_can( 'switch_themes' ) && self::SLUG !== get_template() ) || self::has_pending_success() ) {
+		global $pagenow;
+		if ( ( current_user_can( 'switch_themes' ) && self::SLUG !== get_template() ) || self::has_pending_success() || self::has_pending_completion() || 'update.php' === $pagenow ) {
 			wp_enqueue_script( 'jquery' );
 		}
 	}
@@ -49,13 +56,91 @@ final class Elementor_Edu_Hello_Theme {
 	/** Queue one confirmation for the administrator who completes the setup. */
 	public static function on_plugin_activated( $plugin, $network_wide = false ) {
 		if ( defined( 'ELEMENTOR_EDU_PLUGIN_BASE' ) && ELEMENTOR_EDU_PLUGIN_BASE === $plugin ) {
+			self::queue_completion( 'installed' );
 			self::queue_success_if_ready();
 			global $pagenow;
 			$user_id = get_current_user_id();
-			if ( $user_id && self::SLUG === get_template() && in_array( $pagenow, [ 'plugin-install.php', 'update.php' ], true ) ) {
+			if ( $user_id && in_array( $pagenow, [ 'plugin-install.php', 'update.php' ], true ) ) {
 				set_transient( 'elementor_edu_plugins_redirect_' . $user_id, 1, 120 );
 			}
 		}
+	}
+
+	private static function queue_completion( $kind ) {
+		$user_id = get_current_user_id();
+		if ( $user_id && ( current_user_can( 'activate_plugins' ) || current_user_can( 'manage_network_plugins' ) ) ) {
+			update_user_meta( $user_id, self::COMPLETE_PENDING, $kind );
+		}
+	}
+
+	private static function has_pending_completion() {
+		$user_id = get_current_user_id();
+		return $user_id && in_array( get_user_meta( $user_id, self::COMPLETE_PENDING, true ), [ 'installed', 'updated' ], true );
+	}
+
+	/** A successful normal plugin upgrade, including a combined Edu update. */
+	public static function on_plugin_upgraded( $upgrader, $options ) {
+		$plugins = isset( $options['plugins'] ) ? (array) $options['plugins'] : [];
+		if ( isset( $options['plugin'] ) ) { $plugins[] = $options['plugin']; }
+		if ( 'plugin' === ( $options['type'] ?? '' ) && 'update' === ( $options['action'] ?? '' ) && in_array( ELEMENTOR_EDU_PLUGIN_BASE, $plugins, true ) && ! empty( $upgrader->result ) && ! is_wp_error( $upgrader->result ) ) {
+			self::queue_completion( 'updated' );
+		}
+	}
+
+	/** The uploaded-ZIP overwrite uses WordPress's install skin, not its update skin. */
+	public static function install_complete_actions( $actions, $api, $plugin_file ) {
+		if ( ELEMENTOR_EDU_PLUGIN_BASE === $plugin_file && is_plugin_active( $plugin_file ) ) {
+			unset( $actions['plugins_page'] );
+			self::queue_completion( 'updated' );
+		}
+		return $actions;
+	}
+
+	public static function update_complete_actions( $actions, $plugin_file ) {
+		if ( ELEMENTOR_EDU_PLUGIN_BASE === $plugin_file && self::has_pending_completion() ) {
+			unset( $actions['plugins_page'] );
+		}
+		return $actions;
+	}
+
+	/** The confirmation's button clears only the current user's pending message. */
+	public static function continue_to_plugins() {
+		if ( ! isset( $_GET['elementor_edu_continue'] ) ) { return; }
+		if ( ! current_user_can( 'activate_plugins' ) && ! current_user_can( 'manage_network_plugins' ) ) {
+			wp_die( esc_html__( 'You are not allowed to access this page.', 'elementor-edu' ) );
+		}
+		check_admin_referer( 'elementor_edu_continue' );
+		delete_user_meta( get_current_user_id(), self::COMPLETE_PENDING );
+		wp_safe_redirect( self_admin_url( 'plugins.php' ) );
+		exit;
+	}
+
+	public static function completion_notice() {
+		if ( ! self::has_pending_completion() ) { return; }
+		$kind = get_user_meta( get_current_user_id(), self::COMPLETE_PENDING, true );
+		if ( 'installed' === $kind && self::setup_is_ready() ) {
+			delete_user_meta( get_current_user_id(), self::SUCCESS_PENDING );
+			update_user_meta( get_current_user_id(), self::SUCCESS_SEEN, 1 );
+		}
+		$url = wp_nonce_url( add_query_arg( 'elementor_edu_continue', '1', self_admin_url( 'plugins.php' ) ), 'elementor_edu_continue' );
+		?>
+		<div id="elementor-edu-complete-overlay" style="display:none">
+			<section id="elementor-edu-complete-dialog" role="dialog" aria-modal="true" aria-labelledby="elementor-edu-complete-title" tabindex="-1">
+				<h2 id="elementor-edu-complete-title"><?php echo esc_html( 'updated' === $kind ? __( 'Elementor Edu updated successfully', 'elementor-edu' ) : __( 'Elementor Edu installed successfully', 'elementor-edu' ) ); ?></h2>
+				<p><?php esc_html_e( 'You can continue to the installed plugins page.', 'elementor-edu' ); ?></p>
+				<p><a class="button button-primary" target="_top" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( 'Continue', 'elementor-edu' ); ?></a></p>
+			</section>
+		</div>
+		<style>
+			#elementor-edu-complete-overlay{position:fixed;inset:0;z-index:2147483647;align-items:center;justify-content:center;padding:24px;box-sizing:border-box;background:rgba(0,0,0,.68)}
+			#elementor-edu-complete-dialog{background:#fff;color:#1d2327;width:100%;max-width:520px;padding:32px;box-sizing:border-box;border-radius:8px;box-shadow:0 12px 48px rgba(0,0,0,.3)}
+			#elementor-edu-complete-dialog h2{margin:0 0 20px;font-size:24px}#elementor-edu-complete-dialog .button{padding:8px 16px}
+			body.elementor-edu-complete-open{overflow:hidden}
+		</style>
+		<script>
+		jQuery(function($){var overlay=$('#elementor-edu-complete-overlay').appendTo(document.body);overlay.css('display','flex');$('body').addClass('elementor-edu-complete-open');overlay.siblings().not('script,style').prop('inert',true);overlay.find('a.button').trigger('focus');});
+		</script>
+		<?php
 	}
 
 	/** Keep Edu activation from returning an already-complete setup to Add Plugins. */
@@ -63,7 +148,7 @@ final class Elementor_Edu_Hello_Theme {
 		global $pagenow;
 		$user_id = get_current_user_id();
 		$key = $user_id ? 'elementor_edu_plugins_redirect_' . $user_id : '';
-		if ( 'plugin-install.php' !== $pagenow || ! $key || ! get_transient( $key ) ) {
+		if ( ! in_array( $pagenow, [ 'plugin-install.php', 'update.php' ], true ) || ! $key || ! get_transient( $key ) ) {
 			return;
 		}
 		delete_transient( $key );
@@ -96,7 +181,7 @@ final class Elementor_Edu_Hello_Theme {
 	/** Show and consume the one-time confirmation after both products are active. */
 	public static function success_notice() {
 		$user_id = get_current_user_id();
-		if ( ! $user_id || ! self::has_pending_success() ) {
+		if ( ! $user_id || ! self::has_pending_success() || self::has_pending_completion() ) {
 			return;
 		}
 		delete_user_meta( $user_id, self::SUCCESS_PENDING );
@@ -152,7 +237,7 @@ final class Elementor_Edu_Hello_Theme {
 
 	public static function notice() {
 		// A child theme of Hello already uses the intended base: preserve it.
-		if ( ! current_user_can( 'switch_themes' ) || self::SLUG === get_template() ) {
+		if ( ! current_user_can( 'switch_themes' ) || self::SLUG === get_template() || self::has_pending_completion() ) {
 			return;
 		}
 		$theme = wp_get_theme( self::SLUG );
