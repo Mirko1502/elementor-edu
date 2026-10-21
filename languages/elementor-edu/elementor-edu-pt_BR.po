@@ -308,3 +308,24 @@ msgstr "O WordPress não conseguiu concluir a operação com o tema Hello Elemen
 msgid "The Altervista plugin and its theme initialization, authentication and background services are preserved."
 msgstr "O plugin Altervista e seus serviços de inicialização do tema, autenticação e tarefas em segundo plano são preservados."
 
+msgid "The 90-day update period has been restarted."
+msgstr "O período de atualização de 90 dias foi reiniciado."
+
+msgid "The update period could not be restarted. The existing record was kept."
+msgstr "Não foi possível reiniciar o período de atualização. O registro existente foi mantido."
+
+msgid "Restart the update period"
+msgstr "Reiniciar o período de atualização"
+
+msgid "Restart the 90-day period for Elementor Edu updates and translation refreshes. On a network, this applies to every site."
+msgstr "Reinicia os 90 dias para atualizações do Elementor Edu e das traduções. Em uma rede, isso se aplica a todos os sites."
+
+msgid "I want to restart the 90-day update period now."
+msgstr "Quero reiniciar agora o período de atualização de 90 dias."
+
+msgid "Restart 90 days"
+msgstr "Zerar e reiniciar os 90 dias"
+
+msgid "Confirm the 90-day reset before continuing."
+msgstr "Confirme a redefinição dos 90 dias antes de continuar."
+

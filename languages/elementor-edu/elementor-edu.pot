@@ -305,3 +305,24 @@ msgstr ""
 msgid "The Altervista plugin and its theme initialization, authentication and background services are preserved."
 msgstr ""
 
+msgid "The 90-day update period has been restarted."
+msgstr ""
+
+msgid "The update period could not be restarted. The existing record was kept."
+msgstr ""
+
+msgid "Restart the update period"
+msgstr ""
+
+msgid "Restart the 90-day period for Elementor Edu updates and translation refreshes. On a network, this applies to every site."
+msgstr ""
+
+msgid "I want to restart the 90-day update period now."
+msgstr ""
+
+msgid "Restart 90 days"
+msgstr ""
+
+msgid "Confirm the 90-day reset before continuing."
+msgstr ""
+

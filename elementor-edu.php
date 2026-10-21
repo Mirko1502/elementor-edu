@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Elementor Edu
  * Description: Elementor in one package for educational and demonstration use.
- * Version: 4.3.2.3
+ * Version: 4.3.2.4
  * Author: Elementor.com
  * Requires PHP: 7.4
  * Requires at least: 6.8
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ELEMENTOR_EDU_VERSION', '4.3.2.3' );
+define( 'ELEMENTOR_EDU_VERSION', '4.3.2.4' );
 define( 'ELEMENTOR_EDU__FILE__', __FILE__ );
 define( 'ELEMENTOR_EDU_PLUGIN_BASE', plugin_basename( __FILE__ ) );
 
@@ -120,12 +120,9 @@ final class Elementor_Edu {
 		add_filter( 'elementor/onboarding/steps', '__return_empty_array', PHP_INT_MAX );
 		// Educational installations do not collect or transmit Elementor usage telemetry.
 		update_option( 'elementor_allow_tracking', 'no', false );
-		// Keep Altervista tracking disabled unless an administrator explicitly
-		// chooses the full integration restore in Elementor Edu settings.
-		if ( ! class_exists( 'Elementor_Edu_Altervista' ) || 'all' !== Elementor_Edu_Altervista::get_mode() ) {
-			update_option( 'av_disable_audience_tracking', '1', false );
-			update_option( 'av_disable_google_analytics', '1', false );
-		}
+		// The Altervista choices control presentation only; tracking stays off.
+		update_option( 'av_disable_audience_tracking', '1', false );
+		update_option( 'av_disable_google_analytics', '1', false );
 		add_filter( 'pre_update_option_elementor_allow_tracking', [ __CLASS__, 'disable_tracking' ], PHP_INT_MAX );
 
 		add_filter( 'pre_set_site_transient_update_plugins', [ __CLASS__, 'filter_updates' ], PHP_INT_MAX );
@@ -142,10 +139,8 @@ final class Elementor_Edu {
 		if ( ! get_option( 'elementor_onboarded' ) ) {
 			update_option( 'elementor_onboarded', 'elementor-edu', false );
 		}
-		if ( ! class_exists( 'Elementor_Edu_Altervista' ) || 'all' !== Elementor_Edu_Altervista::get_mode() ) {
-			update_option( 'av_disable_audience_tracking', '1', false );
-			update_option( 'av_disable_google_analytics', '1', false );
-		}
+		update_option( 'av_disable_audience_tracking', '1', false );
+		update_option( 'av_disable_google_analytics', '1', false );
 	}
 
 	public static function disable_tracking( $value ) {

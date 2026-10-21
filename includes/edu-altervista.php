@@ -7,12 +7,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 final class Elementor_Edu_Altervista {
 	private const PLUGIN = 'altervista/altervista.php';
 	private const MODE = 'elementor_edu_altervista_mode';
+	private const SERVER_PAGE = 'av-domain-unlocking';
 	private static $mode = 'disabled';
 
 	public static function boot() {
 		self::$mode = self::get_mode();
 		add_action( 'admin_menu', [ __CLASS__, 'register_settings_page' ], 99 );
 		add_action( 'admin_post_elementor_edu_altervista_mode', [ __CLASS__, 'save_mode' ] );
+		add_action( 'admin_post_elementor_edu_reset_window', [ __CLASS__, 'reset_window' ] );
 		// Hosting callbacks initialize Seamless before the theme loads. Never strip
 		// runtime hooks or deactivate the integration, including on multisite.
 		self::ensure_integration_active();
@@ -37,7 +39,8 @@ final class Elementor_Edu_Altervista {
 	}
 
 	public static function get_mode() {
-		return 'disabled';
+		$mode = get_option( self::MODE, 'disabled' );
+		return in_array( $mode, [ 'disabled', 'server_to_server', 'all' ], true ) ? $mode : 'disabled';
 	}
 
 	public static function register_settings_page() {
@@ -47,18 +50,49 @@ final class Elementor_Edu_Altervista {
 
 	public static function render_settings_page() {
 		if ( ! current_user_can( 'manage_options' ) ) { wp_die( esc_html__( 'You are not allowed to access this page.', 'elementor-edu' ) ); }
-		echo '<div class="wrap"><h1>' . esc_html__( 'Elementor Edu', 'elementor-edu' ) . '</h1><p>' . esc_html__( 'The Altervista plugin and its theme initialization, authentication and background services are preserved.', 'elementor-edu' ) . '</p>';
+		$mode = self::get_mode();
+		echo '<div class="wrap"><h1>' . esc_html__( 'Elementor Edu', 'elementor-edu' ) . '</h1><p>' . esc_html__( 'Choose which Altervista screens to show. Hosting services remain active for theme compatibility.', 'elementor-edu' ) . '</p>';
 		if ( isset( $_GET['updated'] ) ) { echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Settings saved.', 'elementor-edu' ) . '</p></div>'; }
+		if ( isset( $_GET['window_reset'] ) ) { echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'The 90-day update period has been restarted.', 'elementor-edu' ) . '</p></div>'; }
+		if ( isset( $_GET['window_error'] ) ) { echo '<div class="notice notice-error"><p>' . esc_html__( 'The update period could not be restarted. The existing record was kept.', 'elementor-edu' ) . '</p></div>'; }
+		echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="elementor_edu_altervista_mode">';
+		wp_nonce_field( 'elementor_edu_altervista_mode' );
+		foreach ( [ 'disabled' => __( 'Hide Altervista screens (recommended)', 'elementor-edu' ), 'server_to_server' => __( 'Show only Server to server', 'elementor-edu' ), 'all' => __( 'Show all Altervista screens', 'elementor-edu' ) ] as $value => $label ) {
+			echo '<p><label><input type="radio" name="altervista_mode" value="' . esc_attr( $value ) . '" ' . checked( $mode, $value, false ) . '> ' . esc_html( $label ) . '</label></p>';
+		}
+		echo '<p class="description">' . esc_html__( 'These choices affect the interface only. The Altervista plugin and its theme initialization, authentication and background services are preserved.', 'elementor-edu' ) . '</p><p><button class="button button-primary">' . esc_html__( 'Save changes', 'elementor-edu' ) . '</button></p></form>';
+		if ( ! is_multisite() || current_user_can( 'manage_network_options' ) ) {
+			echo '<hr><h2>' . esc_html__( 'Restart the update period', 'elementor-edu' ) . '</h2><p>' . esc_html__( 'Restart the 90-day period for Elementor Edu updates and translation refreshes. On a network, this applies to every site.', 'elementor-edu' ) . '</p>';
+			echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="elementor_edu_reset_window">';
+			wp_nonce_field( 'elementor_edu_reset_window' );
+			echo '<p><label><input type="checkbox" name="confirm_reset_window" value="1" required> ' . esc_html__( 'I want to restart the 90-day update period now.', 'elementor-edu' ) . '</label></p>';
+			echo '<p><button class="button">' . esc_html__( 'Restart 90 days', 'elementor-edu' ) . '</button></p></form>';
+		}
 		echo '</div>';
 	}
 
 	public static function save_mode() {
 		if ( ! current_user_can( 'manage_options' ) ) { wp_die( esc_html__( 'You are not allowed to change these settings.', 'elementor-edu' ) ); }
 		check_admin_referer( 'elementor_edu_altervista_mode' );
-		update_option( self::MODE, 'disabled', false );
-		self::$mode = 'disabled';
+		$mode = isset( $_POST['altervista_mode'] ) && is_string( $_POST['altervista_mode'] ) ? sanitize_key( wp_unslash( $_POST['altervista_mode'] ) ) : 'disabled';
+		if ( ! in_array( $mode, [ 'disabled', 'server_to_server', 'all' ], true ) ) { $mode = 'disabled'; }
+		update_option( self::MODE, $mode, false );
+		self::$mode = $mode;
 		self::apply_mode();
 		wp_safe_redirect( add_query_arg( 'updated', '1', admin_url( 'admin.php?page=elementor-edu-settings' ) ) );
+		exit;
+	}
+
+	public static function reset_window() {
+		if ( ! current_user_can( 'manage_options' ) || ( is_multisite() && ! current_user_can( 'manage_network_options' ) ) ) {
+			wp_die( esc_html__( 'You are not allowed to change these settings.', 'elementor-edu' ) );
+		}
+		check_admin_referer( 'elementor_edu_reset_window' );
+		if ( ! isset( $_POST['confirm_reset_window'] ) || '1' !== wp_unslash( $_POST['confirm_reset_window'] ) ) {
+			wp_die( esc_html__( 'Confirm the 90-day reset before continuing.', 'elementor-edu' ) );
+		}
+		$reset = Elementor_Edu_Course_V4::reset_window();
+		wp_safe_redirect( add_query_arg( is_wp_error( $reset ) ? 'window_error' : 'window_reset', '1', admin_url( 'admin.php?page=elementor-edu-settings' ) ) );
 		exit;
 	}
 
@@ -103,20 +137,36 @@ final class Elementor_Edu_Altervista {
 
 	/** Restrict cosmetic cleanup to registered admin UI, never runtime hooks. */
 	public static function filter_admin_ui() {
-		self::remove_host_admin_callbacks( current_filter() );
+		if ( 'all' === self::$mode ) { return; }
+		// Server to server is registered by the hosting's admin_menu callback.
+		// Let it register, then remove every other hosting page below.
+		if ( 'server_to_server' !== self::$mode || 'admin_menu' !== current_filter() ) {
+			if ( ! self::on_server_page() ) { self::remove_host_admin_callbacks( current_filter() ); }
+		}
 		self::remove_registered_ui();
 		self::clean_toolbar();
 	}
 
+	private static function on_server_page() {
+		return 'server_to_server' === self::$mode
+			&& isset( $_GET['page'] )
+			&& is_string( $_GET['page'] )
+			&& self::SERVER_PAGE === sanitize_key( wp_unslash( $_GET['page'] ) );
+	}
+
 	/** Remove provider-owned callbacks only from WordPress presentation hooks. */
 	public static function strip_admin_presentation_callbacks() {
+		if ( 'all' === self::$mode ) { return; }
 		$hooks = [
 			'admin_menu', 'network_admin_menu', 'user_admin_menu', 'wp_dashboard_setup', 'wp_network_dashboard_setup',
 			'admin_head', 'admin_footer', 'admin_notices', 'all_admin_notices', 'network_admin_notices', 'user_admin_notices',
 			'admin_bar_menu', 'wp_before_admin_bar_render', 'admin_enqueue_scripts', 'admin_print_styles', 'admin_print_scripts',
 			'in_admin_header', 'admin_body_class', 'admin_title', 'admin_footer_text', 'update_footer', 'screen_options_show_screen',
 		];
-		foreach ( $hooks as $hook ) { self::remove_host_admin_callbacks( $hook ); }
+		foreach ( $hooks as $hook ) {
+			if ( 'server_to_server' === self::$mode && ( in_array( $hook, [ 'admin_menu', 'network_admin_menu', 'user_admin_menu' ], true ) || self::on_server_page() ) ) { continue; }
+			self::remove_host_admin_callbacks( $hook );
+		}
 	}
 
 	private static function remove_host_admin_callbacks( $hook ) {
@@ -131,6 +181,7 @@ final class Elementor_Edu_Altervista {
 
 	/** Dequeue only Altervista-owned CSS and scripts from the admin request. */
 	public static function filter_admin_assets() {
+		if ( 'all' === self::$mode || self::on_server_page() ) { return; }
 		foreach ( [ 'style' => wp_styles(), 'script' => wp_scripts() ] as $type => $registry ) {
 			foreach ( (array) $registry->queue as $handle ) {
 				$asset = $registry->registered[ $handle ] ?? null;
@@ -143,6 +194,7 @@ final class Elementor_Edu_Altervista {
 	}
 
 	public static function filter_admin_notices() {
+		if ( 'all' === self::$mode || self::on_server_page() ) { return; }
 		global $wp_filter;
 		$hook = current_filter();
 		if ( ! in_array( $hook, [ 'admin_notices', 'all_admin_notices', 'network_admin_notices', 'user_admin_notices' ], true ) ) { return; }
@@ -156,6 +208,7 @@ final class Elementor_Edu_Altervista {
 
 	/** Restore WordPress's plugin-directory screens without affecting other requests. */
 	public static function filter_plugin_install_screen() {
+		if ( 'all' === self::$mode ) { return; }
 		global $pagenow, $wp_filter;
 		if ( 'plugin-install.php' !== $pagenow ) { return; }
 		foreach ( $wp_filter as $hook => $registered ) {
@@ -178,7 +231,7 @@ final class Elementor_Edu_Altervista {
 
 	public static function wordpress_site_icon( $url ) {
 		// An empty site icon makes core render its standard admin-bar home glyph.
-		return '';
+		return 'all' === self::$mode ? $url : '';
 	}
 
 	/** Match the integration directory, never a site's name or a translated label. */
@@ -244,9 +297,11 @@ final class Elementor_Edu_Altervista {
 
 	/** Catch menus/widgets registered before their usual setup hooks. */
 	public static function remove_registered_ui() {
+		if ( 'all' === self::$mode ) { return; }
 		global $menu, $submenu, $wp_meta_boxes;
 		foreach ( (array) $submenu as $parent => $items ) {
 			foreach ( $items as $item ) {
+				if ( 'server_to_server' === self::$mode && 'options-general.php' === $parent && self::SERVER_PAGE === $item[2] ) { continue; }
 				if ( self::owns_page( $item[2], $parent ) || ( is_dir( WP_PLUGIN_DIR . '/altervista' ) && self::is_hosting_menu_item( $item ) ) ) {
 					self::remove_page_callback( $item[2], $parent );
 					remove_submenu_page( $parent, $item[2] );
@@ -292,6 +347,7 @@ final class Elementor_Edu_Altervista {
 	}
 
 	public static function clean_toolbar() {
+		if ( 'all' === self::$mode ) { return; }
 		global $wp_admin_bar;
 		if ( ! $wp_admin_bar || ! is_dir( WP_PLUGIN_DIR . '/altervista' ) ) {
 			return;
