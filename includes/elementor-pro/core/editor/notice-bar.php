@@ -1,4 +1,5 @@
 <?php
+// Elementor Edu: adapted for the combined educational distribution.
 namespace ElementorPro\Core\Editor;
 
 use Elementor\Core\Editor\Notice_Bar as Base_Notice_Bar;
@@ -19,6 +20,10 @@ class Notice_Bar extends Base_Notice_Bar {
 	const ELEMENTOR_PRO_EDITOR_RENEW_ABOUT_TO_EXPIRE_LICENSE_NOTICE_DISMISSED = '_elementor_pro_editor_renew_about_to_expire_license_notice_dismissed';
 
 	protected function get_init_settings() {
+		if ( defined( 'ELEMENTOR_EDU__FILE__' ) ) {
+			return [];
+		}
+
 		$license_data = License_API::get_license_data();
 		$license_admin = Plugin::instance()->license_admin;
 

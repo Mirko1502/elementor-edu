@@ -356,13 +356,19 @@ function epa_init() {
     $initialized = true;
 
     $license_data = epa_get_license_data();
+    if ( defined( 'ELEMENTOR_EDU__FILE__' ) ) {
+        update_option('elementor_pro_license_key', md5('GPL'));
+        epa_set_license_data($license_data);
+    }
 
     add_action('admin_init', function () use ($license_data) {
         if (!defined('ELEMENTOR_PRO_VERSION')) {
             return;
         }
-        update_option('elementor_pro_license_key', md5('GPL'));
-        epa_set_license_data($license_data);
+        if ( ! defined( 'ELEMENTOR_EDU__FILE__' ) ) {
+            update_option('elementor_pro_license_key', md5('GPL'));
+            epa_set_license_data($license_data);
+        }
         epa_set_connect_data();
         update_option('elementor_one_dismiss_connect_alert', true);
         update_option('elementor_one_welcome_screen_completed', true);

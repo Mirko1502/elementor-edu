@@ -1,8 +1,8 @@
 {
   "name": "Elementor Edu",
   "slug": "elementor-edu",
-  "version": "4.3.2.1",
-  "build_number": 1,
+  "version": "4.3.2.3",
+  "build_number": 3,
   "elementor": "4.3.5",
   "elementor_pro": "4.3.2",
   "hello_elementor": "3.5.1",
@@ -61,6 +61,7 @@
     "elementor/modules/safe-mode/module.php",
     "elementor/modules/safe-mode/mu-plugin/elementor-safe-mode.php",
     "elementor-pro/core/admin/admin.php",
+    "elementor-pro/core/editor/notice-bar.php",
     "elementor-pro/elementor-pro.php",
     "elementor-pro/license/admin.php",
     "elementor-pro/license/updater.php"
