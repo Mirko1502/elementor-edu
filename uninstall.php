@@ -10,6 +10,7 @@ if ( is_multisite() ) {
 		wp_clear_scheduled_hook( 'elementor_edu_course_check' );
 		wp_clear_scheduled_hook( 'elementor_edu_daily_update_check' );
 		wp_clear_scheduled_hook( 'elementor_edu_translation_refresh' );
+		delete_option( 'elementor_edu_hide_educational_notice' );
 		restore_current_blog();
 	}
 	delete_site_option( 'elementor_edu_course_record' );
@@ -19,6 +20,8 @@ if ( is_multisite() ) {
 	wp_clear_scheduled_hook( 'elementor_edu_translation_refresh' );
 	delete_option( 'elementor_edu_course_record' );
 }
+delete_option( 'elementor_edu_hide_educational_notice' );
+
 // Also remove a misplaced per-site copy left by earlier versions on a network.
 delete_option( 'elementor_edu_course_record' );
 

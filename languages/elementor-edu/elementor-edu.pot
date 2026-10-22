@@ -347,3 +347,36 @@ msgstr ""
 msgid "The regular Altervista plugin is inactive. Deactivation takes full effect on the next request. Hosting code loaded outside normal plugins is not disabled."
 msgstr ""
 
+msgid "Permanent updates are now enabled."
+msgstr ""
+
+msgid "Permanent updates could not be enabled. The existing record was kept."
+msgstr ""
+
+msgid "Permanent updates"
+msgstr ""
+
+msgid "Remove the time limit for Elementor Edu updates and translation refreshes permanently. On a network, this applies to every site."
+msgstr ""
+
+msgid "Permanent updates are active."
+msgstr ""
+
+msgid "I want to enable updates without a time limit."
+msgstr ""
+
+msgid "Enable permanent updates"
+msgstr ""
+
+msgid "Educational notice"
+msgstr ""
+
+msgid "Permanently hide the educational use notice on this site."
+msgstr ""
+
+msgid "Confirm permanent updates before continuing."
+msgstr ""
+
+msgid "Settings could not be saved."
+msgstr ""
+

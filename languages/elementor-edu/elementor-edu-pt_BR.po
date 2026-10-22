@@ -350,3 +350,36 @@ msgstr "O Altervista permanece ativo por compatibilidade; suas telas administrat
 msgid "The regular Altervista plugin is inactive. Deactivation takes full effect on the next request. Hosting code loaded outside normal plugins is not disabled."
 msgstr "O plugin comum do Altervista está inativo. A desativação tem efeito completo a partir da próxima requisição. O código da hospedagem carregado fora dos plugins comuns não é desativado."
 
+msgid "Permanent updates are now enabled."
+msgstr "As atualizações sem prazo de expiração estão habilitadas."
+
+msgid "Permanent updates could not be enabled. The existing record was kept."
+msgstr "Não foi possível habilitar as atualizações sem prazo. O registro existente foi preservado."
+
+msgid "Permanent updates"
+msgstr "Atualizações sem prazo de expiração"
+
+msgid "Remove the time limit for Elementor Edu updates and translation refreshes permanently. On a network, this applies to every site."
+msgstr "Remova permanentemente o limite de tempo das atualizações do Elementor Edu e das traduções. Em uma rede, a alteração vale para todos os sites."
+
+msgid "Permanent updates are active."
+msgstr "As atualizações sem prazo estão ativas."
+
+msgid "I want to enable updates without a time limit."
+msgstr "Quero habilitar as atualizações sem limite de tempo."
+
+msgid "Enable permanent updates"
+msgstr "Habilitar atualizações sem prazo"
+
+msgid "Educational notice"
+msgstr "Aviso educacional"
+
+msgid "Permanently hide the educational use notice on this site."
+msgstr "Ocultar permanentemente o aviso de uso educacional neste site."
+
+msgid "Confirm permanent updates before continuing."
+msgstr "Confirme as atualizações sem prazo antes de continuar."
+
+msgid "Settings could not be saved."
+msgstr "Não foi possível salvar as configurações."
+

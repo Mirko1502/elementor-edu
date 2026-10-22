@@ -17,7 +17,9 @@ final class Elementor_Edu_Altervista {
 		self::$mode = self::get_mode();
 		add_action( 'admin_menu', [ __CLASS__, 'register_settings_page' ], 99 );
 		add_action( 'admin_post_elementor_edu_altervista_mode', [ __CLASS__, 'save_mode' ] );
+		add_action( 'admin_post_elementor_edu_notice_visibility', [ __CLASS__, 'save_notice_visibility' ] );
 		add_action( 'admin_post_elementor_edu_reset_window', [ __CLASS__, 'reset_window' ] );
+		add_action( 'admin_post_elementor_edu_permanent_updates', [ __CLASS__, 'enable_permanent_updates' ] );
 		// Run before plugins_loaded: Seamless needs the provider's initialization
 		// before WordPress includes the theme. Never emulate its private API.
 		self::apply_integration_policy();
@@ -130,6 +132,8 @@ final class Elementor_Edu_Altervista {
 		}
 		if ( isset( $_GET['updated'] ) ) { echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Settings saved.', 'elementor-edu' ) . '</p></div>'; }
 		if ( isset( $_GET['window_reset'] ) ) { echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'The 90-day update period has been restarted.', 'elementor-edu' ) . '</p></div>'; }
+		if ( isset( $_GET['updates_permanent'] ) ) { echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Permanent updates are now enabled.', 'elementor-edu' ) . '</p></div>'; }
+		if ( isset( $_GET['permanent_error'] ) ) { echo '<div class="notice notice-error"><p>' . esc_html__( 'Permanent updates could not be enabled. The existing record was kept.', 'elementor-edu' ) . '</p></div>'; }
 		if ( isset( $_GET['window_error'] ) ) { echo '<div class="notice notice-error"><p>' . esc_html__( 'The update period could not be restarted. The existing record was kept.', 'elementor-edu' ) . '</p></div>'; }
 		echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="elementor_edu_altervista_mode">';
 		wp_nonce_field( 'elementor_edu_altervista_mode' );
@@ -138,12 +142,28 @@ final class Elementor_Edu_Altervista {
 		}
 		echo '<p class="description">' . esc_html__( 'With other themes, child themes, declared plugin dependencies or network activation, Altervista stays active to protect compatibility. Its screens are still hidden. Choosing another mode restores the integration.', 'elementor-edu' ) . '</p><p><button class="button button-primary">' . esc_html__( 'Save changes', 'elementor-edu' ) . '</button></p></form>';
 		if ( ! is_multisite() || current_user_can( 'manage_network_options' ) ) {
+			echo '<hr><h2>' . esc_html__( 'Permanent updates', 'elementor-edu' ) . '</h2><p>' . esc_html__( 'Remove the time limit for Elementor Edu updates and translation refreshes permanently. On a network, this applies to every site.', 'elementor-edu' ) . '</p>';
+			if ( Elementor_Edu_Course_V4::updates_are_permanent() ) {
+				echo '<p><strong>' . esc_html__( 'Permanent updates are active.', 'elementor-edu' ) . '</strong></p>';
+			} else {
+			echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="elementor_edu_permanent_updates">';
+			wp_nonce_field( 'elementor_edu_permanent_updates' );
+			echo '<p><label><input type="checkbox" name="confirm_permanent_updates" value="1" required> ' . esc_html__( 'I want to enable updates without a time limit.', 'elementor-edu' ) . '</label></p>';
+			echo '<p><button class="button">' . esc_html__( 'Enable permanent updates', 'elementor-edu' ) . '</button></p></form>';
+			}
+		}
+		if ( ! Elementor_Edu_Course_V4::updates_are_permanent() && ( ! is_multisite() || current_user_can( 'manage_network_options' ) ) ) {
 			echo '<hr><h2>' . esc_html__( 'Restart the update period', 'elementor-edu' ) . '</h2><p>' . esc_html__( 'Restart the 90-day period for Elementor Edu updates and translation refreshes. On a network, this applies to every site.', 'elementor-edu' ) . '</p>';
 			echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="elementor_edu_reset_window">';
 			wp_nonce_field( 'elementor_edu_reset_window' );
 			echo '<p><label><input type="checkbox" name="confirm_reset_window" value="1" required> ' . esc_html__( 'I want to restart the 90-day update period now.', 'elementor-edu' ) . '</label></p>';
 			echo '<p><button class="button">' . esc_html__( 'Restart 90 days', 'elementor-edu' ) . '</button></p></form>';
 		}
+		echo '<hr><h2>' . esc_html__( 'Educational notice', 'elementor-edu' ) . '</h2>';
+		echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="elementor_edu_notice_visibility">';
+		wp_nonce_field( 'elementor_edu_notice_visibility' );
+		echo '<p><label><input type="checkbox" name="hide_educational_notice" value="1" ' . checked( Elementor_Edu_Course_V4::educational_notice_hidden(), true, false ) . '> ' . esc_html__( 'Permanently hide the educational use notice on this site.', 'elementor-edu' ) . '</label></p>';
+		echo '<p><button class="button">' . esc_html__( 'Save changes', 'elementor-edu' ) . '</button></p></form>';
 		echo '</div>';
 	}
 
@@ -159,8 +179,21 @@ final class Elementor_Edu_Altervista {
 		exit;
 	}
 
+	public static function enable_permanent_updates() {
+		if ( 'POST' !== ( $_SERVER['REQUEST_METHOD'] ?? '' ) || ! current_user_can( 'manage_options' ) || ( is_multisite() && ! current_user_can( 'manage_network_options' ) ) ) {
+			wp_die( esc_html__( 'You are not allowed to change these settings.', 'elementor-edu' ) );
+		}
+		check_admin_referer( 'elementor_edu_permanent_updates' );
+		if ( ! isset( $_POST['confirm_permanent_updates'] ) || '1' !== wp_unslash( $_POST['confirm_permanent_updates'] ) ) {
+			wp_die( esc_html__( 'Confirm permanent updates before continuing.', 'elementor-edu' ) );
+		}
+		$reset = Elementor_Edu_Course_V4::enable_permanent_updates();
+		wp_safe_redirect( add_query_arg( is_wp_error( $reset ) ? 'permanent_error' : 'updates_permanent', '1', admin_url( 'admin.php?page=elementor-edu-settings' ) ) );
+		exit;
+	}
+
 	public static function reset_window() {
-		if ( ! current_user_can( 'manage_options' ) || ( is_multisite() && ! current_user_can( 'manage_network_options' ) ) ) {
+		if ( 'POST' !== ( $_SERVER['REQUEST_METHOD'] ?? '' ) || ! current_user_can( 'manage_options' ) || ( is_multisite() && ! current_user_can( 'manage_network_options' ) ) ) {
 			wp_die( esc_html__( 'You are not allowed to change these settings.', 'elementor-edu' ) );
 		}
 		check_admin_referer( 'elementor_edu_reset_window' );
@@ -169,6 +202,17 @@ final class Elementor_Edu_Altervista {
 		}
 		$reset = Elementor_Edu_Course_V4::reset_window();
 		wp_safe_redirect( add_query_arg( is_wp_error( $reset ) ? 'window_error' : 'window_reset', '1', admin_url( 'admin.php?page=elementor-edu-settings' ) ) );
+		exit;
+	}
+
+
+	public static function save_notice_visibility() {
+		if ( 'POST' !== ( $_SERVER['REQUEST_METHOD'] ?? '' ) || ! current_user_can( 'manage_options' ) ) { wp_die( esc_html__( 'You are not allowed to change these settings.', 'elementor-edu' ) ); }
+		check_admin_referer( 'elementor_edu_notice_visibility' );
+		$hidden = isset( $_POST['hide_educational_notice'] ) && '1' === $_POST['hide_educational_notice'];
+		update_option( 'elementor_edu_hide_educational_notice', $hidden ? '1' : '0', false );
+		if ( Elementor_Edu_Course_V4::educational_notice_hidden() !== $hidden ) { wp_die( esc_html__( 'Settings could not be saved.', 'elementor-edu' ) ); }
+		wp_safe_redirect( add_query_arg( 'updated', '1', admin_url( 'admin.php?page=elementor-edu-settings' ) ) );
 		exit;
 	}
 
@@ -486,7 +530,7 @@ final class Elementor_Edu_Altervista {
 	public static function clean_toolbar() {
 		if ( 'all' === self::$mode ) { return; }
 		global $wp_admin_bar;
-		if ( ! $wp_admin_bar ) {
+		if ( ! $wp_admin_bar || ! $wp_admin_bar->get_nodes() ) {
 			return;
 		}
 		foreach ( (array) $wp_admin_bar->get_nodes() as $node ) {
@@ -499,6 +543,14 @@ final class Elementor_Edu_Altervista {
 			// Rebuild this node even when hosting code reused the core ID.
 			$wp_admin_bar->remove_node( 'wp-logo' );
 			wp_admin_bar_wp_menu( $wp_admin_bar );
+			// The native renderer uses insertion order. Recreating the logo at
+			// this late hook otherwise puts it AFTER the other toolbar commands.
+			$nodes = $wp_admin_bar->get_nodes();
+			foreach ( $nodes as $node ) { $wp_admin_bar->remove_node( $node->id ); }
+			$wp_admin_bar->add_node( (array) $nodes['wp-logo'] );
+			foreach ( $nodes as $node ) {
+				if ( 'wp-logo' !== $node->id ) { $wp_admin_bar->add_node( (array) $node ); }
+			}
 		}
 	}
 
@@ -535,23 +587,30 @@ final class Elementor_Edu_Altervista {
         });
         eduAltervistaHosting=eduAltervistaHosting||groups.size>=2;
         if(eduAltervistaHosting){entries.forEach(function(item){item.remove();});}
-        if(!eduAltervistaDashboard){return;}
+        // Do not remove nodes while the HTML parser is still building them.
+        if(!eduAltervistaDashboard||document.readyState==="loading"){return;}
         document.querySelectorAll("#wpbody-content .postbox").forEach(function(box){
             var title=box.querySelector(".hndle,.postbox-header h2");
             if((title&&hostingTitle(title.textContent))||/(?:^|[-_])(?:av|altervista)(?:[-_]|$)/i.test(box.id)){box.remove();}
         });
-        // Some provider versions render a heading followed by loose content,
-        // without a .postbox. Remove only that section, up to its next heading.
+        // Keep an invisible heading as a section boundary. Removing it loses
+        // the anchor when the provider appends the body in a later task.
         document.querySelectorAll("#wpbody-content h2").forEach(function(heading){
             if(!hostingTitle(heading.textContent)){return;}
-            var sibling=heading.nextSibling;
+            heading.hidden=true;
+            heading.style.setProperty("display","none","important");
+            var start=heading;
+            // A title-only wrapper and its following body can be siblings.
+            while(start.parentElement&&!start.parentElement.matches("#wpbody-content,.wrap,.postbox,#dashboard-widgets-wrap")&&start.parentElement.childElementCount===1&&normalized(start.parentElement.textContent)===normalized(heading.textContent)){
+                start=start.parentElement;
+            }
+            var sibling=start.nextSibling;
             while(sibling){
                 if(sibling.nodeType===1&&(sibling.matches("h1,h2,form,.notice,.postbox,#dashboard-widgets-wrap")||sibling.querySelector("h1,h2,form,.notice,.postbox"))){break;}
                 var next=sibling.nextSibling;
                 sibling.remove();
                 sibling=next;
             }
-            heading.remove();
         });
     }
     var scheduled=false;

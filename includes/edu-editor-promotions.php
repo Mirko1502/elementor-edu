@@ -12,6 +12,24 @@ final class Elementor_Edu_Editor_Promotions {
 		add_filter( 'elementor/editor/localize_settings', [ __CLASS__, 'editor_settings' ], PHP_INT_MAX );
 		add_filter( 'elementor/editor/v2/packages', [ __CLASS__, 'editor_packages' ], PHP_INT_MAX );
 		add_action( 'elementor/editor/wp_head', [ __CLASS__, 'hide_promotion_controls' ] );
+		add_filter( 'admin_footer_text', [ __CLASS__, 'remove_review_request' ], PHP_INT_MIN );
+	}
+
+	/** Remove the originating callback, independent of the current translation. */
+	public static function remove_review_request( $text ) {
+		global $wp_filter;
+		$hook = $wp_filter['admin_footer_text'] ?? null;
+		if ( $hook instanceof WP_Hook ) {
+			foreach ( $hook->callbacks as $priority => $callbacks ) {
+				foreach ( $callbacks as $callback ) {
+					$handler = $callback['function'];
+					if ( is_array( $handler ) && $handler[0] instanceof \Elementor\Core\Admin\Admin && 'admin_footer_text' === $handler[1] ) {
+						remove_filter( 'admin_footer_text', $handler, $priority );
+					}
+				}
+			}
+		}
+		return $text;
 	}
 
 	public static function dismiss_angie() {

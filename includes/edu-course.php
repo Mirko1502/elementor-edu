@@ -21,6 +21,7 @@ if ( ! function_exists( 'elementor_edu_course_extend_existing_window_v4' ) ) {
 		if ( ! is_array( $record ) || ! isset( $record['installed_at'], $record['expires_at'] ) || ! is_numeric( $record['installed_at'] ) || ! is_numeric( $record['expires_at'] ) || (int) $record['installed_at'] < 1 ) {
 			return;
 		}
+		if ( array_key_exists( 'updates_permanent', $record ) ) { return; }
 		$installed = (int) $record['installed_at'];
 		if ( (int) ( $record['expires_at'] ?? 0 ) !== $installed + 2592000 ) {
 			return;
@@ -91,6 +92,7 @@ if ( ! class_exists( 'Elementor_Edu_Course_V4', false ) ) {
 			if ( ! is_numeric( $record['installed_at'] ) || ! is_numeric( $record['expires_at'] ) || (int) $record['installed_at'] < 1 || (int) $record['expires_at'] < (int) $record['installed_at'] ) {
 				return false;
 			}
+			if ( array_key_exists( 'updates_permanent', $record ) && ! is_bool( $record['updates_permanent'] ) ) { return false; }
 			if ( ! is_array( $record['plugins'] ) ) {
 				return false;
 			}
@@ -180,6 +182,7 @@ if ( ! class_exists( 'Elementor_Edu_Course_V4', false ) ) {
 				// Keep all editing and rendering available, but fail closed for updates.
 				return true;
 			}
+			if ( true === ( $record['updates_permanent'] ?? false ) ) { return false; }
 			if ( ! empty( $record['expired'] ) ) {
 				return true;
 			}
@@ -191,11 +194,50 @@ if ( ! class_exists( 'Elementor_Edu_Course_V4', false ) ) {
 			return false;
 		}
 
+		public static function updates_are_permanent() {
+			$record = self::record();
+			return self::record_is_valid( $record ) && true === ( $record['updates_permanent'] ?? false );
+		}
+
+		public static function educational_notice_hidden() {
+			return '1' === (string) get_option( 'elementor_edu_hide_educational_notice', '0' );
+		}
+
 		private static function schedule() {
+			if ( self::updates_are_permanent() ) {
+				wp_clear_scheduled_hook( self::EVENT );
+				return;
+			}
 			$record = self::record();
 			if ( $record && ! self::expired() && ! wp_next_scheduled( self::EVENT ) ) {
 				wp_schedule_single_event( (int) $record['expires_at'], self::EVENT );
 			}
+		}
+
+		/** An explicit administrator action removes the update deadline permanently. */
+		public static function enable_permanent_updates() {
+			$record = self::record();
+			if ( ! self::record_is_valid( $record ) ) {
+				return new WP_Error( 'elementor_edu_record_invalid', 'The existing educational record is invalid.' );
+			}
+			$record['updates_permanent'] = true;
+			$record['expired'] = false;
+			if ( ! self::save( $record ) && self::record() !== $record ) {
+				return new WP_Error( 'elementor_edu_permanent_updates_failed', 'The educational record could not be saved.' );
+			}
+			$sites = is_multisite() ? get_sites( [ 'fields' => 'ids', 'number' => 0 ] ) : [ get_current_blog_id() ];
+			foreach ( $sites as $site_id ) {
+				if ( is_multisite() ) { switch_to_blog( $site_id ); }
+				try {
+					wp_clear_scheduled_hook( self::EVENT );
+					self::schedule();
+					if ( class_exists( 'Elementor_Edu_Updater' ) ) { Elementor_Edu_Updater::schedule(); }
+					if ( class_exists( 'Elementor_Edu_Translation_Updater' ) ) { Elementor_Edu_Translation_Updater::schedule(); }
+				} finally {
+					if ( is_multisite() ) { restore_current_blog(); }
+				}
+			}
+			return true;
 		}
 
 		/** An explicit administrator action restarts the update window. */
@@ -225,6 +267,7 @@ if ( ! class_exists( 'Elementor_Edu_Course_V4', false ) ) {
 			}
 			return true;
 		}
+
 
 		/** Expiry stops updates, never the engines or plugin activation. */
 		public static function enforce() {
@@ -328,6 +371,7 @@ if ( ! class_exists( 'Elementor_Edu_Course_V4', false ) ) {
 				echo '<div class="notice notice-info is-dismissible elementor-edu-educational-notice">' . wp_kses_post( self::expiration_message() ) . '</div>';
 				return;
 			}
+			if ( self::educational_notice_hidden() ) { return; }
 			echo '<div class="notice notice-warning elementor-edu-educational-notice"><p><strong>' . esc_html__( 'Elementor Edu – Educational use only.', 'elementor-edu' ) . '</strong> '
 				. esc_html__( 'This plugin was developed exclusively for educational and training purposes. It must never be used outside activities strictly related to education.', 'elementor-edu' ) . '</p></div>';
 		}

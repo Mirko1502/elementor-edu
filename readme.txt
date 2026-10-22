@@ -1,7 +1,7 @@
 === Elementor Edu ===
 Requires at least: 6.8
 Requires PHP: 7.4
-Stable tag: 4.3.2.9
+Stable tag: 4.3.2.13
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -33,9 +33,11 @@ Administrators can hide hosting screens, show only Server to server, or show all
 
 With other themes, child themes or declared plugin dependencies, Edu preserves or restores Altervista before the theme loads. This protects Seamless theme initialization. A site preference never deactivates a network-wide integration. Edu does not change the theme automatically. Selecting another mode or deactivating Edu restores the integration it suspended. The settings page shows the actual state.
 
-Account, Earn and Promote menus, hosting dashboard cards and Altervista's Installed Plugins row are hidden in the first two modes and visible when all screens are selected. Cleanup also covers late menu entries and dashboard sections outside standard WordPress postboxes. Hosting notices, admin assets and branding are hidden in the reduced modes. Tracking remains disabled in every mode.
+Account, Earn and Promote menus, hosting dashboard cards and Altervista's Installed Plugins row are hidden in the first two modes and visible when all screens are selected. Cleanup also covers late menu entries and dashboard sections outside standard WordPress postboxes, including section bodies inserted after their headings. The native WordPress logo is restored at the beginning of the toolbar. Hosting notices, admin assets and branding are hidden in the reduced modes. Tracking remains disabled in every mode.
 
 Code loaded by the hosting provider outside normal plugins, including must-use plugins and shared bootstrap files, is not deactivated. Compatibility checks use synthetic local fixtures, not the provider's private source code; unknown third-party dependencies are not covered.
+
+Elementor's five-star review request is suppressed while Edu is active. The normal WordPress footer and footer content from other plugins are preserved.
 
 == Updates ==
 While the educational update period is active, the plugin checks daily for a newer Pro release at https://www.gpl-astra.com/elementor-pro/. Only a newer Pro release triggers an Elementor update offer. Clicking "Update Elementor now" downloads both current engines, validates the packages and installs the combined update through WordPress. A newer Elementor release alone does not trigger an update.
@@ -51,3 +53,8 @@ Translations are obtained from https://translate.wordpress.org/projects/wp-plugi
 
 == Distribution changes ==
 The combined package uses one plugin identity while preserving internal engine paths and APIs. Separate engine updates and rollbacks are disabled to protect the combined installation; database upgrades remain enabled. The builder retains Elementor branding. Local translation catalogues and supplementary entries are distributed under the corresponding component licenses.
+
+== Administrator preferences ==
+Administrators can hide the educational-use notice persistently for their site. Unchecking the option restores it. The choice survives normal updates and deactivation; uninstalling Edu removes it.
+
+A separate confirmed action enables updates and translation refreshes without a time limit, including for an already expired installation. On multisite only a network administrator can enable this shared setting. Existing dates are preserved for reference; ordinary updates and deactivation do not restore the deadline. The optional 90-day restart remains available until unlimited updates are enabled. Corrupt records are preserved and must be repaired before enabling updates. Availability of remote packages and services is still required.
