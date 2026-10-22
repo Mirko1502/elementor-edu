@@ -290,9 +290,6 @@ msgstr "Não foi possível remover o antigo monitor MU do Elementor Edu em mu-pl
 msgid "Elementor Edu brings Elementor and Elementor Pro together in one plugin for lessons, demonstrations and guided practice. It preserves the familiar editor and existing content while managing the included components as one educational package."
 msgstr "O Elementor Edu reúne Elementor e Elementor Pro em um único plugin para aulas, demonstrações e exercícios orientados. Preserva o editor familiar e o conteúdo existente, gerenciando os componentes incluídos como um único pacote educacional."
 
-msgid "Choose which Altervista screens to show. Hosting services remain active for theme compatibility."
-msgstr "Escolha quais telas do Altervista exibir. Os serviços da hospedagem permanecem ativos para compatibilidade com o tema."
-
 msgid "Hide Altervista screens (recommended)"
 msgstr "Ocultar telas do Altervista (recomendado)"
 
@@ -301,9 +298,6 @@ msgstr "Mostrar apenas Server to server"
 
 msgid "Show all Altervista screens"
 msgstr "Mostrar todas as telas do Altervista"
-
-msgid "These choices affect the interface only. The Altervista plugin and its theme initialization, authentication and background services are preserved."
-msgstr "Estas opções afetam apenas a interface. O plugin Altervista e seus serviços de inicialização do tema, autenticação e tarefas em segundo plano são preservados."
 
 msgid "Setup complete"
 msgstr "Configuração concluída"
@@ -343,4 +337,16 @@ msgstr "Zerar e reiniciar os 90 dias"
 
 msgid "Confirm the 90-day reset before continuing."
 msgstr "Confirme a redefinição dos 90 dias antes de continuar."
+
+msgid "Choose which Altervista screens to show. Hide mode also deactivates the regular Altervista plugin when standalone Hello Elementor is active."
+msgstr "Escolha quais telas do Altervista exibir. O modo Ocultar também desativa o plugin comum do Altervista quando o Hello Elementor está ativo sem tema filho."
+
+msgid "With other themes, child themes, declared plugin dependencies or network activation, Altervista stays active to protect compatibility. Its screens are still hidden. Choosing another mode restores the integration."
+msgstr "Com outros temas, temas filhos, dependências declaradas por outros plugins ou ativação em rede, o Altervista permanece ativo para preservar a compatibilidade. Suas telas continuam ocultas. Escolher outro modo restaura a integração."
+
+msgid "Altervista remains active for compatibility; its administration screens are hidden."
+msgstr "O Altervista permanece ativo por compatibilidade; suas telas administrativas estão ocultas."
+
+msgid "The regular Altervista plugin is inactive. Deactivation takes full effect on the next request. Hosting code loaded outside normal plugins is not disabled."
+msgstr "O plugin comum do Altervista está inativo. A desativação tem efeito completo a partir da próxima requisição. O código da hospedagem carregado fora dos plugins comuns não é desativado."
 

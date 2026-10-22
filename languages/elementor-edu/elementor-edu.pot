@@ -287,9 +287,6 @@ msgstr ""
 msgid "Elementor Edu brings Elementor and Elementor Pro together in one plugin for lessons, demonstrations and guided practice. It preserves the familiar editor and existing content while managing the included components as one educational package."
 msgstr ""
 
-msgid "Choose which Altervista screens to show. Hosting services remain active for theme compatibility."
-msgstr ""
-
 msgid "Hide Altervista screens (recommended)"
 msgstr ""
 
@@ -297,9 +294,6 @@ msgid "Show only Server to server"
 msgstr ""
 
 msgid "Show all Altervista screens"
-msgstr ""
-
-msgid "These choices affect the interface only. The Altervista plugin and its theme initialization, authentication and background services are preserved."
 msgstr ""
 
 msgid "Setup complete"
@@ -339,5 +333,17 @@ msgid "Restart 90 days"
 msgstr ""
 
 msgid "Confirm the 90-day reset before continuing."
+msgstr ""
+
+msgid "Choose which Altervista screens to show. Hide mode also deactivates the regular Altervista plugin when standalone Hello Elementor is active."
+msgstr ""
+
+msgid "With other themes, child themes, declared plugin dependencies or network activation, Altervista stays active to protect compatibility. Its screens are still hidden. Choosing another mode restores the integration."
+msgstr ""
+
+msgid "Altervista remains active for compatibility; its administration screens are hidden."
+msgstr ""
+
+msgid "The regular Altervista plugin is inactive. Deactivation takes full effect on the next request. Hosting code loaded outside normal plugins is not disabled."
 msgstr ""
 

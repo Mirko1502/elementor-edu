@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Elementor Edu
  * Description: Elementor in one package for educational and demonstration use.
- * Version: 4.3.2.7
+ * Version: 4.3.2.9
  * Author: Elementor.com
  * Requires PHP: 7.4
  * Requires at least: 6.8
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ELEMENTOR_EDU_VERSION', '4.3.2.7' );
+define( 'ELEMENTOR_EDU_VERSION', '4.3.2.9' );
 define( 'ELEMENTOR_EDU__FILE__', __FILE__ );
 define( 'ELEMENTOR_EDU_PLUGIN_BASE', plugin_basename( __FILE__ ) );
 
@@ -120,7 +120,7 @@ final class Elementor_Edu {
 		add_filter( 'elementor/onboarding/steps', '__return_empty_array', PHP_INT_MAX );
 		// Educational installations do not collect or transmit Elementor usage telemetry.
 		update_option( 'elementor_allow_tracking', 'no', false );
-		// The Altervista choices control presentation only; tracking stays off.
+		// Altervista tracking stays off in every integration mode.
 		update_option( 'av_disable_audience_tracking', '1', false );
 		update_option( 'av_disable_google_analytics', '1', false );
 		add_filter( 'pre_update_option_elementor_allow_tracking', [ __CLASS__, 'disable_tracking' ], PHP_INT_MAX );

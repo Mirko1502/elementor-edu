@@ -1,7 +1,7 @@
 === Elementor Edu ===
 Requires at least: 6.8
 Requires PHP: 7.4
-Stable tag: 4.3.2.7
+Stable tag: 4.3.2.9
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -28,8 +28,14 @@ Translation catalogues are included and work offline. While the update period is
 
 Only translation data is downloaded; remote PHP files are never installed or executed. Supplementary translations for missing strings are preserved. If a source is unavailable, existing catalogues are retained and a later automatic attempt is scheduled silently. Refresh errors are recorded internally without a dashboard notice. Newly introduced strings without an available translation appear in English until a translated catalogue becomes available. WordPress Cron depends on site visits or a server cron job.
 
-== Altervista presentation ==
-Elementor Edu preserves the Altervista plugin and its runtime services, including Seamless theme initialization, authentication and background tasks. If an older Edu version disabled the installed integration, Edu restores it before the theme loads. Administrators can hide hosting screens, show Server to server, or show all hosting screens. The top-level Account, Earn and Promote menus, hosting dashboard cards and Altervista's Installed Plugins row are hidden in the first two modes and visible when all screens are selected. Hosting notices, admin assets and branding are also hidden in the first two modes so WordPress administration remains standard; the native plugin directory page and WordPress admin-bar logo are restored. These changes affect presentation only and do not remove hosting callbacks needed by the theme. Plugin files and data are preserved, and deactivating Edu leaves the hosting integration available.
+== Altervista integration ==
+Administrators can hide hosting screens, show only Server to server, or show all hosting screens. Hide mode deactivates the regular Altervista plugin when standalone Hello Elementor is active, unless another active plugin declares a dependency on Altervista. Deactivation takes full effect on the next request; plugin files and data are preserved without running provider teardown callbacks.
+
+With other themes, child themes or declared plugin dependencies, Edu preserves or restores Altervista before the theme loads. This protects Seamless theme initialization. A site preference never deactivates a network-wide integration. Edu does not change the theme automatically. Selecting another mode or deactivating Edu restores the integration it suspended. The settings page shows the actual state.
+
+Account, Earn and Promote menus, hosting dashboard cards and Altervista's Installed Plugins row are hidden in the first two modes and visible when all screens are selected. Cleanup also covers late menu entries and dashboard sections outside standard WordPress postboxes. Hosting notices, admin assets and branding are hidden in the reduced modes. Tracking remains disabled in every mode.
+
+Code loaded by the hosting provider outside normal plugins, including must-use plugins and shared bootstrap files, is not deactivated. Compatibility checks use synthetic local fixtures, not the provider's private source code; unknown third-party dependencies are not covered.
 
 == Updates ==
 While the educational update period is active, the plugin checks daily for a newer Pro release at https://www.gpl-astra.com/elementor-pro/. Only a newer Pro release triggers an Elementor update offer. Clicking "Update Elementor now" downloads both current engines, validates the packages and installs the combined update through WordPress. A newer Elementor release alone does not trigger an update.
