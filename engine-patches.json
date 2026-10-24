@@ -1,0 +1,109 @@
+{
+  "patches": [
+    {
+      "path": "elementor-pro/elementor-pro.php",
+      "old": "print_error(",
+      "new": "elementor_edu_pro_print_error(",
+      "count": 4
+    },
+    {
+      "path": "elementor-pro/license/admin.php",
+      "old": "if ( method_exists( $current_screen, 'is_block_editor' ) && $current_screen->is_block_editor() ) {",
+      "new": "if ( $current_screen && method_exists( $current_screen, 'is_block_editor' ) && $current_screen->is_block_editor() ) {",
+      "count": 1
+    },
+    {
+      "path": "elementor-pro/elementor-pro.php",
+      "old": "    $license_data = epa_get_license_data();\n\n    add_action('admin_init', function () use ($license_data) {",
+      "new": "    $license_data = epa_get_license_data();\n    if ( defined( 'ELEMENTOR_EDU__FILE__' ) ) {\n        update_option('elementor_pro_license_key', md5('GPL'));\n        epa_set_license_data($license_data);\n    }\n\n    add_action('admin_init', function () use ($license_data) {",
+      "count": 1
+    },
+    {
+      "path": "elementor-pro/elementor-pro.php",
+      "old": "        update_option('elementor_pro_license_key', md5('GPL'));\n        epa_set_license_data($license_data);\n        epa_set_connect_data();",
+      "new": "        if ( ! defined( 'ELEMENTOR_EDU__FILE__' ) ) {\n            update_option('elementor_pro_license_key', md5('GPL'));\n            epa_set_license_data($license_data);\n        }\n        epa_set_connect_data();",
+      "count": 1
+    },
+    {
+      "path": "elementor-pro/core/editor/notice-bar.php",
+      "old": "\tprotected function get_init_settings() {\n",
+      "new": "\tprotected function get_init_settings() {\n\t\tif ( defined( 'ELEMENTOR_EDU__FILE__' ) ) {\n\t\t\treturn [];\n\t\t}\n\n",
+      "count": 1
+    },
+    {
+      "path": "elementor/modules/safe-mode/module.php",
+      "old": "public function __construct() {\n",
+      "new": "public function __construct() {\n\t\tif ( defined( 'ELEMENTOR_EDU__FILE__' ) ) {\n\t\t\tif ( $this->is_enabled() ) {\n\t\t\t\t$this->disable_safe_mode();\n\t\t\t}\n\t\t\treturn;\n\t\t}\n",
+      "count": 1
+    },
+    {
+      "path": "elementor/modules/safe-mode/module.php",
+      "old": "\tpublic function enable_safe_mode() {\n\t\tif ( ! current_user_can( 'install_plugins' ) ) {\n\t\t\treturn;\n\t\t}\n\n\t\tWP_Filesystem();\n\n\t\t$this->update_allowed_plugins();\n\n\t\tif ( ! is_dir( WPMU_PLUGIN_DIR ) ) {\n\t\t\twp_mkdir_p( WPMU_PLUGIN_DIR );\n\t\t\tadd_option( 'elementor_safe_mode_created_mu_dir', true );\n\t\t}\n\n\t\tif ( ! is_dir( WPMU_PLUGIN_DIR ) ) {\n\t\t\twp_die( esc_html__( 'Cannot enable Safe Mode', 'elementor' ) );\n\t\t}\n\n\t\t$results = copy_dir( __DIR__ . '/mu-plugin/', WPMU_PLUGIN_DIR );\n\n\t\tif ( is_wp_error( $results ) ) {\n\t\t\treturn;\n\t\t}\n\n\t\t$token = hash( 'sha256', wp_rand() );\n\n\t\t// Only who own this key can use 'elementor-safe-mode'.\n\t\tupdate_option( self::OPTION_TOKEN, $token );\n\n\t\t// Save for later use.\n\t\tsetcookie( self::OPTION_TOKEN, $token, time() + HOUR_IN_SECONDS, COOKIEPATH, '', is_ssl(), true );\n\t}",
+      "new": "\t/** Safe Mode is disabled in Elementor Edu because upstream requires an MU-plugin. */\n\tpublic function enable_safe_mode() {\n\t\treturn;\n\t}",
+      "count": 1
+    },
+    {
+      "path": "elementor/modules/safe-mode/module.php",
+      "old": "\t\tif ( file_exists( $file_path ) ) {\n\t\t\tunlink( $file_path );\n\t\t}",
+      "new": "\t\tif ( is_file( $file_path ) && ! is_link( $file_path ) ) {\n\t\t\t$contents = @file_get_contents( $file_path );\n\t\t\tif ( false !== $contents && false !== strpos( $contents, 'Plugin Name: Elementor Safe Mode' ) && false !== strpos( $contents, 'class Safe_Mode' ) ) {\n\t\t\t\t@unlink( $file_path );\n\t\t\t}\n\t\t}",
+      "count": 1
+    },
+    {
+      "path": "elementor/modules/safe-mode/module.php",
+      "old": "\tpublic function disable_safe_mode() {\n\t\tif ( ! current_user_can( 'install_plugins' ) ) {\n\t\t\treturn;\n\t\t}",
+      "new": "\tpublic function disable_safe_mode() {\n\t\tif ( ! current_user_can( 'install_plugins' ) && ! defined( 'ELEMENTOR_EDU__FILE__' ) ) {\n\t\t\treturn;\n\t\t}",
+      "count": 1
+    },
+    {
+      "path": "elementor/modules/safe-mode/module.php",
+      "old": "\t\tsetcookie( self::OPTION_TOKEN, '', 1, '', '', is_ssl(), true );",
+      "new": "\t\tif ( ! headers_sent() ) {\n\t\t\tsetcookie( self::OPTION_TOKEN, '', 1, '', '', is_ssl(), true );\n\t\t}",
+      "count": 1
+    },
+    {
+      "path": "elementor/core/document-types/page-base.php",
+      "old": "\t\t\t\t'type' => Controls_Manager::SWITCHER,\n\t\t\t\t'description' => sprintf(",
+      "new": "\t\t\t\t'type' => Controls_Manager::SWITCHER,\n\t\t\t\t'default' => 'yes',\n\t\t\t\t'description' => sprintf(",
+      "count": 1
+    },
+    {
+      "path": "elementor/includes/beta-testers.php",
+      "old": "public function __construct() {",
+      "new": "public function __construct() {\n\t\t// Versions are replaced using complete Elementor Edu ZIP packages.\n\t\tif ( defined( 'ELEMENTOR_EDU__FILE__' ) ) {\n\t\t\treturn;\n\t\t}\n",
+      "count": 1
+    },
+    {
+      "path": "elementor/core/admin/canary-deployment.php",
+      "old": "public function __construct() {",
+      "new": "public function __construct() {\n\t\t// Versions are replaced using complete Elementor Edu ZIP packages.\n\t\tif ( defined( 'ELEMENTOR_EDU__FILE__' ) ) {\n\t\t\treturn;\n\t\t}\n",
+      "count": 1
+    },
+    {
+      "path": "elementor-pro/license/updater.php",
+      "old": "\t\t$this->setup_hooks();",
+      "new": "\t\tif ( defined( 'ELEMENTOR_EDU__FILE__' ) ) {\n\t\t\treturn;\n\t\t}\n\n\t\t$this->setup_hooks();",
+      "count": 1
+    },
+    {
+      "path": "elementor/includes/settings/tools.php",
+      "old": "private function get_rollback_versions() {",
+      "new": "private function get_rollback_versions() {\n\t\tif ( defined( 'ELEMENTOR_EDU__FILE__' ) ) {\n\t\t\treturn [];\n\t\t}\n",
+      "count": 1
+    },
+    {
+      "path": "elementor/includes/settings/tools.php",
+      "old": "\t\treturn $tabs;",
+      "new": "\t\tunset( $tabs['versions'] );\n\t\treturn $tabs;",
+      "count": 1
+    },
+    {
+      "path": "elementor-pro/core/admin/admin.php",
+      "old": "public function register_admin_tools_fields( Tools $tools ) {",
+      "new": "public function register_admin_tools_fields( Tools $tools ) {\n\t\t// Single-engine rollback would replace the combined distribution.\n\t\tif ( defined( 'ELEMENTOR_EDU__FILE__' ) ) {\n\t\t\treturn;\n\t\t}\n",
+      "count": 1
+    }
+  ],
+  "remove": [
+    "elementor/modules/safe-mode/mu-plugin"
+  ]
+}

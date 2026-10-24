@@ -16,7 +16,8 @@ final class Elementor_Edu_Translation_Updater {
 	}
 
 	private static function versions() {
-		return [ 'elementor' => ELEMENTOR_VERSION, 'elementor-pro' => ELEMENTOR_PRO_VERSION ];
+		$manifest = json_decode( file_get_contents( dirname( ELEMENTOR_EDU__FILE__ ) . '/bundle.json' ), true );
+		return [ 'elementor' => $manifest['elementor'], 'elementor-pro' => $manifest['elementor_pro'] ];
 	}
 
 	public static function schedule() {

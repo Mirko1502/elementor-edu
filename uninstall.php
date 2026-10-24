@@ -11,6 +11,8 @@ if ( is_multisite() ) {
 		wp_clear_scheduled_hook( 'elementor_edu_daily_update_check' );
 		wp_clear_scheduled_hook( 'elementor_edu_translation_refresh' );
 		delete_option( 'elementor_edu_hide_educational_notice' );
+		delete_option( 'elementor_edu_engines_enrolled' );
+	delete_option( 'elementor_edu_engine_activation_pending' );
 		restore_current_blog();
 	}
 	delete_site_option( 'elementor_edu_course_record' );
@@ -66,4 +68,13 @@ if ( isset( $wpdb->usermeta ) ) {
 	$wpdb->delete( $wpdb->usermeta, [ 'meta_key' => 'elementor_edu_setup_success_pending' ], [ '%s' ] );
 	$wpdb->delete( $wpdb->usermeta, [ 'meta_key' => 'elementor_edu_setup_success_seen' ], [ '%s' ] );
 	$wpdb->delete( $wpdb->usermeta, [ 'meta_key' => 'elementor_edu_install_complete_pending' ], [ '%s' ] );
+}
+
+// The separately installed engines and their content belong to the site.
+// Keep recovery records if a filesystem transaction still needs attention.
+delete_option( 'elementor_edu_engines_enrolled' );
+	delete_option( 'elementor_edu_engine_activation_pending' );
+delete_site_option( 'elementor_edu_engines_network_enrolled' );
+if ( ! get_site_option( 'elementor_edu_engines_transaction' ) ) {
+	delete_site_option( 'elementor_edu_engines_version' );
 }

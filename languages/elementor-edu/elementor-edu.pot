@@ -314,30 +314,6 @@ msgstr ""
 msgid "The Altervista plugin and its theme initialization, authentication and background services are preserved."
 msgstr ""
 
-msgid "The 90-day update period has been restarted."
-msgstr ""
-
-msgid "The update period could not be restarted. The existing record was kept."
-msgstr ""
-
-msgid "Restart the update period"
-msgstr ""
-
-msgid "Restart the 90-day period for Elementor Edu updates and translation refreshes. On a network, this applies to every site."
-msgstr ""
-
-msgid "I want to restart the 90-day update period now."
-msgstr ""
-
-msgid "Restart 90 days"
-msgstr ""
-
-msgid "Confirm the 90-day reset before continuing."
-msgstr ""
-
-msgid "Choose which Altervista screens to show. Hide mode also deactivates the regular Altervista plugin when standalone Hello Elementor is active."
-msgstr ""
-
 msgid "With other themes, child themes, declared plugin dependencies or network activation, Altervista stays active to protect compatibility. Its screens are still hidden. Choosing another mode restores the integration."
 msgstr ""
 
@@ -378,5 +354,38 @@ msgid "Confirm permanent updates before continuing."
 msgstr ""
 
 msgid "Settings could not be saved."
+msgstr ""
+
+msgid "Elementor Edu installs Elementor and Elementor Pro as separate plugins, preserving their standard identities and existing content. Edu manages educational settings and coordinated updates."
+msgstr ""
+
+msgid "Installs and manages Elementor and Elementor Pro as separate plugins for educational use."
+msgstr ""
+
+msgid "Elementor Edu could not finish installing its separate plugins. Existing files were preserved. Check filesystem permissions and any existing Elementor installations, then reload this page."
+msgstr ""
+
+msgid "Engine recovery needs attention. Backups were kept."
+msgstr ""
+
+msgid "Update Elementor and Elementor Pro together through Elementor Edu."
+msgstr ""
+
+msgid "About Elementor Edu"
+msgstr ""
+
+msgid "Elementor Edu installs Elementor and Elementor Pro as separate plugins and manages educational settings, translations and coordinated updates while preserving existing content."
+msgstr ""
+
+msgid "Altervista presence"
+msgstr ""
+
+msgid "Show all Altervista elements"
+msgstr ""
+
+msgid "Hide all visible traces of Altervista (recommended)"
+msgstr ""
+
+msgid "Choose whether to hide every visible trace of Altervista throughout the WordPress administration area, show only Server to server, or show the full Altervista interface. In Hide mode, the regular Altervista plugin is deactivated when standalone Hello Elementor is active."
 msgstr ""
 

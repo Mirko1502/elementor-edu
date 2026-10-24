@@ -71,7 +71,7 @@ final class Elementor_Edu_I18n {
 		}
 		$registered = wp_scripts()->registered[ $handle ] ?? null;
 		$src = $registered ? wp_parse_url( $registered->src, PHP_URL_PATH ) : '';
-		$prefix = '/includes/' . $domain . '/';
+		$prefix = '/' . $domain . '/';
 		$position = $src ? strpos( $src, $prefix ) : false;
 		if ( false === $position ) {
 			return $empty;

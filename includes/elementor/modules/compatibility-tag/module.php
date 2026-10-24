@@ -1,5 +1,4 @@
 <?php
-// Elementor Edu: adapted for the combined educational distribution.
 namespace Elementor\Modules\CompatibilityTag;
 
 use Elementor\Plugin;
@@ -68,7 +67,7 @@ class Module extends Base_Module {
 		return Plugin::$instance->wp
 			->get_plugins()
 			->except( [
-				ELEMENTOR_EDU_PLUGIN_BASE,
+				'elementor/elementor.php',
 				'elementor-beta/elementor-beta.php',
 				'block-builder/block-builder.php',
 			] )

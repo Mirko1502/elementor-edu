@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: Elementor Edu
- * Description: Elementor in one package for educational and demonstration use.
- * Version: 4.3.2.13
+ * Description: Installs and manages Elementor and Elementor Pro as separate plugins for educational use.
+ * Version: 4.3.2.19
  * Author: Elementor.com
  * Requires PHP: 7.4
  * Requires at least: 6.8
@@ -20,11 +20,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ELEMENTOR_EDU_VERSION', '4.3.2.13' );
+define( 'ELEMENTOR_EDU_VERSION', '4.3.2.19' );
 define( 'ELEMENTOR_EDU__FILE__', __FILE__ );
 define( 'ELEMENTOR_EDU_PLUGIN_BASE', plugin_basename( __FILE__ ) );
 
-/** Coordinates the two engines under a single WordPress plugin identity. */
+/** Coordinates separate Elementor plugins and educational settings. */
 final class Elementor_Edu {
 
 	private static $error = '';
@@ -65,8 +65,7 @@ final class Elementor_Edu {
 		} elseif ( version_compare( get_bloginfo( 'version' ), '6.8', '<' ) ) {
 			self::$error = 'Elementor Edu requires WordPress %s or later.';
 			self::$error_args = [ '6.8' ];
-		} elseif ( self::has_conflict() ) {
-			self::$error = 'Deactivate the separate Elementor and Elementor Pro plugins before activating Elementor Edu. Existing content will be preserved.';
+
 		}
 
 		// Validate all bootstrap files before requiring any of them or creating
@@ -74,7 +73,7 @@ final class Elementor_Edu {
 		foreach ( [
 			'edu-i18n.php', 'edu-course.php', 'edu-hello-theme.php',
 			'edu-updater.php', 'edu-translation-updater.php', 'edu-translation-catalog.php',
-			'edu-altervista.php', 'edu-editor-promotions.php',
+			'edu-altervista.php', 'edu-editor-promotions.php', 'edu-engines.php',
 			'elementor/elementor.php', 'elementor/includes/plugin.php',
 			'elementor-pro/elementor-pro.php', 'elementor-pro/plugin.php',
 		] as $file ) {
@@ -101,9 +100,9 @@ final class Elementor_Edu {
 			return;
 		}
 
-		// Keep the physical engine paths intact; only their plugin identity changes.
-		require_once __DIR__ . '/includes/elementor/elementor.php';
-		require_once __DIR__ . '/includes/elementor-pro/elementor-pro.php';
+		// Standard plugin files provide their own identities and lifecycle hooks.
+		require_once __DIR__ . '/includes/edu-engines.php';
+		Elementor_Edu_Engines::boot();
 		require_once __DIR__ . '/includes/edu-hello-theme.php';
 		require_once __DIR__ . '/includes/edu-updater.php';
 		require_once __DIR__ . '/includes/edu-translation-updater.php';
@@ -129,6 +128,7 @@ final class Elementor_Edu {
 		add_filter( 'site_transient_update_plugins', [ __CLASS__, 'filter_updates' ], PHP_INT_MAX );
 		add_filter( 'auto_update_plugin', [ __CLASS__, 'auto_update' ], PHP_INT_MAX, 2 );
 		add_filter( 'plugin_auto_update_setting_html', [ __CLASS__, 'auto_update_html' ], PHP_INT_MAX, 2 );
+		add_filter( 'plugin_action_links_' . ELEMENTOR_EDU_PLUGIN_BASE, [ __CLASS__, 'settings_link' ] );
 		add_action( 'admin_post_elementor_rollback', [ __CLASS__, 'block_rollback' ], -100 );
 		add_action( 'admin_post_elementor_pro_rollback', [ __CLASS__, 'block_rollback' ], -100 );
 		add_filter( 'elementor/admin/show_beta_tester', '__return_false' );
@@ -143,26 +143,21 @@ final class Elementor_Edu {
 		update_option( 'av_disable_google_analytics', '1', false );
 	}
 
-	public static function disable_tracking( $value ) {
-		return 'no';
+	public static function settings_link( $links ) {
+		if ( current_user_can( 'manage_options' ) ) {
+			$url = admin_url( ( defined( 'ELEMENTOR_VERSION' ) ? 'admin.php' : 'options-general.php' ) . '?page=elementor-edu-settings' );
+			$links['edu_settings'] = '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Elementor Edu', 'elementor-edu' ) . '</a>';
+		}
+		return $links;
 	}
 
-	private static function has_conflict() {
-		$active = (array) get_option( 'active_plugins', [] );
-		$network = is_multisite() ? array_keys( (array) get_site_option( 'active_sitewide_plugins', [] ) ) : [];
-		return defined( 'ELEMENTOR_VERSION' ) || defined( 'ELEMENTOR_PRO_VERSION' ) || array_intersect( self::ORIGINAL_PLUGINS, array_merge( $active, $network ) );
+	public static function disable_tracking( $value ) {
+		return 'no';
 	}
 
 	public static function activate( $network_wide ) {
 		if ( self::$error ) {
 			wp_die( esc_html( self::error_message() ), 'Elementor Edu', [ 'back_link' => true ] );
-		}
-		if ( is_multisite() && $network_wide ) {
-			foreach ( get_sites( [ 'fields' => 'ids', 'number' => 0 ] ) as $site_id ) {
-				if ( array_intersect( self::ORIGINAL_PLUGINS, (array) get_blog_option( $site_id, 'active_plugins', [] ) ) ) {
-					wp_die( esc_html( __( 'Deactivate the separate Elementor and Elementor Pro plugins on every site before activating Elementor Edu across the network.', 'elementor-edu' ) ), 'Elementor Edu', [ 'back_link' => true ] );
-				}
-			}
 		}
 		if ( class_exists( 'Elementor_Edu_Altervista' ) ) {
 			Elementor_Edu_Altervista::apply_activation_policy( $network_wide );
@@ -207,6 +202,7 @@ final class Elementor_Edu {
 		}
 		$files = [
 			ELEMENTOR_EDU_PLUGIN_BASE,
+			'elementor/elementor.php', 'elementor-pro/elementor-pro.php',
 			plugin_basename( __DIR__ . '/includes/elementor/elementor.php' ),
 			plugin_basename( __DIR__ . '/includes/elementor-pro/elementor-pro.php' ),
 		];
@@ -222,11 +218,11 @@ final class Elementor_Edu {
 	}
 
 	public static function auto_update( $update, $item ) {
-		return isset( $item->plugin ) && ELEMENTOR_EDU_PLUGIN_BASE === $item->plugin ? false : $update;
+		return isset( $item->plugin ) && in_array( $item->plugin, array_merge( [ ELEMENTOR_EDU_PLUGIN_BASE ], self::ORIGINAL_PLUGINS ), true ) ? false : $update;
 	}
 
 	public static function auto_update_html( $html, $plugin_file ) {
-		if ( ELEMENTOR_EDU_PLUGIN_BASE !== $plugin_file ) {
+		if ( ! in_array( $plugin_file, array_merge( [ ELEMENTOR_EDU_PLUGIN_BASE ], self::ORIGINAL_PLUGINS ), true ) ) {
 			return $html;
 		}
 		return esc_html( Elementor_Edu_Course_V4::updates_allowed() ? __( 'Updates managed by the plugin itself', 'elementor-edu' ) : __( 'Updates are unavailable for this copy', 'elementor-edu' ) );

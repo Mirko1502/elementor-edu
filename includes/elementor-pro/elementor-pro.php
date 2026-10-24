@@ -30,7 +30,7 @@ define( 'ELEMENTOR_PRO_REQUIRED_CORE_VERSION', '4.0' );
 define( 'ELEMENTOR_PRO_RECOMMENDED_CORE_VERSION', '4.3' );
 
 define( 'ELEMENTOR_PRO__FILE__', __FILE__ );
-define( 'ELEMENTOR_PRO_PLUGIN_BASE', ELEMENTOR_EDU_PLUGIN_BASE );
+define( 'ELEMENTOR_PRO_PLUGIN_BASE', plugin_basename( ELEMENTOR_PRO__FILE__ ) );
 define( 'ELEMENTOR_PRO_PATH', plugin_dir_path( ELEMENTOR_PRO__FILE__ ) );
 define( 'ELEMENTOR_PRO_ASSETS_PATH', ELEMENTOR_PRO_PATH . 'assets/' );
 define( 'ELEMENTOR_PRO_MODULES_PATH', ELEMENTOR_PRO_PATH . 'modules/' );
@@ -513,7 +513,7 @@ function elementor_pro_fail_load() {
 		return;
 	}
 
-	$plugin = ELEMENTOR_PLUGIN_BASE;
+	$plugin = 'elementor/elementor.php';
 
 	if ( _is_elementor_installed() ) {
 		if ( ! current_user_can( 'activate_plugins' ) ) {
@@ -545,7 +545,7 @@ function elementor_pro_fail_load_out_of_date() {
 		return;
 	}
 
-	$file_path = ELEMENTOR_PLUGIN_BASE;
+	$file_path = 'elementor/elementor.php';
 
 	$upgrade_link = wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' ) . $file_path, 'upgrade-plugin_' . $file_path );
 
@@ -575,7 +575,7 @@ function elementor_pro_admin_notice_upgrade_recommendation() {
 		return;
 	}
 
-	$file_path = ELEMENTOR_PLUGIN_BASE;
+	$file_path = 'elementor/elementor.php';
 	$upgrade_link = wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' ) . $file_path, 'upgrade-plugin_' . $file_path );
 	$notice_id = \ElementorPro\Modules\CoreUpgradeRecommendation\Classes\Upgrade_Recommendation_Dismissal::get_notice_id( $recommended_version );
 
@@ -624,7 +624,7 @@ function elementor_pro_print_upgrade_recommendation_legacy_notice( string $upgra
 if ( ! function_exists( '_is_elementor_installed' ) ) {
 
 	function _is_elementor_installed() {
-		$file_path = ELEMENTOR_PLUGIN_BASE;
+		$file_path = 'elementor/elementor.php';
 		$installed_plugins = get_plugins();
 
 		return isset( $installed_plugins[ $file_path ] );

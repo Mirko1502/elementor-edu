@@ -1,19 +1,26 @@
 === Elementor Edu ===
 Requires at least: 6.8
 Requires PHP: 7.4
-Stable tag: 4.3.2.13
+Stable tag: 4.3.2.19
 License: GPL-3.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
-Elementor Edu combines Elementor 4.3.5 and Elementor Pro in one installable WordPress plugin for educational demonstrations and course exercises. The original engines are by Elementor Ltd.; their copyright notices and licenses are preserved.
+
+Elementor Edu installs the bundled engines as real plugins at elementor/elementor.php and elementor-pro/elementor-pro.php. Installed Plugins lists Elementor, Elementor Pro and Elementor Edu separately. WordPress dependency checks for Elementor work without aliases. Edu retains educational settings, translations, hosting controls and coordinated updates.
+
+Activation installs both engines; an existing combined Edu installation migrates on its next request. Deployment verifies both full file trees before replacement, keeps a recovery journal and restores the previous pair after an interrupted replacement. Direct filesystem access is required. Unmanaged, locally modified or newer engine folders are preserved and reported, never overwritten. A failed initial migration can temporarily use the bundled engines until the filesystem problem is resolved.
+
+The two engines can be deactivated independently. Ordinary Edu updates preserve their activation state. Deactivating or uninstalling Edu leaves the separate engines and site content in place; Edu settings and update controls apply only while Edu is active. On multisite, engine files are shared but activation follows the site or network scope of Edu. Installation after complete Edu removal starts with fresh Edu preferences.
+
+One Edu ZIP supplies Elementor 4.3.5 and Elementor Pro for educational demonstrations and course exercises. The original engines are by Elementor Ltd.; their copyright notices and licenses are preserved.
 
 This educational distribution is intended only for activities directly related to the course. It does not include an official Elementor Pro license or guarantee access to cloud services.
 
 == Installation ==
-1. Deactivate any separate Elementor and Elementor Pro installations.
+1. Back up the site. Existing installations not managed by Edu are preserved and reported; do not delete them without a recoverable backup.
 2. In Plugins > Add New Plugin > Upload Plugin, upload the Elementor Edu ZIP file.
-3. Activate Elementor Edu. Both included engines load together and reuse existing Elementor pages, settings and data.
+3. Activate Elementor Edu. It installs and activates the two bundled engines as separate plugins, reusing existing Elementor pages, settings and data.
 4. In the setup dialog, select "Install the Hello Elementor theme" to install and activate the included Hello Elementor 3.5.1 theme, then return automatically to the dashboard. The dialog remains visible across admin pages until Hello is active and cannot be dismissed. Your current theme changes only after you click. An existing Hello installation is reused without being overwritten; an active Hello child theme is preserved. WordPress theme installation and activation permissions are required. On multisite, the change applies only to the current site.
 5. After activation, Elementor Edu confirms the installation in a dialog with a Continue button leading to Installed Plugins. Successful updates receive the same confirmation; the native post-update Add Plugins link is removed. If Hello still needs setup, its required dialog follows the confirmation. Completing Hello setup later shows the separate one-time ready message.
 
@@ -52,7 +59,7 @@ This package includes customizations from an altered Pro distribution. It retain
 Translations are obtained from https://translate.wordpress.org/projects/wp-plugins/elementor/ and https://translate.elementor.com/projects/elementor-pro/. Translation requests contain no site content, personal data or license credentials. Public servers necessarily receive connection metadata such as the requesting IP address.
 
 == Distribution changes ==
-The combined package uses one plugin identity while preserving internal engine paths and APIs. Separate engine updates and rollbacks are disabled to protect the combined installation; database upgrades remain enabled. The builder retains Elementor branding. Local translation catalogues and supplementary entries are distributed under the corresponding component licenses.
+The package deploys two standard engine identities and keeps Edu as their separate manager. Separate engine updates and rollbacks are disabled to protect the combined installation; database upgrades remain enabled. The builder retains Elementor branding. Local translation catalogues and supplementary entries are distributed under the corresponding component licenses.
 
 == Administrator preferences ==
 Administrators can hide the educational-use notice persistently for their site. Unchecking the option restores it. The choice survives normal updates and deactivation; uninstalling Edu removes it.

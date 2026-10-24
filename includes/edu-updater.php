@@ -19,6 +19,11 @@ final class Elementor_Edu_Updater {
 	private const MAX_DOWNLOAD = 157286400;
 	private const MAX_UNPACKED = 629145600;
 
+	private static function engine_version( $key ) {
+		$manifest = json_decode( file_get_contents( dirname( ELEMENTOR_EDU__FILE__ ) . '/bundle.json' ), true );
+		return $manifest[ $key ] ?? '0';
+	}
+
 	public static function boot() {
 		add_action( 'init', [ __CLASS__, 'schedule' ] );
 		add_action( self::EVENT, [ __CLASS__, 'check_release' ] );
@@ -56,7 +61,7 @@ final class Elementor_Edu_Updater {
 			return;
 		}
 		$remote = $match[1];
-		if ( version_compare( $remote, ELEMENTOR_PRO_VERSION, '>' ) ) {
+		if ( version_compare( $remote, self::engine_version( 'elementor_pro' ), '>' ) ) {
 			update_site_option( self::AVAILABLE, [ 'version' => $remote, 'checked_at' => time() ] );
 		} else {
 			delete_site_option( self::AVAILABLE );
@@ -71,7 +76,7 @@ final class Elementor_Edu_Updater {
 			return;
 		}
 		$available = get_site_option( self::AVAILABLE );
-		if ( empty( $available['version'] ) || ! version_compare( $available['version'], ELEMENTOR_PRO_VERSION, '>' ) ) {
+		if ( empty( $available['version'] ) || ! version_compare( $available['version'], self::engine_version( 'elementor_pro' ), '>' ) ) {
 			return;
 		}
 		wp_enqueue_script( 'jquery' );
@@ -106,7 +111,7 @@ final class Elementor_Edu_Updater {
 			wp_die( esc_html( self::expiry_error()->get_error_message() ), 'Elementor', [ 'response' => 403 ] );
 		}
 		$available = get_site_option( self::AVAILABLE );
-		if ( empty( $available['version'] ) || ! version_compare( $available['version'], ELEMENTOR_PRO_VERSION, '>' ) ) {
+		if ( empty( $available['version'] ) || ! version_compare( $available['version'], self::engine_version( 'elementor_pro' ), '>' ) ) {
 			wp_die( esc_html__( 'No Elementor update is available.', 'elementor-edu' ), '', [ 'response' => 409 ] );
 		}
 
@@ -234,6 +239,9 @@ final class Elementor_Edu_Updater {
 		if ( isset( $extra['plugin'] ) ) {
 			$plugins[] = $extra['plugin'];
 		}
+		if ( array_intersect( Elementor_Edu_Engines::PLUGINS, $plugins ) ) {
+			return new WP_Error( 'edu_managed_engine', __( 'Update Elementor and Elementor Pro together through Elementor Edu.', 'elementor-edu' ) );
+		}
 		if ( in_array( ELEMENTOR_EDU_PLUGIN_BASE, $plugins, true ) && ! Elementor_Edu_Course_V4::updates_allowed() ) {
 			return self::expiry_error();
 		}
@@ -251,7 +259,7 @@ final class Elementor_Edu_Updater {
 		if ( is_wp_error( $pro_release ) ) {
 			return $pro_release;
 		}
-		if ( $expected_pro !== $pro_release['version'] || ! version_compare( $pro_release['version'], ELEMENTOR_PRO_VERSION, '>' ) ) {
+		if ( $expected_pro !== $pro_release['version'] || ! version_compare( $pro_release['version'], self::engine_version( 'elementor_pro' ), '>' ) ) {
 			return new WP_Error( 'elementor_edu_pro_changed', __( 'The available version changed during preparation. Reload the dashboard and try again.', 'elementor-edu' ) );
 		}
 		$core_info = self::request( self::API, 20 );
@@ -262,7 +270,7 @@ final class Elementor_Edu_Updater {
 		if ( empty( $metadata['version'] ) || empty( $metadata['download_link'] ) || 'downloads.wordpress.org' !== wp_parse_url( $metadata['download_link'], PHP_URL_HOST ) ) {
 			return new WP_Error( 'elementor_edu_core_metadata', __( 'Could not verify the Elementor package.', 'elementor-edu' ) );
 		}
-		if ( version_compare( $metadata['version'], ELEMENTOR_VERSION, '<' ) ) {
+		if ( version_compare( $metadata['version'], self::engine_version( 'elementor' ), '<' ) ) {
 			return new WP_Error( 'elementor_edu_core_downgrade', __( 'The source returned an Elementor version older than the installed version.', 'elementor-edu' ) );
 		}
 
@@ -380,7 +388,7 @@ final class Elementor_Edu_Updater {
 		self::replace_header_value( $bundle . '/readme.txt', 'Stable tag', ELEMENTOR_EDU_VERSION, $edu_version );
 		$readme_path = $bundle . '/readme.txt';
 		$readme_contents = file_get_contents( $readme_path );
-		$readme_contents = str_replace( 'Elementor ' . ELEMENTOR_VERSION, 'Elementor ' . $core_version, $readme_contents );
+		$readme_contents = str_replace( 'Elementor ' . self::engine_version( 'elementor' ), 'Elementor ' . $core_version, $readme_contents );
 		file_put_contents( $readme_path, $readme_contents );
 		$manifest['requires_php'] = $minimum_php;
 		$manifest['requires_wordpress'] = $minimum_wp;
@@ -405,6 +413,10 @@ final class Elementor_Edu_Updater {
 		}
 		sort( $modified );
 		$manifest['modified_engine_files'] = $modified;
+		$manifest['engine_files'] = [];
+		foreach ( [ 'elementor', 'elementor-pro' ] as $slug ) {
+			$manifest['engine_files'][ $slug ] = Elementor_Edu_Engines::hashes( $bundle . '/includes/' . $slug );
+		}
 		file_put_contents( $manifest_path, wp_json_encode( $manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES ) . "\n" );
 
 		$translations = Elementor_Edu_Translation_Updater::refresh_bundle( $bundle );
@@ -555,36 +567,30 @@ final class Elementor_Edu_Updater {
 	}
 
 	private static function patch_engines( $bundle, $core, $pro ) {
-		$patches = [
-			[ 'elementor/elementor.php', "define( 'ELEMENTOR_PLUGIN_BASE', plugin_basename( ELEMENTOR__FILE__ ) );", "define( 'ELEMENTOR_PLUGIN_BASE', ELEMENTOR_EDU_PLUGIN_BASE );", 1 ],
-			[ 'elementor-pro/elementor-pro.php', "define( 'ELEMENTOR_PRO_PLUGIN_BASE', plugin_basename( ELEMENTOR_PRO__FILE__ ) );", "define( 'ELEMENTOR_PRO_PLUGIN_BASE', ELEMENTOR_EDU_PLUGIN_BASE );", 1 ],
-			[ 'elementor-pro/elementor-pro.php', "'elementor/elementor.php'", 'ELEMENTOR_PLUGIN_BASE', 4 ],
-			[ 'elementor-pro/elementor-pro.php', 'print_error(', 'elementor_edu_pro_print_error(', 4 ],
-			[ 'elementor/includes/utils.php', "return 'elementor-pro/elementor-pro.php';", 'return ELEMENTOR_EDU_PLUGIN_BASE;', 1 ],
-			[ 'elementor/modules/compatibility-tag/module.php', "'elementor/elementor.php',", 'ELEMENTOR_EDU_PLUGIN_BASE,', 1 ],
-		];
-		foreach ( [ 'elementor/includes/beta-testers.php', 'elementor/core/admin/canary-deployment.php' ] as $path ) {
-			$patches[] = [ $path, 'public function __construct() {', "public function __construct() {\n\t\t// Combined Elementor Edu package updater.\n\t\tif ( defined( 'ELEMENTOR_EDU__FILE__' ) ) {\n\t\t\treturn;\n\t\t}\n", 1 ];
+		$spec = json_decode( file_get_contents( $bundle . '/engine-patches.json' ), true );
+		if ( ! is_array( $spec['patches'] ?? null ) ) {
+			return new WP_Error( 'elementor_edu_patch_manifest', __( 'The installed package manifest is invalid.', 'elementor-edu' ) );
 		}
-		$patches[] = [ 'elementor-pro/license/updater.php', "\t\t\$this->setup_hooks();", "\t\tif ( defined( 'ELEMENTOR_EDU__FILE__' ) ) {\n\t\t\treturn;\n\t\t}\n\n\t\t\$this->setup_hooks();", 1 ];
-		$patches[] = [ 'elementor/includes/settings/tools.php', 'private function get_rollback_versions() {', "private function get_rollback_versions() {\n\t\tif ( defined( 'ELEMENTOR_EDU__FILE__' ) ) {\n\t\t\treturn [];\n\t\t}\n", 1 ];
-		$patches[] = [ 'elementor/includes/settings/tools.php', "\t\treturn \$tabs;", "\t\tunset( \$tabs['versions'] );\n\t\treturn \$tabs;", 1 ];
-		$patches[] = [ 'elementor-pro/core/admin/admin.php', 'public function register_admin_tools_fields( Tools $tools ) {', "public function register_admin_tools_fields( Tools \$tools ) {\n\t\tif ( defined( 'ELEMENTOR_EDU__FILE__' ) ) {\n\t\t\treturn;\n\t\t}\n", 1 ];
-		foreach ( $patches as $patch ) {
-			$path = $bundle . '/includes/' . $patch[0];
+		foreach ( $spec['patches'] as $patch ) {
+			$path = $bundle . '/includes/' . $patch['path'];
 			if ( ! is_file( $path ) ) {
 				return new WP_Error( 'elementor_edu_patch_file', __( 'The downloaded package is incompatible with Elementor Edu.', 'elementor-edu' ) );
 			}
 			$contents = file_get_contents( $path );
-			if ( substr_count( $contents, $patch[1] ) !== $patch[3] ) {
+			if ( substr_count( $contents, $patch['old'] ) !== $patch['count'] ) {
 				return new WP_Error( 'elementor_edu_patch_mismatch', __( 'The downloaded package needs to be adapted before installation.', 'elementor-edu' ) );
 			}
-			$contents = str_replace( $patch[1], $patch[2], $contents );
+			$contents = str_replace( $patch['old'], $patch['new'], $contents );
 			$marker = "// Elementor Edu: adapted for the combined educational distribution.\n";
 			if ( false === strpos( $contents, $marker ) ) {
 				$contents = preg_replace( '/<\?php\s*\n/', "<?php\n" . $marker, $contents, 1 );
 			}
-			file_put_contents( $path, $contents );
+			if ( false === file_put_contents( $path, $contents ) ) {
+				return new WP_Error( 'elementor_edu_patch_write', __( 'Could not prepare a complete copy of the plugin.', 'elementor-edu' ) );
+			}
+		}
+		foreach ( $spec['remove'] ?? [] as $relative ) {
+			self::remove_tree( $bundle . '/includes/' . $relative );
 		}
 		return true;
 	}

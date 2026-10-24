@@ -75,7 +75,7 @@ final class Elementor_Edu_Hello_Theme {
 
 	private static function has_pending_completion() {
 		$user_id = get_current_user_id();
-		return $user_id && in_array( get_user_meta( $user_id, self::COMPLETE_PENDING, true ), [ 'installed', 'updated' ], true );
+		return ( ! class_exists( 'Elementor_Edu_Engines', false ) || Elementor_Edu_Engines::ready() ) && $user_id && in_array( get_user_meta( $user_id, self::COMPLETE_PENDING, true ), [ 'installed', 'updated' ], true );
 	}
 
 	/** A successful normal plugin upgrade, including a combined Edu update. */

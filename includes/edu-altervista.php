@@ -18,7 +18,6 @@ final class Elementor_Edu_Altervista {
 		add_action( 'admin_menu', [ __CLASS__, 'register_settings_page' ], 99 );
 		add_action( 'admin_post_elementor_edu_altervista_mode', [ __CLASS__, 'save_mode' ] );
 		add_action( 'admin_post_elementor_edu_notice_visibility', [ __CLASS__, 'save_notice_visibility' ] );
-		add_action( 'admin_post_elementor_edu_reset_window', [ __CLASS__, 'reset_window' ] );
 		add_action( 'admin_post_elementor_edu_permanent_updates', [ __CLASS__, 'enable_permanent_updates' ] );
 		// Run before plugins_loaded: Seamless needs the provider's initialization
 		// before WordPress includes the theme. Never emulate its private API.
@@ -114,7 +113,7 @@ final class Elementor_Edu_Altervista {
 
 	public static function register_settings_page() {
 		if ( ! current_user_can( 'manage_options' ) ) { return; }
-		add_submenu_page( 'elementor', __( 'Elementor Edu', 'elementor-edu' ), __( 'Elementor Edu', 'elementor-edu' ), 'manage_options', 'elementor-edu-settings', [ __CLASS__, 'render_settings_page' ] );
+		add_submenu_page( defined( 'ELEMENTOR_VERSION' ) ? 'elementor' : 'options-general.php', __( 'Elementor Edu', 'elementor-edu' ), __( 'Elementor Edu', 'elementor-edu' ), 'manage_options', 'elementor-edu-settings', [ __CLASS__, 'render_settings_page' ] );
 		// Editor One uses a separate top-level menu. Keep the settings entry in
 		// Elementor's editor flyout and also place it after Editor (20), before
 		// Theme Builder (70), in the visible WordPress admin menu.
@@ -124,20 +123,18 @@ final class Elementor_Edu_Altervista {
 	public static function render_settings_page() {
 		if ( ! current_user_can( 'manage_options' ) ) { wp_die( esc_html__( 'You are not allowed to access this page.', 'elementor-edu' ) ); }
 		$mode = self::get_mode();
-		echo '<div class="wrap"><h1>' . esc_html__( 'Elementor Edu', 'elementor-edu' ) . '</h1><p>' . esc_html__( 'Elementor Edu brings Elementor and Elementor Pro together in one plugin for lessons, demonstrations and guided practice. It preserves the familiar editor and existing content while managing the included components as one educational package.', 'elementor-edu' ) . '</p><p>' . esc_html__( 'Choose which Altervista screens to show. Hide mode also deactivates the regular Altervista plugin when standalone Hello Elementor is active.', 'elementor-edu' ) . '</p>';
+		echo '<div class="wrap"><h1>' . esc_html__( 'Elementor Edu', 'elementor-edu' ) . '</h1><h2>' . esc_html__( 'About Elementor Edu', 'elementor-edu' ) . '</h2><p>' . esc_html__( 'Elementor Edu installs Elementor and Elementor Pro as separate plugins and manages educational settings, translations and coordinated updates while preserving existing content.', 'elementor-edu' ) . '</p><hr><h2>' . esc_html__( 'Altervista presence', 'elementor-edu' ) . '</h2><p>' . esc_html__( 'Choose whether to hide every visible trace of Altervista throughout the WordPress administration area, show only Server to server, or show the full Altervista interface. In Hide mode, the regular Altervista plugin is deactivated when standalone Hello Elementor is active.', 'elementor-edu' ) . '</p>';
 		if ( 'disabled' === $mode ) {
 			echo '<p class="description" id="elementor-edu-altervista-status">' . ( is_plugin_active( self::PLUGIN )
 				? esc_html__( 'Altervista remains active for compatibility; its administration screens are hidden.', 'elementor-edu' )
 				: esc_html__( 'The regular Altervista plugin is inactive. Deactivation takes full effect on the next request. Hosting code loaded outside normal plugins is not disabled.', 'elementor-edu' ) ) . '</p>';
 		}
 		if ( isset( $_GET['updated'] ) ) { echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Settings saved.', 'elementor-edu' ) . '</p></div>'; }
-		if ( isset( $_GET['window_reset'] ) ) { echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'The 90-day update period has been restarted.', 'elementor-edu' ) . '</p></div>'; }
 		if ( isset( $_GET['updates_permanent'] ) ) { echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__( 'Permanent updates are now enabled.', 'elementor-edu' ) . '</p></div>'; }
 		if ( isset( $_GET['permanent_error'] ) ) { echo '<div class="notice notice-error"><p>' . esc_html__( 'Permanent updates could not be enabled. The existing record was kept.', 'elementor-edu' ) . '</p></div>'; }
-		if ( isset( $_GET['window_error'] ) ) { echo '<div class="notice notice-error"><p>' . esc_html__( 'The update period could not be restarted. The existing record was kept.', 'elementor-edu' ) . '</p></div>'; }
 		echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="elementor_edu_altervista_mode">';
 		wp_nonce_field( 'elementor_edu_altervista_mode' );
-		foreach ( [ 'disabled' => __( 'Hide Altervista screens (recommended)', 'elementor-edu' ), 'server_to_server' => __( 'Show only Server to server', 'elementor-edu' ), 'all' => __( 'Show all Altervista screens', 'elementor-edu' ) ] as $value => $label ) {
+		foreach ( [ 'disabled' => __( 'Hide all visible traces of Altervista (recommended)', 'elementor-edu' ), 'server_to_server' => __( 'Show only Server to server', 'elementor-edu' ), 'all' => __( 'Show all Altervista elements', 'elementor-edu' ) ] as $value => $label ) {
 			echo '<p><label><input type="radio" name="altervista_mode" value="' . esc_attr( $value ) . '" ' . checked( $mode, $value, false ) . '> ' . esc_html( $label ) . '</label></p>';
 		}
 		echo '<p class="description">' . esc_html__( 'With other themes, child themes, declared plugin dependencies or network activation, Altervista stays active to protect compatibility. Its screens are still hidden. Choosing another mode restores the integration.', 'elementor-edu' ) . '</p><p><button class="button button-primary">' . esc_html__( 'Save changes', 'elementor-edu' ) . '</button></p></form>';
@@ -151,13 +148,6 @@ final class Elementor_Edu_Altervista {
 			echo '<p><label><input type="checkbox" name="confirm_permanent_updates" value="1" required> ' . esc_html__( 'I want to enable updates without a time limit.', 'elementor-edu' ) . '</label></p>';
 			echo '<p><button class="button">' . esc_html__( 'Enable permanent updates', 'elementor-edu' ) . '</button></p></form>';
 			}
-		}
-		if ( ! Elementor_Edu_Course_V4::updates_are_permanent() && ( ! is_multisite() || current_user_can( 'manage_network_options' ) ) ) {
-			echo '<hr><h2>' . esc_html__( 'Restart the update period', 'elementor-edu' ) . '</h2><p>' . esc_html__( 'Restart the 90-day period for Elementor Edu updates and translation refreshes. On a network, this applies to every site.', 'elementor-edu' ) . '</p>';
-			echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="elementor_edu_reset_window">';
-			wp_nonce_field( 'elementor_edu_reset_window' );
-			echo '<p><label><input type="checkbox" name="confirm_reset_window" value="1" required> ' . esc_html__( 'I want to restart the 90-day update period now.', 'elementor-edu' ) . '</label></p>';
-			echo '<p><button class="button">' . esc_html__( 'Restart 90 days', 'elementor-edu' ) . '</button></p></form>';
 		}
 		echo '<hr><h2>' . esc_html__( 'Educational notice', 'elementor-edu' ) . '</h2>';
 		echo '<form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="elementor_edu_notice_visibility">';
@@ -189,19 +179,6 @@ final class Elementor_Edu_Altervista {
 		}
 		$reset = Elementor_Edu_Course_V4::enable_permanent_updates();
 		wp_safe_redirect( add_query_arg( is_wp_error( $reset ) ? 'permanent_error' : 'updates_permanent', '1', admin_url( 'admin.php?page=elementor-edu-settings' ) ) );
-		exit;
-	}
-
-	public static function reset_window() {
-		if ( 'POST' !== ( $_SERVER['REQUEST_METHOD'] ?? '' ) || ! current_user_can( 'manage_options' ) || ( is_multisite() && ! current_user_can( 'manage_network_options' ) ) ) {
-			wp_die( esc_html__( 'You are not allowed to change these settings.', 'elementor-edu' ) );
-		}
-		check_admin_referer( 'elementor_edu_reset_window' );
-		if ( ! isset( $_POST['confirm_reset_window'] ) || '1' !== wp_unslash( $_POST['confirm_reset_window'] ) ) {
-			wp_die( esc_html__( 'Confirm the 90-day reset before continuing.', 'elementor-edu' ) );
-		}
-		$reset = Elementor_Edu_Course_V4::reset_window();
-		wp_safe_redirect( add_query_arg( is_wp_error( $reset ) ? 'window_error' : 'window_reset', '1', admin_url( 'admin.php?page=elementor-edu-settings' ) ) );
 		exit;
 	}
 
@@ -462,7 +439,7 @@ final class Elementor_Edu_Altervista {
 		}
 	}
 
-	/** Hide these hosting menus unless all Altervista screens are requested. */
+	/** Hide visible hosting interface elements unless the full Altervista interface is requested. */
 	private static function remove_unwanted_top_level_menus() {
 		if ( 'all' === self::$mode || ! self::has_hosting_ui() ) { return; }
 		global $menu;

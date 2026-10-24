@@ -1,5 +1,4 @@
 <?php
-// Elementor Edu: adapted for the combined educational distribution.
 /**
  * Plugin Name: Elementor
  * Description: The Elementor Website Builder has it all: drag and drop page builder, Atomic Editor, pixel perfect design, global and reusable style systems, mobile responsive editing, and more. Get started now!
@@ -33,7 +32,7 @@ define( 'ELEMENTOR_VERSION', '4.3.5' );
 define( 'ELEMENTOR_MINIMUM_WP_VERSION', '6.8' );
 
 define( 'ELEMENTOR__FILE__', __FILE__ );
-define( 'ELEMENTOR_PLUGIN_BASE', ELEMENTOR_EDU_PLUGIN_BASE );
+define( 'ELEMENTOR_PLUGIN_BASE', plugin_basename( ELEMENTOR__FILE__ ) );
 define( 'ELEMENTOR_PATH', plugin_dir_path( ELEMENTOR__FILE__ ) );
 
 if ( defined( 'ELEMENTOR_TESTS' ) && ELEMENTOR_TESTS ) {

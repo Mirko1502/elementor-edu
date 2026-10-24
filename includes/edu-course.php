@@ -240,35 +240,6 @@ if ( ! class_exists( 'Elementor_Edu_Course_V4', false ) ) {
 			return true;
 		}
 
-		/** An explicit administrator action restarts the update window. */
-		public static function reset_window() {
-			$record = self::record();
-			if ( ! self::record_is_valid( $record ) ) {
-				return new WP_Error( 'elementor_edu_record_invalid', 'The existing educational record is invalid.' );
-			}
-			$now = time();
-			$record['installed_at'] = $now;
-			$record['expires_at'] = $now + self::INTERVAL;
-			$record['expired'] = false;
-			if ( ! self::save( $record ) && self::record() !== $record ) {
-				return new WP_Error( 'elementor_edu_reset_failed', 'The educational record could not be saved.' );
-			}
-			$sites = is_multisite() ? get_sites( [ 'fields' => 'ids', 'number' => 0 ] ) : [ get_current_blog_id() ];
-			foreach ( $sites as $site_id ) {
-				if ( is_multisite() ) { switch_to_blog( $site_id ); }
-				try {
-					wp_clear_scheduled_hook( self::EVENT );
-					self::schedule();
-					if ( class_exists( 'Elementor_Edu_Updater' ) ) { Elementor_Edu_Updater::schedule(); }
-					if ( class_exists( 'Elementor_Edu_Translation_Updater' ) ) { Elementor_Edu_Translation_Updater::schedule(); }
-				} finally {
-					if ( is_multisite() ) { restore_current_blog(); }
-				}
-			}
-			return true;
-		}
-
-
 		/** Expiry stops updates, never the engines or plugin activation. */
 		public static function enforce() {
 			if ( ! self::expired() ) {

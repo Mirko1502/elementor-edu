@@ -1,5 +1,4 @@
 <?php
-// Elementor Edu: adapted for the combined educational distribution.
 namespace Elementor;
 
 use Elementor\Core\Files\Fonts\Google_Font;
@@ -676,7 +675,7 @@ class Utils {
 	}
 
 	private static function get_elementor_pro_file_path(): string {
-		return ELEMENTOR_EDU_PLUGIN_BASE;
+		return 'elementor-pro/elementor-pro.php';
 	}
 
 	/**

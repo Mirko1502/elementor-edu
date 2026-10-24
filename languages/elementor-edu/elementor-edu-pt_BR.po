@@ -317,30 +317,6 @@ msgstr "O WordPress não conseguiu concluir a operação com o tema Hello Elemen
 msgid "The Altervista plugin and its theme initialization, authentication and background services are preserved."
 msgstr "O plugin Altervista e seus serviços de inicialização do tema, autenticação e tarefas em segundo plano são preservados."
 
-msgid "The 90-day update period has been restarted."
-msgstr "O período de atualização de 90 dias foi reiniciado."
-
-msgid "The update period could not be restarted. The existing record was kept."
-msgstr "Não foi possível reiniciar o período de atualização. O registro existente foi mantido."
-
-msgid "Restart the update period"
-msgstr "Reiniciar o período de atualização"
-
-msgid "Restart the 90-day period for Elementor Edu updates and translation refreshes. On a network, this applies to every site."
-msgstr "Reinicia os 90 dias para atualizações do Elementor Edu e das traduções. Em uma rede, isso se aplica a todos os sites."
-
-msgid "I want to restart the 90-day update period now."
-msgstr "Quero reiniciar agora o período de atualização de 90 dias."
-
-msgid "Restart 90 days"
-msgstr "Zerar e reiniciar os 90 dias"
-
-msgid "Confirm the 90-day reset before continuing."
-msgstr "Confirme a redefinição dos 90 dias antes de continuar."
-
-msgid "Choose which Altervista screens to show. Hide mode also deactivates the regular Altervista plugin when standalone Hello Elementor is active."
-msgstr "Escolha quais telas do Altervista exibir. O modo Ocultar também desativa o plugin comum do Altervista quando o Hello Elementor está ativo sem tema filho."
-
 msgid "With other themes, child themes, declared plugin dependencies or network activation, Altervista stays active to protect compatibility. Its screens are still hidden. Choosing another mode restores the integration."
 msgstr "Com outros temas, temas filhos, dependências declaradas por outros plugins ou ativação em rede, o Altervista permanece ativo para preservar a compatibilidade. Suas telas continuam ocultas. Escolher outro modo restaura a integração."
 
@@ -382,4 +358,37 @@ msgstr "Confirme as atualizações sem prazo antes de continuar."
 
 msgid "Settings could not be saved."
 msgstr "Não foi possível salvar as configurações."
+
+msgid "Elementor Edu installs Elementor and Elementor Pro as separate plugins, preserving their standard identities and existing content. Edu manages educational settings and coordinated updates."
+msgstr "O Elementor Edu instala Elementor e Elementor Pro como plugins separados, preservando suas identidades padrão e o conteúdo existente. O Edu gerencia as configurações educacionais e as atualizações coordenadas."
+
+msgid "Installs and manages Elementor and Elementor Pro as separate plugins for educational use."
+msgstr "Instala e gerencia Elementor e Elementor Pro como plugins separados para uso educacional."
+
+msgid "Elementor Edu could not finish installing its separate plugins. Existing files were preserved. Check filesystem permissions and any existing Elementor installations, then reload this page."
+msgstr "O Elementor Edu não concluiu a instalação dos plugins separados. Os arquivos existentes foram preservados. Verifique as permissões do sistema de arquivos e as instalações existentes do Elementor e recarregue esta página."
+
+msgid "Engine recovery needs attention. Backups were kept."
+msgstr "A recuperação dos mecanismos requer atenção. Os backups foram preservados."
+
+msgid "Update Elementor and Elementor Pro together through Elementor Edu."
+msgstr "Atualize Elementor e Elementor Pro juntos pelo Elementor Edu."
+
+msgid "About Elementor Edu"
+msgstr "Sobre o Elementor Edu"
+
+msgid "Elementor Edu installs Elementor and Elementor Pro as separate plugins and manages educational settings, translations and coordinated updates while preserving existing content."
+msgstr "O Elementor Edu instala o Elementor e o Elementor Pro como plugins separados e gerencia configurações educacionais, traduções e atualizações coordenadas, preservando o conteúdo existente."
+
+msgid "Altervista presence"
+msgstr "Presença do Altervista"
+
+msgid "Show all Altervista elements"
+msgstr "Mostrar todos os elementos do Altervista"
+
+msgid "Hide all visible traces of Altervista (recommended)"
+msgstr "Ocultar todos os vestígios visíveis do Altervista (recomendado)"
+
+msgid "Choose whether to hide every visible trace of Altervista throughout the WordPress administration area, show only Server to server, or show the full Altervista interface. In Hide mode, the regular Altervista plugin is deactivated when standalone Hello Elementor is active."
+msgstr "Escolha se deseja ocultar todos os vestígios visíveis do Altervista em toda a área administrativa do WordPress, mostrar apenas Server to server ou manter visível toda a interface do Altervista. No modo Ocultar, o plugin comum do Altervista é desativado quando o Hello Elementor está ativo sem tema filho."
 
