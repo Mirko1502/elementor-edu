@@ -123,7 +123,7 @@ final class Elementor_Edu_Altervista {
 	public static function render_settings_page() {
 		if ( ! current_user_can( 'manage_options' ) ) { wp_die( esc_html__( 'You are not allowed to access this page.', 'elementor-edu' ) ); }
 		$mode = self::get_mode();
-		echo '<div class="wrap"><h1>' . esc_html__( 'Elementor Edu', 'elementor-edu' ) . '</h1><h2>' . esc_html__( 'About Elementor Edu', 'elementor-edu' ) . '</h2><p>' . esc_html__( 'Elementor Edu installs Elementor and Elementor Pro as separate plugins and manages educational settings, translations and coordinated updates while preserving existing content.', 'elementor-edu' ) . '</p><hr><h2>' . esc_html__( 'Altervista presence', 'elementor-edu' ) . '</h2><p>' . esc_html__( 'Choose whether to hide every visible trace of Altervista throughout the WordPress administration area, show only Server to server, or show the full Altervista interface. In Hide mode, the regular Altervista plugin is deactivated when standalone Hello Elementor is active.', 'elementor-edu' ) . '</p>';
+		echo '<div class="wrap"><h1>' . esc_html__( 'Elementor Edu', 'elementor-edu' ) . '</h1><h2>' . esc_html__( 'About Elementor Edu', 'elementor-edu' ) . '</h2><p>' . esc_html__( 'Elementor Edu installs Elementor and Elementor Pro as separate plugins and manages educational settings, translations and coordinated updates while preserving existing content.', 'elementor-edu' ) . '</p><hr><h2>' . esc_html__( 'Altervista presence', 'elementor-edu' ) . '</h2><p>' . esc_html__( 'Choose whether and how much of Altervista to hide throughout the WordPress administration area and on the frontend.', 'elementor-edu' ) . '</p>';
 		if ( 'disabled' === $mode ) {
 			echo '<p class="description" id="elementor-edu-altervista-status">' . ( is_plugin_active( self::PLUGIN )
 				? esc_html__( 'Altervista remains active for compatibility; its administration screens are hidden.', 'elementor-edu' )
@@ -139,7 +139,7 @@ final class Elementor_Edu_Altervista {
 		}
 		echo '<p class="description">' . esc_html__( 'With other themes, child themes, declared plugin dependencies or network activation, Altervista stays active to protect compatibility. Its screens are still hidden. Choosing another mode restores the integration.', 'elementor-edu' ) . '</p><p><button class="button button-primary">' . esc_html__( 'Save changes', 'elementor-edu' ) . '</button></p></form>';
 		if ( ! is_multisite() || current_user_can( 'manage_network_options' ) ) {
-			echo '<hr><h2>' . esc_html__( 'Permanent updates', 'elementor-edu' ) . '</h2><p>' . esc_html__( 'Remove the time limit for Elementor Edu updates and translation refreshes permanently. On a network, this applies to every site.', 'elementor-edu' ) . '</p>';
+			echo '<hr><h2>' . esc_html__( 'Permanent updates', 'elementor-edu' ) . '</h2><p>' . esc_html__( 'Permanently remove the time limit for Elementor and Elementor Pro updates.', 'elementor-edu' ) . '</p>';
 			if ( Elementor_Edu_Course_V4::updates_are_permanent() ) {
 				echo '<p><strong>' . esc_html__( 'Permanent updates are active.', 'elementor-edu' ) . '</strong></p>';
 			} else {

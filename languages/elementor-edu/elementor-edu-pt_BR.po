@@ -326,9 +326,6 @@ msgstr "Não foi possível habilitar as atualizações sem prazo. O registro exi
 msgid "Permanent updates"
 msgstr "Atualizações sem prazo de expiração"
 
-msgid "Remove the time limit for Elementor Edu updates and translation refreshes permanently. On a network, this applies to every site."
-msgstr "Remova permanentemente o limite de tempo das atualizações do Elementor Edu e das traduções. Em uma rede, a alteração vale para todos os sites."
-
 msgid "Permanent updates are active."
 msgstr "As atualizações sem prazo estão ativas."
 
@@ -377,12 +374,15 @@ msgstr "Mostrar todos os elementos do Altervista"
 msgid "Hide all visible traces of Altervista (recommended)"
 msgstr "Ocultar todos os vestígios visíveis do Altervista (recomendado)"
 
-msgid "Choose whether to hide every visible trace of Altervista throughout the WordPress administration area, show only Server to server, or show the full Altervista interface. In Hide mode, the regular Altervista plugin is deactivated when standalone Hello Elementor is active."
-msgstr "Escolha se deseja ocultar todos os vestígios visíveis do Altervista em toda a área administrativa do WordPress, mostrar apenas Server to server ou manter visível toda a interface do Altervista. No modo Ocultar, o plugin comum do Altervista é desativado quando o Hello Elementor está ativo sem tema filho."
-
 msgid "You can get back to building your site by clicking the button below."
 msgstr "Você pode voltar a construir seu site clicando no botão abaixo."
 
 msgid "Installs, manages, and keeps Elementor and Elementor Pro up to date for educational use, providing the full functionality of a standard Elementor Pro installation."
 msgstr "Instala, gerencia e mantém o Elementor e o Elementor Pro atualizados para uso educacional, reproduzindo em todos os aspectos uma instalação normal do Elementor Pro."
+
+msgid "Choose whether and how much of Altervista to hide throughout the WordPress administration area and on the frontend."
+msgstr "Escolha se e quanto ocultar do Altervista em toda a área administrativa do WordPress e no frontend."
+
+msgid "Permanently remove the time limit for Elementor and Elementor Pro updates."
+msgstr "Remova permanentemente o limite de tempo para as atualizações do Elementor e do Elementor Pro."
 
