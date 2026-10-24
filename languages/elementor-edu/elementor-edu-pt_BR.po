@@ -35,9 +35,6 @@ msgstr "Elementor Edu instalado com sucesso"
 msgid "Elementor Edu updated successfully"
 msgstr "Elementor Edu atualizado com sucesso"
 
-msgid "You can continue to the installed plugins page."
-msgstr "Você pode continuar para a página de plugins instalados."
-
 msgid "Continue"
 msgstr "Prosseguir"
 
@@ -391,4 +388,7 @@ msgstr "Ocultar todos os vestígios visíveis do Altervista (recomendado)"
 
 msgid "Choose whether to hide every visible trace of Altervista throughout the WordPress administration area, show only Server to server, or show the full Altervista interface. In Hide mode, the regular Altervista plugin is deactivated when standalone Hello Elementor is active."
 msgstr "Escolha se deseja ocultar todos os vestígios visíveis do Altervista em toda a área administrativa do WordPress, mostrar apenas Server to server ou manter visível toda a interface do Altervista. No modo Ocultar, o plugin comum do Altervista é desativado quando o Hello Elementor está ativo sem tema filho."
+
+msgid "You can get back to building your site by clicking the button below."
+msgstr "Você pode voltar a construir seu site clicando no botão abaixo."
 

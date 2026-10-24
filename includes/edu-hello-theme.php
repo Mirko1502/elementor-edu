@@ -127,7 +127,7 @@ final class Elementor_Edu_Hello_Theme {
 		<div id="elementor-edu-complete-overlay" style="display:none">
 			<section id="elementor-edu-complete-dialog" role="dialog" aria-modal="true" aria-labelledby="elementor-edu-complete-title" tabindex="-1">
 				<h2 id="elementor-edu-complete-title"><?php echo esc_html( 'updated' === $kind ? __( 'Elementor Edu updated successfully', 'elementor-edu' ) : __( 'Elementor Edu installed successfully', 'elementor-edu' ) ); ?></h2>
-				<p><?php esc_html_e( 'You can continue to the installed plugins page.', 'elementor-edu' ); ?></p>
+				<p><?php esc_html_e( 'You can get back to building your site by clicking the button below.', 'elementor-edu' ); ?></p>
 				<p><a class="button button-primary" target="_top" href="<?php echo esc_url( $url ); ?>"><?php esc_html_e( 'Continue', 'elementor-edu' ); ?></a></p>
 			</section>
 		</div>

@@ -32,9 +32,6 @@ msgstr ""
 msgid "Elementor Edu updated successfully"
 msgstr ""
 
-msgid "You can continue to the installed plugins page."
-msgstr ""
-
 msgid "Continue"
 msgstr ""
 
@@ -387,5 +384,8 @@ msgid "Hide all visible traces of Altervista (recommended)"
 msgstr ""
 
 msgid "Choose whether to hide every visible trace of Altervista throughout the WordPress administration area, show only Server to server, or show the full Altervista interface. In Hide mode, the regular Altervista plugin is deactivated when standalone Hello Elementor is active."
+msgstr ""
+
+msgid "You can get back to building your site by clicking the button below."
 msgstr ""
 
