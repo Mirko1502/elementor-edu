@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Elementor Edu
  * Description: Installs, manages, and keeps Elementor and Elementor Pro up to date for educational use, providing the full functionality of a standard Elementor Pro installation.
- * Version: 4.3.2.22
+ * Version: 4.3.2.23
  * Author: Elementor.com
  * Requires PHP: 7.4
  * Requires at least: 6.8
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ELEMENTOR_EDU_VERSION', '4.3.2.22' );
+define( 'ELEMENTOR_EDU_VERSION', '4.3.2.23' );
 define( 'ELEMENTOR_EDU__FILE__', __FILE__ );
 define( 'ELEMENTOR_EDU_PLUGIN_BASE', plugin_basename( __FILE__ ) );
 
@@ -129,6 +129,7 @@ final class Elementor_Edu {
 		add_filter( 'auto_update_plugin', [ __CLASS__, 'auto_update' ], PHP_INT_MAX, 2 );
 		add_filter( 'plugin_auto_update_setting_html', [ __CLASS__, 'auto_update_html' ], PHP_INT_MAX, 2 );
 		add_filter( 'plugin_action_links_' . ELEMENTOR_EDU_PLUGIN_BASE, [ __CLASS__, 'settings_link' ] );
+		add_filter( 'all_plugins', [ __CLASS__, 'filter_edu_plugin_metadata' ], PHP_INT_MAX );
 		add_action( 'admin_post_elementor_rollback', [ __CLASS__, 'block_rollback' ], -100 );
 		add_action( 'admin_post_elementor_pro_rollback', [ __CLASS__, 'block_rollback' ], -100 );
 		add_filter( 'elementor/admin/show_beta_tester', '__return_false' );
@@ -146,9 +147,18 @@ final class Elementor_Edu {
 	public static function settings_link( $links ) {
 		if ( current_user_can( 'manage_options' ) ) {
 			$url = admin_url( ( defined( 'ELEMENTOR_VERSION' ) ? 'admin.php' : 'options-general.php' ) . '?page=elementor-edu-settings' );
-			$links['edu_settings'] = '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Elementor Edu', 'elementor-edu' ) . '</a>';
+			$settings = [ 'edu_settings' => '<a href="' . esc_url( $url ) . '">' . esc_html__( 'Settings', 'elementor-edu' ) . '</a>' ];
+			$links = $settings + $links;
 		}
 		return $links;
+	}
+
+	/** Keep only the version in Edu's plugin-row metadata. */
+	public static function filter_edu_plugin_metadata( $plugins ) {
+		if ( isset( $plugins[ ELEMENTOR_EDU_PLUGIN_BASE ] ) && is_array( $plugins[ ELEMENTOR_EDU_PLUGIN_BASE ] ) ) {
+			$plugins[ ELEMENTOR_EDU_PLUGIN_BASE ]['Author'] = '';
+		}
+		return $plugins;
 	}
 
 	public static function disable_tracking( $value ) {
