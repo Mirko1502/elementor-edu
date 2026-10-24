@@ -20,9 +20,6 @@ msgstr "Elementor Edu ha rilevato impostazioni didattiche danneggiate. Ha conser
 msgid "Deactivate the separate Elementor and Elementor Pro plugins on every site before activating Elementor Edu across the network."
 msgstr "Disattiva Elementor ed Elementor Pro separati in tutti i siti della rete prima di attivare Elementor Edu nella rete."
 
-msgid "Updates are unavailable for this copy"
-msgstr "Aggiornamenti di questa copia non disponibili"
-
 msgid "To change versions, upload a complete Elementor Edu package. Rolling back individual components is unavailable."
 msgstr "Per cambiare versione carica un pacchetto completo Elementor Edu. Il ripristino dei singoli motori non è disponibile."
 
@@ -250,9 +247,6 @@ msgstr "Elementor Edu – Avviso educativo"
 
 msgid "Maintains educational notices and usage conditions for Elementor Edu."
 msgstr "Mantiene gli avvisi e le condizioni di utilizzo didattico di Elementor Edu."
-
-msgid "Updates managed by the plugin itself"
-msgstr "Aggiornamenti gestiti dal plugin stesso"
 
 msgid "Install and activate Hello Elementor to complete your setup and continue to the dashboard."
 msgstr "Installa e attiva Hello Elementor per completare la configurazione e proseguire alla Bacheca."

@@ -17,9 +17,6 @@ msgstr ""
 msgid "Deactivate the separate Elementor and Elementor Pro plugins on every site before activating Elementor Edu across the network."
 msgstr ""
 
-msgid "Updates are unavailable for this copy"
-msgstr ""
-
 msgid "To change versions, upload a complete Elementor Edu package. Rolling back individual components is unavailable."
 msgstr ""
 
@@ -246,9 +243,6 @@ msgid "Elementor Edu – Educational notice"
 msgstr ""
 
 msgid "Maintains educational notices and usage conditions for Elementor Edu."
-msgstr ""
-
-msgid "Updates managed by the plugin itself"
 msgstr ""
 
 msgid "Install and activate Hello Elementor to complete your setup and continue to the dashboard."
