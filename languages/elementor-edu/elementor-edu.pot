@@ -350,9 +350,6 @@ msgstr ""
 msgid "Elementor Edu installs Elementor and Elementor Pro as separate plugins, preserving their standard identities and existing content. Edu manages educational settings and coordinated updates."
 msgstr ""
 
-msgid "Installs and manages Elementor and Elementor Pro as separate plugins for educational use."
-msgstr ""
-
 msgid "Elementor Edu could not finish installing its separate plugins. Existing files were preserved. Check filesystem permissions and any existing Elementor installations, then reload this page."
 msgstr ""
 
@@ -381,5 +378,8 @@ msgid "Choose whether to hide every visible trace of Altervista throughout the W
 msgstr ""
 
 msgid "You can get back to building your site by clicking the button below."
+msgstr ""
+
+msgid "Installs, manages, and keeps Elementor and Elementor Pro up to date for educational use, providing the full functionality of a standard Elementor Pro installation."
 msgstr ""
 

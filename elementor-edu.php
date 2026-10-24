@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: Elementor Edu
- * Description: Installs and manages Elementor and Elementor Pro as separate plugins for educational use.
- * Version: 4.3.2.21
+ * Description: Installs, manages, and keeps Elementor and Elementor Pro up to date for educational use, providing the full functionality of a standard Elementor Pro installation.
+ * Version: 4.3.2.22
  * Author: Elementor.com
  * Requires PHP: 7.4
  * Requires at least: 6.8
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'ELEMENTOR_EDU_VERSION', '4.3.2.21' );
+define( 'ELEMENTOR_EDU_VERSION', '4.3.2.22' );
 define( 'ELEMENTOR_EDU__FILE__', __FILE__ );
 define( 'ELEMENTOR_EDU_PLUGIN_BASE', plugin_basename( __FILE__ ) );
 

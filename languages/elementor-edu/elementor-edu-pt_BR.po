@@ -353,9 +353,6 @@ msgstr "Não foi possível salvar as configurações."
 msgid "Elementor Edu installs Elementor and Elementor Pro as separate plugins, preserving their standard identities and existing content. Edu manages educational settings and coordinated updates."
 msgstr "O Elementor Edu instala Elementor e Elementor Pro como plugins separados, preservando suas identidades padrão e o conteúdo existente. O Edu gerencia as configurações educacionais e as atualizações coordenadas."
 
-msgid "Installs and manages Elementor and Elementor Pro as separate plugins for educational use."
-msgstr "Instala e gerencia Elementor e Elementor Pro como plugins separados para uso educacional."
-
 msgid "Elementor Edu could not finish installing its separate plugins. Existing files were preserved. Check filesystem permissions and any existing Elementor installations, then reload this page."
 msgstr "O Elementor Edu não concluiu a instalação dos plugins separados. Os arquivos existentes foram preservados. Verifique as permissões do sistema de arquivos e as instalações existentes do Elementor e recarregue esta página."
 
@@ -385,4 +382,7 @@ msgstr "Escolha se deseja ocultar todos os vestígios visíveis do Altervista em
 
 msgid "You can get back to building your site by clicking the button below."
 msgstr "Você pode voltar a construir seu site clicando no botão abaixo."
+
+msgid "Installs, manages, and keeps Elementor and Elementor Pro up to date for educational use, providing the full functionality of a standard Elementor Pro installation."
+msgstr "Instala, gerencia e mantém o Elementor e o Elementor Pro atualizados para uso educacional, reproduzindo em todos os aspectos uma instalação normal do Elementor Pro."
 
